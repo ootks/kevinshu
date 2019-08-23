@@ -1,7 +1,7 @@
 /*Heading*/
 nav{
 	width: 100%;
-    font-size: 1.1em;
+    font-size: 110%;
     background-color: 	#007791 ; 
 }
 
@@ -41,7 +41,7 @@ h2 {
 #home h1 {
     margin-top: 30px;
     font-family: "Parisienne";
-    font-size: 6em;
+    font-size: 600%;
 }
 
 section {
@@ -59,12 +59,17 @@ p {
     padding-top: 10px;
     padding-bottom: 20px;
     width:auto;
+    font-size:100%;
 }
 
 .line {
     width: 400px;
     border-bottom: 2px solid black;
     margin:auto;
+}
+
+p {
+    font-size: 110%;
 }
 
 .paper {
