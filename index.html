@@ -1,33 +1,100 @@
-<html>
-	<head>
- 		<script src = "processing.min.js" type="text/javascript"></script>
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Script font for name. -->
+        <link href="https://fonts.googleapis.com/css?family=Parisienne&display=swap" rel="stylesheet">
+        <!-- Latest compiled Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- Latest compiled Bootstrap javascript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <!-- Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- Roboto font -->
 		<link href='http://fonts.googleapis.com/css?family=Roboto:100,400' rel='stylesheet' type='text/css'>
-		<script>
-			var XSIZE = 700;
-			var YSIZE = 400;
-			var XMARGIN = 100;
-			var YMARGIN = 100;
-		</script>
-		<link rel="stylesheet" type="text/css" href="heading.css">
-		<link rel="stylesheet" type="text/css" href="indexHeading.css">
-
+        <title>Kevin Shu</title>
 	</head>
 	<body>
+        <div id="container">
 		<header>
-			<div id = "canvasContainer">
-				<canvas id = "mycanvas" width = "1000" height = "1000" data-processing-sources = "header.pde"></canvas>
-			</div>
-			<div class = "header">
-				<a href = "index.html" class = "name"></a>
-			</div>
-			<nav>
-				<ul>
-					<li><a href = "about.html"> About </a></li>
-					<li><a  href = "programs.html"> Programs </a></li>
-					<li><a  href = "contact.html"> Contact</a>  </li>
-					<li><a  href = "KevinShuResume.pdf"> Resum&eacute </a> </li>
-				</ul>
+			<nav class="navbar">
+              <div class="ml-auto">
+                  <ul>
+                      <li class-"nav-item"><a class="nav-link" href = "#about"> About </a></li>
+                      <li class="nav-item"><a class="nav-link" href = "#papers"> Papers </a></li>
+                      <li class="nav-item"><a class="nav-link" href = "#programming"> Programs </a></li>
+                      <li class="nav-item"><a class="nav-link" href = "#contact"> Contact</a>  </li>
+                      <li class="nav-item"><a class="nav-link" href = "KevinShuResume.pdf"> Resum&eacute </a> </li>
+                  </ul>
+              </div>
 			</nav>
 		</header>
+
+        <!-- Home begin -->
+        <section id="home" class="text-center">
+            <h1>Kevin Shu</h1>
+        </section>
+        <!-- Home end -->
+
+        <!-- About begin -->
+        <section id="about">
+            <div class="section-header text-center">
+                <h2>About</h2>
+                <div class="line center-block"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm text-center">
+                    <object class="vertical-center" data="Portrait.svg"></object>
+                </div>
+                <div class="col-sm">
+                    <p> I am a first year graduate student at the Georgia Institute of Technology, in the <a href='http://www.aco.gatech.edu'>Algorithms, Combinatorics and Optimization</a> program. My interests are mostly on the intersection between algebra and computer science, including polynomial optimization and sums of squares proof systems.</p>
+
+                    <p>I am temporarily being advised by Prasad Tetali.</p>
+                </div>
+        </section>
+        <!-- About end -->
+        <!-- Papers begin -->
+        <section id = "papers">
+            <div class="section-header text-center">
+                <h2>Papers</h2>
+                <div class="line center-block"></div>
+            </div>
+            <div class="row">
+            <div class="col-sm paper">
+
+            </div>
+            <div class="col-sm paper">
+                <div class="paper-title">
+                    <a href="link.springer.com/article/10.1007%2Fs11786-017-0298-0">Syntactic Structures and Code Parameters</a></div>
+                <div class="paper-authors">Matilde Marcolli, Kevin Shu</div>
+                <div class="paper-date">Published in Mathematics in Computer Science, March 2017</div>
+            </div>
+            </div>
+             
+        </section>
+        <!-- Papers end -->
+<!--
+        <section id = "programming">
+            <h2>Programming</h2>
+			<div class = "program">
+				<div class = "leftSide">
+					<img src = "dinos.png">
+				</div>
+				<div class = "rightSide">
+					<h1><a href = "http://hackdfw.devpost.com/submissions/34058-dino-world">DinoWorld</a></h1>
+					This dinosaur simulation uses C# and the Oculus Rift to create an immersive 3d experience of dinosaurs right before your eyes.
+				</div>
+			</div>
+        </section>
+-->
+        <section id = "contact">
+            <div class="section-header text-center">
+                <h2>Contact</h2>
+                <div class="line center-block"></div>
+            </div>
+            Email me at kshu8 AT gatech.edu.
+        </section>
+            </div>
 	</body>
 </html>

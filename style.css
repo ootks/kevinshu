@@ -1,0 +1,84 @@
+/*Heading*/
+nav{
+	width: 100%;
+    font-size:1em;
+}
+
+nav ul{
+	/*Turn off the bullets*/
+	list-style: none;
+}
+
+nav ul li {
+	/*Display list elements in a line*/
+	display:inline-block;
+}
+
+a {
+	/*Make links black*/
+	color:black;
+	/*Remove weird underlining*/
+	text-decoration: none;
+}
+
+a:hover {
+	/*Indicate which link is being selected*/
+	color: #ADADAD;
+}
+/*End Heading*/
+
+.header-container {
+    width: auto;
+	/*Draw a line at the bottom of the header*/
+	border-bottom: thin solid #a0a0a0;
+}
+
+#home h1 {
+    font-family: "Parisienne";
+    font-size: 4em;
+}
+
+nav {
+    font-size: 1.1em;
+}
+
+#home object {
+    width: 176px;
+    display: block;
+    max-width: 100%;
+    height:auto;
+    vertical-align: middle;
+}
+
+section {
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+p {
+    text-align: justify;
+}
+.section-header {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    width:auto;
+}
+
+.line {
+    width: 400px;
+    border-bottom: 2px solid black;
+    margin:auto;
+}
+
+#container {
+    margin-left:auto;
+    margin-right:auto;
+    max-width:1000px;
+}
+
+.paper {
+    text-align: right;
+}
