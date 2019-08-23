@@ -1,7 +1,8 @@
 /*Heading*/
 nav{
 	width: 100%;
-    font-size:1em;
+    font-size: 1.1em;
+    background-color: 	#007791 ; 
 }
 
 nav ul{
@@ -14,14 +15,14 @@ nav ul li {
 	display:inline-block;
 }
 
-a {
-	/*Make links black*/
-	color:black;
+nav ul li a {
+	/*Make links light grey*/
+	color: #F0F0F0;
 	/*Remove weird underlining*/
 	text-decoration: none;
 }
 
-a:hover {
+nav ul li a:hover {
 	/*Indicate which link is being selected*/
 	color: #ADADAD;
 }
@@ -33,26 +34,19 @@ a:hover {
 	border-bottom: thin solid #a0a0a0;
 }
 
+h2 {
+    font-family: "Roboto";
+}
+
 #home h1 {
+    margin-top: 30px;
     font-family: "Parisienne";
-    font-size: 4em;
-}
-
-nav {
-    font-size: 1.1em;
-}
-
-#home object {
-    width: 176px;
-    display: block;
-    max-width: 100%;
-    height:auto;
-    vertical-align: middle;
+    font-size: 6em;
 }
 
 section {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     max-width:1000px;
     margin-left:auto;
     margin-right:auto;
@@ -73,12 +67,10 @@ p {
     margin:auto;
 }
 
-#container {
-    margin-left:auto;
-    margin-right:auto;
-    max-width:1000px;
-}
-
 .paper {
     text-align: right;
+}
+
+.contact-info {
+    padding-left: 150px;
 }
