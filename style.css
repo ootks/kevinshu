@@ -72,6 +72,10 @@ p {
     font-size: 110%;
 }
 
+#portrait {
+    min-height: 200px;
+}
+
 .paper {
     text-align: right;
 }
