@@ -33,7 +33,7 @@ var indices;
 
 function incrementTransforms() {
     TRANSFORMS += 1;
-    DEPTH -= 1;
+    DEPTH -= 2;
     SIZE = 2 * SIZE;
     COLORS = new Array(SIZE);
     for (let i = 0; i < SIZE; i++) {
