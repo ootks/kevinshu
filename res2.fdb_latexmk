@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1566530614 "res2.tex" "res2.pdf" "res2" 1566530614
+["pdflatex"] 1571975840 "res2.tex" "res2.pdf" "res2" 1571975840
   "/etc/texmf/web2c/texmf.cnf" 1535961203 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -8,17 +8,18 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1248133631 34811 78b52f49e893bcba91bd7581cdc144c0 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1454284088 20708 39fdf9e2fb65617012fa7382a351f485 ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd" 1454284088 2256 80ce1168fb4ce6a85583a9cf8972c013 ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1454284088 9179 4cd3c5f593e63512893b8ac0123f1bd7 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1535961204 77826 fb0999dfdef60cec32f5f66aba84b0d1 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1570222486 127754 7b284a7fbf96272755d23fb2d6c3b05b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1541330738 718487 42d5f6e8f8d964b879a08e94954701cb ""
-  "res.cls" 1566530609 25066 8ec1e15ab4c53340bc92863668c7be49 ""
-  "res2.aux" 1566530594 8 a94a2480d3289e625eea47cd1b285758 ""
-  "res2.tex" 1566340310 3654 4fb13f078149e161db567ff5a87dadd5 ""
+  "res.cls" 1566530657 25066 8ec1e15ab4c53340bc92863668c7be49 ""
+  "res2.aux" 1566530657 8 a94a2480d3289e625eea47cd1b285758 ""
+  "res2.tex" 1571975839 6034 eb8380df6525d953a9485fe6419c07cb ""
   (generated)
   "res2.pdf"
   "res2.log"
