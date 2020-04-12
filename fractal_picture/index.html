@@ -77,6 +77,20 @@
             height: 180px;
         }
     }
+    .control.fullscreen{
+        z-index: 9999;
+        width: 90%;
+        height: 90%;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        font-size: 300%;
+     }
+    .control.fullscreen input {
+        height: 40px;
+        width: 60px;
+        font-size: 10px;
+    }
     .svg-circleplus { height: 40px; stroke: black; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.3/math.js"></script>
@@ -89,7 +103,7 @@
             </div>
             <div id = "control_container">
 
-                <div class = "control" onfocusin="pauseAnimation()" onfocusout="startAnimation()">
+                <div class = "control" onfocusin="pauseAnimation(); fullScreen(this);" onfocusout="startAnimation(); unFullScreen(this)">
                     <span class="function_symbol">
                         \(f_1(x) =\)
                     </span>
@@ -123,7 +137,7 @@
                     </span>
                 </div>
 
-                <div class = "control"  id="input2" onfocusin="pauseAnimation()" onfocusout="startAnimation()">
+                <div class = "control"  id="input2" onfocusin="pauseAnimation(); fullScreen(this);" onfocusout="startAnimation(); unFullScreen(this);">
                     <span class="function_symbol">
                         \(f_2(x) =\)
                     </span>

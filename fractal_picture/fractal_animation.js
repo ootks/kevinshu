@@ -210,7 +210,7 @@ function pauseAnimation() {
 }
 
 function newControl(index) {
-    return `<div class = "control" onfocusin="pauseAnimation()" onfocusout="startAnimation()"> <span class="function_symbol"> \\(f_${index}(x) =\\) </span> <span class="bracket"> \\(\\Big(\\) </span> <form class="matrix_form"  onsubmit='document.activeElement.blur(); return false'> <input type="submit" style="display: none" /> <input type="text" size="5" value="1"  id="matrix${index}11"> <input type="text" size="5" value="0" id="matrix${index}12"> <input type="text" size="5" value="0"  id="matrix${index}21"> <input type="text" size="5" value="1"  id="matrix${index}22"> </form> <span class="bracket"> \\(\\Big)\\) </span> <span class="plus_sign"> \\(x\\) + </span> <span class="bracket"> \\(\\Big(\\) </span> <form class="vector_form" onsubmit='document.activeElement.blur(); return false'> <input type="submit" style="display: none" /> <input type="text" size="5" value="10" id="vector${index}1"> <input type="text" size="5" value="0"  id="vector${index}2"> </form> <span class="bracket"> \\(\\Big)\\) </span> </div>`;
+    return `<div class = "control" onfocusin="pauseAnimation(); fullScreen(this);" onfocusout="startAnimation(); unFullScreen(this);"> <span class="function_symbol"> \\(f_${index}(x) =\\) </span> <span class="bracket"> \\(\\Big(\\) </span> <form class="matrix_form"  onsubmit='document.activeElement.blur(); return false'> <input type="submit" style="display: none" /> <input type="text" size="5" value="1"  id="matrix${index}11"> <input type="text" size="5" value="0" id="matrix${index}12"> <input type="text" size="5" value="0"  id="matrix${index}21"> <input type="text" size="5" value="1"  id="matrix${index}22"> </form> <span class="bracket"> \\(\\Big)\\) </span> <span class="plus_sign"> \\(x\\) + </span> <span class="bracket"> \\(\\Big(\\) </span> <form class="vector_form" onsubmit='document.activeElement.blur(); return false'> <input type="submit" style="display: none" /> <input type="text" size="5" value="10" id="vector${index}1"> <input type="text" size="5" value="0"  id="vector${index}2"> </form> <span class="bracket"> \\(\\Big)\\) </span> </div>`;
 }
 
 function addTransforms() {
@@ -224,4 +224,13 @@ function addTransforms() {
     var container = document.getElementById("control_container");
     container.insertBefore(new_control, add_button); 
     MathJax.typeset();
+}
+
+function fullScreen(element) {
+    element.classList.add("fullscreen");
+}
+
+function unFullScreen(element) {
+    console.log("here");
+    element.classList.remove("fullscreen");
 }
