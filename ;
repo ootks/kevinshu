@@ -32,10 +32,7 @@ var colors;
 var indices;
 
 // This value is only used when something has focus.
-var focusedElement;
-
-// True if there is an error in parsing the matrices
-var parseError = false;
+var focused;
 
 function incrementTransforms() {
     TRANSFORMS += 1;
@@ -80,40 +77,24 @@ function HSVtoRGB(h, s, v) {
 }
 
 function evaluateMatrix(matrix, time) {
-    let evaluatedMatrix = [[0,0],[0,0]];
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 2; j++) {
-            try {
-                evaluatedMatrix[i][j] = matrix[i][j].evaluate({t:time})
-            } catch(err) {
-                console.log(err);
-                throw String(i+1)+", "+String(j+1);
-            }
-        }
-    }
-    return evaluatedMatrix;
+    return matrix.map(x => (evaluateVector(x, time)));
 }
 
 function evaluateVector(vector, time) {
-    let evaluatedVector = [0,0];
-    for (let i = 0; i < 2; i++) {
-        try {
-            evaluatedVector[i] = vector[i].evaluate({t:time})
-        } catch(err) {
-            console.log(err);
-            throw String(i + 1)
-        }
-    }
-    return evaluatedVector;
+    return vector.map(x => x.evaluate({t:time}));
 }
 
 function getMatrix(index) {
     let matrix = [[0,0],[0,0]];
     for(let i = 1; i <= 2; i++) {
         for(let j = 1; j <= 2; j++) {
+            try {
                 matrix[i-1][j-1] = math.compile(
                     document.getElementById(
                         "matrix"+String(index)+String(i)+String(j)).value);
+            } catch(err) {
+
+            }
         }
     }
     return matrix;
@@ -129,36 +110,9 @@ function drawCircle(x, y, r, color) {
     mainContext.fill();
 }
 
-function evaluateTransforms() {
-    let evaluatedMatrices = new Array(TRANSFORMS);
-    for (let i = 0; i < TRANSFORMS; i++) {
-        try {
-            evaluatedMatrices[i] = evaluateMatrix(matrices[i], time);
-        } catch(err) {
-            parseError = true;
-            throw "Function " + String(i+1) + " has an error in matrix position "+err;
-        }
-    }
-
-    let evaluatedOffsets = new Array(TRANSFORMS);
-    for (let i = 0; i < TRANSFORMS; i++) {
-        try {
-            evaluatedOffsets[i] = evaluateVector(offsets[i], time);
-        } catch(err) {
-            parseError = true;
-            throw "Function " + String(i+1) + " has an error in vector position "+err;
-        }
-    }
-
-    parseError = false;
-    return [evaluatedMatrices, evaluatedOffsets]
-}
-
-
-
 function randomNewPoints() {
-    var evaluatedMatrices, evaluatedOffsets;
-    [evaluatedMatrices, evaluatedOffsets] = evaluateTransforms();
+    var evaluatedMatrices = matrices.map(m => evaluateMatrix(m, time));
+    var evaluatedOffsets = offsets.map(o => evaluateVector(o, time));
 
     for (let i = 0; i < SIZE; i++) {
         indices[i]
@@ -186,18 +140,10 @@ function randomNewPoints() {
     }
 }
 
-function errorMessage(error) {
-    mainContext.font = '30px serif';
-    mainContext.fillStyle = "#AA0000";
-    mainContext.fillText(error, 150, 100);
-}
-
 function newPoints() {
-    var evaluatedMatrices, evaluatedOffsets;
-    [evaluatedMatrices, evaluatedOffsets] = evaluateTransforms();
-
     points[0] = [10,0];
-
+    var evaluatedMatrices = matrices.map(m => evaluateMatrix(m, time));
+    var evaluatedOffsets = offsets.map(o => evaluateVector(o, time));
     for(let iter = 0; iter < DEPTH; iter++) {
         var rounds = TRANSFORMS ** iter;
         for (let j = 0; j < rounds; j++) {
@@ -221,16 +167,10 @@ function updateFractal() {
     mainContext.fillStyle = "#EEEEEE";
     mainContext.fillRect(0, 0, canvasWidth, canvasHeight);
     
-    try {
-        if (TRANSFORMS == 2) {
-            newPoints();
-        } else {
-            randomNewPoints();
-        }
-    } catch(err) {
-        console.log(err);
-        errorMessage(err);
-        return;
+    if (TRANSFORMS == 2) {
+        newPoints();
+    } else {
+        randomNewPoints();
     }
  
     var offset = [canvasWidth / 2, canvasHeight / 2];
@@ -263,12 +203,20 @@ function getVector(index) {
 }
 
 function startAnimation() {
-    console.log("Starting Animation.");
     matrices = []
     offsets = []
     for (let i = 1; i <= TRANSFORMS; i++) {
-        matrices.push(getMatrix(i));
-        offsets.push(getVector(i));
+        try {
+            matrices.push(getMatrix(i));
+            offsets.push(getVector(i));
+        } catch(err) {
+            // This shouldn't happen. We should do something about that.
+            if (typeof focus == 'undefined') {
+                return;
+            }
+            // Display error message.
+            errorMessage()
+        }
     }
     time = 0;
     eventid = requestAnimationFrame(doAnimation);
@@ -297,10 +245,11 @@ function addTransforms() {
 
 function fullScreen(element) {
     element.classList.add("fullscreen");
-    focusedElement = element;
+    focused_element = element;
 }
 
 function unFullScreen(element) {
+    console.log("here");
     element.classList.remove("fullscreen");
-    focusedElement = undefined;
+    focused_element = undefined;
 }
