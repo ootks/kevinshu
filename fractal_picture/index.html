@@ -23,6 +23,7 @@
         flex-grow:1;
         flex-direction: column;
         height:100%;
+        width: 200px;
     }
     .control {
         height:18%;
@@ -47,6 +48,10 @@
           align-items: center;
           justify-content: center;
     }
+    .bracket {
+        padding-top:10px;
+        font-size: 20px;
+    }
     canvas {
         background: white;
     }
@@ -70,23 +75,39 @@
                     <span class="function_symbol">
                         \(f_1(x) =\)
                     </span>
+                    <span class="bracket">
+                    (
+                    </span>
                     <form class="matrix_form" >
                         <input type="text" size="5" value="cos(t)/sqrt(2)"  id="matrix111">
                         <input type="text" size="5" value="-sin(t)/sqrt(2)" id="matrix112">
                         <input type="text" size="5" value="sin(t)/sqrt(2)"  id="matrix121">
                         <input type="text" size="5" value="cos(t)/sqrt(2)"  id="matrix122">
                     </form>
+                    <span class="bracket">
+                    )
+                    </span>
                     <span class="plus_sign">
+                    \(x\)
                     +
+                    </span>
+                    <span class="bracket">
+                    (
                     </span>
                     <form class="vector_form">
                         <input type="text" size="5" value="10" id="vector11">
                         <input type="text" size="5" value="0"  id="vector12">
                     </form>
+                    <span class="bracket">
+                    )
+                    </span>
                 </div>
                 <div class = "control"  id="input2" onfocusin="pauseAnimation()" onfocusout="startAnimation()">
                     <span class="function_symbol">
                         \(f_2(x) =\)
+                    </span>
+                    <span class="bracket">
+                    (
                     </span>
                     <form class="matrix_form">
                         <input type="text" size="5" value="cos(t+2)/sqrt(2)"  id="matrix211">
@@ -94,13 +115,23 @@
                         <input type="text" size="5" value="sin(t+2)/sqrt(2)"  id="matrix221">
                         <input type="text" size="5" value="cos(t+2)/sqrt(2)"  id="matrix222">
                     </form>
+                    <span class="bracket">
+                    )
+                    </span>
                     <span class="plus_sign">
+                    \(x\)
                     +
+                    </span>
+                    <span class="bracket">
+                        (
                     </span>
                     <form class="vector_form">
                         <input type="text" size="5" value="0" id="vector21">
                         <input type="text" size="5" value="0" id="vector22">
                     </form>
+                    <span class="bracket">
+                        )
+                    </span>
                 </div>
                 <div class = "add_control">
                     <svg class="svg-circleplus" viewBox="0 0 100 100" onclick="addTransforms">
