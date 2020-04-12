@@ -133,6 +133,9 @@ function updateFractal() {
 function doAnimation() {
     updateFractal();
     time += DELTA_T;
+    if (time > 1000000) {
+        time = 0;
+    }
     eventid = requestAnimationFrame(doAnimation);
 }
 

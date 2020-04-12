@@ -15,21 +15,25 @@
         display:flex;
         flex-direction: row;
         flex-wrap: wrap;
+        align-items:center;
     }
 
     #animation_container {
-        flex-grow: 3;
+        width: 1000px;
     }
     #control_container {
-        flex-grow:1;
-        flex-direction: column;
-        height:100%;
-        width: 200px;
+        height:550px;
+        width: 400px;
+        margin-left: 10px;
     }
     .control {
         height:18%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
         background-color: #999999;
-        margin-bottom: 2%
+        margin-bottom: 2%;
+        font-size: 150%;
     }
     .plus_sign {
         padding-top: 10px;
@@ -49,11 +53,6 @@
           align-items: center;
           justify-content: center;
     }
-    .bracket {
-        padding-top:10px;
-        font-size: 20px;
-        transform: translateY(-2);
-    }
     canvas {
         background: white;
     }
@@ -70,7 +69,7 @@
     <body>
         <div id = "container">
             <div id = "animation_container">
-                <canvas id="animation" width="500" height="300"></canvas>
+                <canvas id="animation" width="1000" height="600"></canvas>
             </div>
             <div id = "control_container">
 
