@@ -27,15 +27,27 @@ var time = 0;
 var matrices = [0,0];
 var offsets = [0,0];
 
+// These values are only used when we go to randomized point selection.
+var colors;
+var indices;
+
 function incrementTransforms() {
     TRANSFORMS += 1;
-    DEPTH -= 3;
-    SIZE = TRANSFORMS ** DEPTH;
+    DEPTH -= 1;
+    SIZE = 2 * SIZE;
     COLORS = new Array(SIZE);
     for (let i = 0; i < SIZE; i++) {
         COLORS[i] = HSVtoRGB(i / SIZE, 0.75, 0.8);
     }
     points = new Array(SIZE);
+    colors = new Array(SIZE);
+    indices = new Array(SIZE);
+    for (let i = 0; i < SIZE; i++) {
+        indices[i] = i;
+    }
+    for (let i = 0; i < SIZE; i++) {
+        points[i] = [0,0];
+    }
 }
 
 // Utility functions
@@ -90,6 +102,36 @@ function drawCircle(x, y, r, color) {
     mainContext.fill();
 }
 
+function randomNewPoints() {
+    var evaluatedMatrices = matrices.map(m => evaluateMatrix(m, time));
+    var evaluatedOffsets = offsets.map(o => evaluateVector(o, time));
+
+    for (let i = 0; i < SIZE; i++) {
+        indices[i]
+    }
+    for(let i = 0; i < SIZE; i++) {
+        let point = points[i];
+        colors[i] = 0;
+        for(let iter = 0; iter < DEPTH; iter++) {
+            let index = Math.floor(Math.random() * TRANSFORMS);
+            colors[i] /= TRANSFORMS;
+            colors[i] += index;
+            point = math.add(math.multiply(evaluatedMatrices[index], point), evaluatedOffsets[index]);
+        }
+        points[i] = point;
+    }
+    indices.sort((i, j) => colors[i] - colors[j]);
+    for(let i = 0; i < SIZE; i++) {
+        colors[i] = points[indices[i]];
+    }
+    temp = points;
+    points = colors;
+    colors = temp;
+    for(let i = 0; i < SIZE; i++) {
+        indices[i] = i;
+    }
+}
+
 function newPoints() {
     points[0] = [10,0];
     var evaluatedMatrices = matrices.map(m => evaluateMatrix(m, time));
@@ -117,8 +159,12 @@ function updateFractal() {
     mainContext.fillStyle = "#EEEEEE";
     mainContext.fillRect(0, 0, canvasWidth, canvasHeight);
     
-    newPoints();
-
+    if (TRANSFORMS == 2) {
+        newPoints();
+    } else {
+        randomNewPoints();
+    }
+ 
     var offset = [canvasWidth / 2, canvasHeight / 2];
     for(let i = 0; i < SIZE; i++) {
         offset[0] -= 3*points[i][0] / SIZE;
