@@ -61,32 +61,17 @@ input {
         width: 500px;
         height: 300px;
     }
-    .left_bracket {
-        display:inline;
-    }
-    .left_bracket::before{
-          content: "\A";
-        white-space: pre-line;
-    }
 }
 @media only screen and (max-width: 450px) {
     #animation {
         width: 400px;
         height: 240px;
     }
-    .left_bracket::before{
-          content: "\A";
-        white-space: pre-line;
-    }
 }
 @media only screen and (max-width: 300px) {
     #animation {
         width: 300px;
         height: 180px;
-    }
-    .left_bracket::before{
-          content: "\A";
-        white-space: pre-line;
     }
 }
 .control.fullscreen{
@@ -99,8 +84,8 @@ input {
     font-size: 300%;
  }
 .control.fullscreen input {
-    height: 130%;
-    width: 100%;
+    height: 40px;
+    width: 80px;
     font-size: 10px;
 }
 .svg-circleplus { height: 40px; stroke: black; }
