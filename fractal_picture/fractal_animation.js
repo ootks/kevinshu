@@ -304,3 +304,11 @@ function unFullScreen(element) {
     element.classList.remove("fullscreen");
     focusedElement = undefined;
 }
+
+
+function escHandler() {
+    if (typeof focusedElement != "undefined") {
+        unFullScreen(focusedElement);
+        startAnimation();
+    }
+}
