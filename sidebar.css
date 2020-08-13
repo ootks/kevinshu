@@ -38,6 +38,7 @@ body {
 .main {
     margin-left: 300px;
     padding: 0px 40px 30px 30px;
+    max-width: 600px;
 }
 
 .portrait {
@@ -48,6 +49,7 @@ body {
 .name {
     color: #000000;
     font-family: 'PT Serif', serif;
+    font-weight: bold;
     font-size:2em;
     text-align: center;
 }
@@ -58,6 +60,10 @@ body {
 
 section {
     margin-top:30px;
+}
+
+#Contact {
+    margin-bottom: 30px;
 }
 
 .sectionHeader {
@@ -76,9 +82,6 @@ section {
     margin-top:auto;
     margin-bottom: auto;
     margin-right: 15px;
-}
-
-.paperContents {
 }
 
 @media only screen and (max-width: 800px) {
