@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
  <channel>
    <title>Categories on Quasicoherent</title>
-   <link>/blog/categories/</link>
+   <link>./categories/</link>
    <description>Recent content in Categories on Quasicoherent</description>
    <generator>Hugo -- gohugo.io</generator>
    <copyright>Copyright &amp;copy; 2019 - Kevin shu</copyright>
    <lastBuildDate>Thu, 13 Aug 2020 14:15:53 -0400</lastBuildDate>
    
-       <atom:link href="/blog/categories/index.xml" rel="self" type="application/rss+xml" />
+       <atom:link href="./categories/index.xml" rel="self" type="application/rss+xml" />
    
    
      <item>
        <title>Polynomials</title>
-       <link>/blog/posts/polynomials/</link>
+       <link>./posts/polynomials/</link>
        <pubDate>Thu, 13 Aug 2020 15:26:31 -0400</pubDate>
        
-       <guid>/blog/posts/polynomials/</guid>
+       <guid>./posts/polynomials/</guid>
        <description></description>
      </item>
    
      <item>
        <title>Fractals</title>
-       <link>/blog/posts/fractals/</link>
+       <link>./posts/fractals/</link>
        <pubDate>Thu, 13 Aug 2020 14:15:53 -0400</pubDate>
        
-       <guid>/blog/posts/fractals/</guid>
+       <guid>./posts/fractals/</guid>
        <description>&lt;p&gt;The term fractal, coined by Mandelbrot, means &amp;lsquo;to break apart&amp;rsquo; in Latin, and is meant to be held opposed to &amp;lsquo;algebra&amp;rsquo;, meaning &amp;lsquo;to bring together&amp;rsquo; in Arabic. It seems, as they were originally conceived, that these two things are opposites.&lt;/p&gt;
 &lt;p&gt;Nevertheless, there are a number of connections that one can make between these two subjects, even if one doesn&amp;rsquo;t really know that much about either.&lt;/p&gt;
 &lt;h1 id=&#34;symmetries&#34;&gt;Symmetries&lt;/h1&gt;
