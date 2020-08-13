@@ -84,3 +84,13 @@ p {
 .contact-info {
     padding-left: 150px;
 }
+
+.icon {
+    width: 10%;
+    float: left;
+}
+
+.paperContents {
+    float: right;
+    width: 20%;
+}

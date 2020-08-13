@@ -66,6 +66,21 @@ section {
     font-size:1.5em;
 }
 
+.paper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.icon {
+    margin-top:auto;
+    margin-bottom: auto;
+    margin-right: 15px;
+}
+
+.paperContents {
+}
+
 @media only screen and (max-width: 800px) {
     .hamburgerContainer {
         padding-top: 8px;
@@ -126,5 +141,10 @@ section {
     }
     .nameContainer {
         margin: 0 0 0 0;
+    }
+    
+    a.navlink {
+        margin-top: 0;
+        margin-bottom: 10px;
     }
 }
