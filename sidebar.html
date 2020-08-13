@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+</html>
+<head>
+    <!-- Declare unicode character set -->
+    <meta charset="utf-8">
+    <!-- Says that the website is compatible with old browsers -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- TODO: Add favicon -->
+    <!-- bootstrap library -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- Latest compiled Bootstrap javascript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="sidebar.css">
+
+    <!-- script -->
+    <script src="collapse.js"></script>
+
+    <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Neuton&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet"> 
+    <title> Kevin Shu </title>
+</head>
+<body onresize="redisplay()">
+    <!-- See https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp -->
+    <div id="navContainer" class="navContainer">
+        <span class="hamburgerContainer">
+            <span class="hamburger">
+                <a href="#" onclick="toggleCollapse()">&#9776; </a>
+            </span>
+        </span>
+        <nav id="homeSidebar" class="sidebar">
+        <div id="portraitContainer">
+            <object data="Portrait.svg" class="portrait text-center"></object>
+        </div>
+        <div class="nameContainer">
+            <h2 class="name">Kevin Shu</h2>
+        </div>
+        <a href="#" class="navlink">About</a>
+        <a href="#" class="navlink">Publications</a>
+        <a href="#" class="navlink">Blog</a>
+        <a href="#" class="navlink">Contact</a>
+        </nav>
+    </div>
+    <div id="homeMain" class="main">
+        <section>
+            <h1 class="sectionHeader"> About </h1>
+            <div class="content">
+                <p>I'm a PhD candidate in the Algorithms, Combinatorics and Optimization department at Georgia Tech. My main interests are on the intersection between convex geometry and algebraic geometry. Of recent interest to me are sums-of-squares type problems in algebra, and stable polynomials which appear in convex optimization. I am advised by Greg Blekherman.</p>
+                <p>I did my undergraduate education at Caltech.</p>
+                <p>I am trying to write a blog to keep me honest about what I've been reading/thinking about. Check it out <a href="link_to_blog">here</a>.
+            </div class="content">
+        </section>
+        <section>
+            <h1 class="sectionHeader"> Publications </h1>
+            <div class="content">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div class="content">
+        </section>
+        <section>
+            <h1 class="sectionHeader"> Blog </h1>
+            <div class="content">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div class="content">
+        </section>
+        <section>
+            <h1 class="sectionHeader"> Contact </h1>
+            <div class="content">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div class="content">
+        </section>
+    </div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 nav{
 	width: 100%;
     font-size: 110%;
-    background-color: 	#007791 ; 
+    background-color: #ddddee ; 
 }
 
 nav ul{
@@ -17,9 +17,10 @@ nav ul li {
 
 nav ul li a {
 	/*Make links light grey*/
-	color: #F0F0F0;
+	color: #777777;
 	/*Remove weird underlining*/
 	text-decoration: none;
+    font-family: "Quicksand", Arial, sans-serif;
 }
 
 nav ul li a:hover {
@@ -35,12 +36,12 @@ nav ul li a:hover {
 }
 
 h2 {
-    font-family: "Roboto";
+    font-family: "Quicksand", Arial, sans-serif;
 }
 
 #home h1 {
     margin-top: 30px;
-    font-family: "Parisienne";
+    font-family: "Playfair Display", serif;
     font-size: 600%;
 }
 

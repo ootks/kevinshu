@@ -1,0 +1,130 @@
+body {
+    font: 'Neuton', serif;
+}
+
+.hamburgerContainer {
+    display: none;
+}
+
+.sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #d8ebf6;
+    overflow-x:hidden;
+    padding: 50px 30px 30px 30px;
+}
+
+.navlink {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Archivo Narrow', sans-serif;
+    color: #777777;
+    text-align: center;
+}
+
+.sidebar a:hover {
+    color: #2222bb;
+}
+
+.content {
+    margin-left: 20px;
+    font-size: 0.8em;
+}
+
+.main {
+    margin-left: 300px;
+    padding: 0px 40px 30px 30px;
+}
+
+.portrait {
+    width: 150px;
+    height: 150px;
+}
+
+.name {
+    color: #000000;
+    font-family: 'PT Serif', serif;
+    font-size:2em;
+    text-align: center;
+}
+
+.nameContainer {
+    margin: 20px 0px 50px 0px;
+}
+
+section {
+    margin-top:30px;
+}
+
+.sectionHeader {
+    font-family: 'PT Serif', serif;
+    margin-bottom: 20px;
+    font-size:1.5em;
+}
+
+@media only screen and (max-width: 800px) {
+    .hamburgerContainer {
+        padding-top: 8px;
+        display: block;
+        width: 100%;
+        height:40px;
+        background-color: #d8ebf6;
+    }
+
+    .hamburger {
+        margin-left: 6px;
+        padding: 2px 2px 2px 4px;
+        border: 1px solid #777777;
+        width: 1.5em;
+        border-radius: 6px;
+    }
+
+    .hamburger a {
+        text-decoration: none;
+        color: #777777;
+    }
+
+    .hamburger a:hover {
+        text-decoration: none;
+    }
+
+    .sidebar {
+        display: none;
+        position: relative;
+        width: 100%;
+        height:auto;
+        top: auto;
+        left:auto;
+        z-index: 0;
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    .portrait {
+        display: none;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .main {
+        margin-top: 50px;
+        margin-left: 0px;
+        position:relative;
+        top: auto;
+        left:auto
+    }
+
+    .content {
+        margin-left: 0px;
+    }
+    .nameContainer {
+        margin: 0 0 0 0;
+    }
+}
