@@ -1,103 +1,120 @@
-<html lang="en">
-    <head>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <!-- Script font for name. -->
-        <link href="https://fonts.googleapis.com/css?family=Parisienne&display=swap" rel="stylesheet">
-         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;800afamily=Quicksand&display=swap" rel="stylesheet">
-        <!-- Latest compiled Bootstrap CSS -->
+<!DOCTYPE HTML>
+</html>
+<head>
+    <!-- Declare unicode character set -->
+    <meta charset="utf-8">
+    <!-- Says that the website is compatible with old browsers -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- TODO: Add favicon -->
+    <!-- bootstrap library -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <!-- Latest compiled Bootstrap javascript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <!-- Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- Roboto font -->
-		<link href='http://fonts.googleapis.com/css?family=Roboto:100,400' rel='stylesheet' type='text/css'>
-         <meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <title>Kevin Shu</title>
-	</head>
-	<body>
-		<header>
-			<nav class="navbar">
-              <div class="ml-auto">
-                  <ul>
-                      <li><a class="nav-link" href = "#about"> About </a></li>
-                      <li><a class="nav-link" href = "#papers"> Papers </a></li>
-                      <li><a class="nav-link" href = "#programming"> Programs </a></li>
-                      <li><a class="nav-link" href = "#contact"> Contact</a>  </li>
-                      <li><a class="nav-link" href = "res2.pdf"> Resum&eacute </a> </li>
-                  </ul>
-              </div>
-			</nav>
-		</header>
 
-        <!-- Home begin -->
-        <section id="home" class="text-center">
-            <h1>Kevin Shu</h1>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- script -->
+    <script src="collapse.js"></script>
+
+    <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Neuton&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet"> 
+    <title> Kevin Shu </title>
+</head>
+<body onresize="redisplay()">
+    <!-- See https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp -->
+    <div id="navContainer" class="navContainer">
+        <span class="hamburgerContainer">
+            <span class="hamburger">
+                <a href="#" onclick="toggleCollapse()">&#9776; </a>
+            </span>
+        </span>
+        <nav id="homeSidebar" class="sidebar">
+        <div id="portraitContainer">
+            <object data="Portrait.svg" class="portrait text-center"></object>
+        </div>
+        <div class="nameContainer">
+            <h1 class="name">Kevin Shu</h1>
+        </div>
+        <a href="#About" class="navlink">About</a>
+        <a href="#Publications" class="navlink">Publications</a>
+        <a href="#Blog" class="navlink">Blog</a>
+        <a href="#Resume " class="navlink">Resum&eacute </a>
+        <a href="#Contact" class="navlink">Contact</a>
+        </nav>
+    </div>
+
+
+
+    <div id="homeMain" class="main">
+        <section id="About">
+            <h2 class="sectionHeader"> About </h2>
+            <div class="content">
+                <p>I'm a second year PhD candidate in the <a href='http://www.aco.gatech.edu'>Algorithms, Combinatorics and Optimization</a> department at Georgia Tech. My main interests are on the intersection between convex geometry and algebraic geometry. Of recent interest to me are sums-of-squares type problems in algebra, and stable polynomials which appear in convex optimization. I am advised by <a href="https://sites.google.com/site/grrigg/">Greg Blekherman</a>.</p>
+                <p>I did my undergraduate education at Caltech in mathematics and computer science.</p>
+                <p>I am trying to write a blog to keep me honest about what I've been reading/thinking about. Check it out <a href="link_to_blog">here</a>.
+            </div class="content">
         </section>
-        <!-- Home end -->
 
-        <!-- About begin -->
-        <section id="about">
-            <div class="section-header text-center">
-                <h2>About</h2>
-                <div class="line center-block"></div>
-            </div>
-            <div class="row">
-                <div id="portrait" class="col-sm text-center">
-                    <object class="vertical-center" data="Portrait.svg"></object>
+
+
+        <section id="Publications">
+            <h2 class="sectionHeader"> Publications </h2>
+            <div class="content">
+
+
+                <!-- Start of paper format -->
+                <div class="paper">
+                    <div class="icon">
+                        &#128220;
+                    </div>
+                    <div class="paperContents">
+                        <div class="paperTitle">
+                            <a href="link.springer.com/article/10.1007%2Fs11786-017-0298-0">Syntactic Structures and Code Parameters</a></div>
+                        <div class="paperAuthors">Matilde Marcolli, Kevin Shu</div>
+                        <div class="paperDate">Published in Mathematics in Computer Science, March 2017</div>
+                    </div>
                 </div>
-                <div class="col-sm">
-                    <p> I am a first year graduate student at the Georgia Institute of Technology, in the <a href='http://www.aco.gatech.edu'>Algorithms, Combinatorics and Optimization</a> program. My interests are mostly on the intersection between algebra and computer science, including polynomial optimization and sums of squares proof systems.</p>
+                <!-- End of paper format-->
 
-                    <p>I am temporarily being advised by Prasad Tetali.</p>
+
+        </section>
+
+
+
+        <section id="Blog">
+            <h2 class="sectionHeader"> Blog </h2>
+            <div class="content">
+                <p>The main content of the blog can be found at <a href="blog">blog</a>. 
+
+                <p> The first post on this blog is about this online <a href="fractal_picture/index.html"> fractal generator</a>, an example of which is the following: </p>
+                <img src="fractal_picture/screenshot.png" style="width:300px; height:150px;margin-left:30px;"></img>
+            </div>
+        </section>
+
+
+
+        <section id="Resume">
+            <h2 class="sectionHeader"> Resum&eacute </h2>
+            <div class="content">
+                A PDF copy of my resum&eacute can be found <a href="KevinShuResume.pdf">here</a>.
+            </div>
+        </section>
+
+
+        <section id="Contact">
+            <h2 class="sectionHeader"> Contact </h2>
+            <div class="content">
+                <div class = "contact-info">
+                    <p> &#x2709 kshu8 AT gatech.edu </p>
+                    <p> &#127970 Skiles Room 145, 686 Cherry Street, Atlanta, GA 30332  </p>
                 </div>
-        </section>
-        <!-- About end -->
-        <!-- Papers begin -->
-        <section id = "papers">
-            <div class="section-header text-center">
-                <h2>Papers</h2>
-                <div class="line center-block"></div>
-            </div>
-            <div class="row">
-            <div class="col-sm paper">
-
-            </div>
-            <div class="col-sm paper">
-                <div class="paper-title">
-                    <a href="link.springer.com/article/10.1007%2Fs11786-017-0298-0">Syntactic Structures and Code Parameters</a></div>
-                <div class="paper-authors">Matilde Marcolli, Kevin Shu</div>
-                <div class="paper-date">Published in Mathematics in Computer Science, March 2017</div>
-            </div>
-            </div>
-             
-        </section>
-        <!-- Papers end -->
-<!--
-        <section id = "programming">
-            <h2>Programming</h2>
-			<div class = "program">
-				<div class = "leftSide">
-					<img src = "dinos.png">
-				</div>
-				<div class = "rightSide">
-					<h1><a href = "http://hackdfw.devpost.com/submissions/34058-dino-world">DinoWorld</a></h1>
-					This dinosaur simulation uses C# and the Oculus Rift to create an immersive 3d experience of dinosaurs right before your eyes.
-				</div>
-			</div>
-        </section>
--->
-        <section id = "contact">
-            <div class="section-header text-center">
-                <h2>Contact</h2>
-                <div class="line center-block"></div>
-            </div>
-            <div class = "contact-info">
-                <p> &#x2709 kshu8 AT gatech.edu </p>
-                <p> &#127970 Skiles Room 145, 686 Cherry Street, Atlanta, GA 30332  </p>
             </div>
         </section>
-	</body>
+    </div>
+</body>
 </html>
