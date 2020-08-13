@@ -40,6 +40,7 @@ body {
     margin-left: 300px;
     padding: 0px 50px 40px 40px;
     max-width: 800px;
+    margin-bottom: 100%;
 }
 
 .portrait {
@@ -61,10 +62,6 @@ body {
 
 section {
     margin-top:50px;
-}
-
-#Contact {
-    margin-bottom: 30px;
 }
 
 .sectionHeader {
