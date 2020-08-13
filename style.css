@@ -1,5 +1,6 @@
 body {
     font: 'Neuton', serif;
+    font-size:150%;
 }
 
 .hamburgerContainer {
@@ -8,7 +9,7 @@ body {
 
 .sidebar {
     height: 100%;
-    width: 240px;
+    width: 300px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -31,19 +32,19 @@ body {
 }
 
 .content {
-    margin-left: 20px;
+    margin-left: 30px;
     font-size: 0.8em;
 }
 
 .main {
     margin-left: 300px;
-    padding: 0px 40px 30px 30px;
-    max-width: 600px;
+    padding: 0px 50px 40px 40px;
+    max-width: 800px;
 }
 
 .portrait {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
 }
 
 .name {
