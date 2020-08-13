@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/blog/posts/</loc>
+    <lastmod>2020-08-13T15:26:31-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/about/</loc>
+    <lastmod>2020-08-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/posts/polynomials/</loc>
+    <lastmod>2020-08-13T15:26:31-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2020-08-13T15:26:31-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/categories/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/categories/category/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/posts/fractals/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/tags/fractals/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/tags/geometry/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/tags/</loc>
+    <lastmod>2020-08-13T14:15:53-04:00</lastmod>
+  </url>
+  
+</urlset>
