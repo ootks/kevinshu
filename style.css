@@ -1,6 +1,6 @@
 body {
-    font: 'Neuton', serif;
-    font-size:150%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:140%;
     color: #333333;
 }
 
@@ -29,10 +29,12 @@ body {
 
 a {
     color: #706F7D;
+    text-decoration: none;
 }
 
 a:hover {
     color: #4C4B63;
+    text-decoration: none;
 }
 
 .content {
@@ -50,6 +52,8 @@ a:hover {
 .portrait {
     width: 200px;
     height: 200px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .name {
@@ -66,6 +70,7 @@ a:hover {
 
 section {
     margin-top:50px;
+    margin-left:50px;
 }
 
 .sectionHeader {
@@ -91,7 +96,7 @@ section {
         padding-top: 8px;
         display: block;
         width: 100%;
-        height:60px;
+        height:40px;
         background-color: #EFEFFF;
     }
 
@@ -113,7 +118,7 @@ section {
         z-index: 0;
         margin: 0;
         padding: 0;
-        
+        height:80px;
     }
 
     .portrait {
