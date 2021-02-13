@@ -23,7 +23,7 @@ body {
 .navlink {
     display: block;
     margin-top: 10px;
-    font-family: 'Archivo Narrow', sans-serif;
+    font-family: 'Ruda', sans-serif;
     text-align: center;
 }
 
@@ -54,7 +54,7 @@ a:hover {
 
 .name {
     color: #000000;
-    font-family: 'PT Serif', serif;
+    font-family: "PT Serif", serif;
     font-weight: bold;
     font-size:2em;
     text-align: center;
@@ -69,7 +69,7 @@ section {
 }
 
 .sectionHeader {
-    font-family: 'PT Serif', serif;
+    font-family: 'Ruda', sans-serif;
     margin-bottom: 20px;
     font-size:1.5em;
 }
@@ -92,7 +92,7 @@ section {
         display: block;
         width: 100%;
         height:60px;
-        background-color: #d8ebf6;
+        background-color: #EFEFFF;
     }
 
     .hamburger {
@@ -101,15 +101,6 @@ section {
         border: 1px solid #777777;
         width: 1.5em;
         border-radius: 6px;
-    }
-
-    .hamburger a {
-        text-decoration: none;
-        color: #777777;
-    }
-
-    .hamburger a:hover {
-        text-decoration: none;
     }
 
     .sidebar {
