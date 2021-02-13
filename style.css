@@ -1,6 +1,7 @@
 body {
     font: 'Neuton', serif;
     font-size:150%;
+    color: #333333;
 }
 
 .hamburgerContainer {
@@ -14,7 +15,7 @@ body {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #d8ebf6;
+    background-color: #EFEFFF;
     overflow-x:hidden;
     padding: 50px 30px 30px 30px;
 }
@@ -23,12 +24,15 @@ body {
     display: block;
     margin-top: 10px;
     font-family: 'Archivo Narrow', sans-serif;
-    color: #777777;
     text-align: center;
 }
 
-.sidebar a:hover {
-    color: #2222bb;
+a {
+    color: #706F7D;
+}
+
+a:hover {
+    color: #4C4B63;
 }
 
 .content {
