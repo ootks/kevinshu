@@ -936,7 +936,7 @@
                 <section>
                     <h3 style="color:#EEAAAA">Can we conclude correlation from causation?</h3>
                     <p style="font-size:30px"> A graph with marked unobserved variables is said to be <b>identifiable</b> if for any consistent distribution on the observed variables, there is a unique interventional distribution. </p>
-                    <p style="font-size:30px"> A complete classification of identifiable graphs was given in Tian and Pearl in 2002, including an algorithm for determining if a given network is identifiable. </p>
+                    <p style="font-size:30px"> A complete classification of identifiable graphs was given in Tian and Pearl in 2002, including an algorithm for determining if a given network is identifiable. [1] </p>
                 </section>
 
                 <section>
@@ -1240,7 +1240,16 @@
                         </svg>
                 </section>
 
-                <!-- TODO: Explain the backdoor criterion -->
+                <section>
+                    <h3> Identifiability Criterion </h3>
+                    <ul>
+                    <li style="font-size:20px"> Assume that the Bayesian network is semi-Markovian, so that every unobserved node has 2 direct observed children.  </li>
+                    <li style="font-size:20px"> We draw undirected edges from $\textbf{V}_i$ to $\textbf{V}_j$ if there is an unobserved node with $\textbf{V}_i$ and $\textbf{V}_j$ as direct children.  </li>
+                    <li style="font-size:20px"> The causal effect of fixing $\textbf{X}$ on the rest of the variables is identifiable if there is no path of undirected edges from $\textbf{X}$ to any of its children [2].  </li>
+                    </ul>
+                    <small> Here, the causal effect of $X$ on $Y$ is unidentifiable (yellow edges represent undirected edges). </small>
+                    <object height="700px" type="image/svg+xml" data="backdoor.svg"></object>
+                </section>
                 <section>
                     <h3> Limits of Identifiability </h3>
                     <ul>
@@ -1312,6 +1321,7 @@
                         \[\hspace{6.5em}    = \text{Pr}(V_{obs} = v_{obs}) \]
                         \[ \dots \]
                 </section>
+
                 <section>
                     <ul>
                         <li> Optimizing this kind of program is hard in general, though there has been a lot of work on the subject. </li>
@@ -1319,6 +1329,7 @@
                         <li> In particular, we can often use linear programming duality to construct bounds using this framework. </li>
                     </ul>
                 </section>
+
                 <section>
                     <h3> Theorem 2: Low Mutual Information Bound </h3>
                     <section style="margin-top:130px">
@@ -1374,6 +1385,22 @@
                         </ul>
                     </section>
                 </section>
+
+                <section>
+                    <h3> References </h3> 
+                    <ol>
+                        <li>
+                            Tian, J., & Pearl, J. (2002, August). A general identification condition for causal effects. In Aaai/iaai (pp. 567-573).
+                        </li>
+                        <li>
+                             Bhattacharyya, A., Gayen, S., Kandasamy, S., Maran, A. & Variyam, V.N.. (2020). Learning and Sampling of Atomic Interventions from Observations. Proceedings of the 37th International Conference on Machine Learning, in Proceedings of Machine Learning Research 119:842-853 Available from http://proceedings.mlr.press/v119/bhattacharyya20a.html .
+                        </li>
+                        <li>
+                            Shu, K. (2021). Causal Channels. https://arxiv.org/abs/2103.02834
+                        </li>
+                    </ol>
+                </section>
+
 
 
 			</div>
