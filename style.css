@@ -85,6 +85,12 @@ section {
     margin-top: 20px;
 }
 
+.presentation {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
 .icon {
     margin-top:auto;
     margin-bottom: auto;
