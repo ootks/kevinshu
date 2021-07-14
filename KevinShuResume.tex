@@ -2,6 +2,7 @@
 % This file uses the resume document class (res.cls)
 
 \documentclass[margin]{res} 
+\usepackage{hyperref}
 % the margin option causes section titles to appear to the left of body text 
 \textwidth=5.2in % increase textwidth to get smaller right margin
 %\usepackage{helvetica} % uses helvetica postscript font (download helvetica.sty)
@@ -9,9 +10,10 @@
 
 \begin{document} 
  
-\name{Kevin Shu\\[12pt]} % the \\[12pt] adds a blank line after name
+\name{Kevin Shu\\[12pt]\href{https://kevinshu.me}{kevinshu.me}} % the \\[12pt] adds a blank line after name
+
  
-\address{{\bf Present Address} \\ 1737 Liberty Parkway NW \\ Atlanta, GA 30318  \\
+\address{{\bf Present Address} \\ 1000 Northside Dr NW \\ Apt 1314  \\ Atlanta, GA 30318  \\
         (626) 399-3716 }
 \address{{\bf Permanent Address} \\ 84 Cheesespring Road \\ Wilton, CT 06897}
 
@@ -24,12 +26,73 @@
  \item In the Algorithms, Combinatorics, and Optimization program, under the Mathematics department.
  \item Advised by Grigoriy Blekherman.
  \item Research interests mostly involve semidefinite programming and applications of sparse semidefinite programming to industrial applications.
+ \item 4.0 GPA
  \end{itemize}
 
 B.S. in Mathematics, Computer Science, California Institute of Technology, Pasadena, CA, June 2018 \\
 GPA 3.9
 
-\section{Research and Work Experience}
+\section{Publications}
+{\bf    Extreme Nonnegative Quadratics over Stanley Reisner Varieties} \\ 2021
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Uses powerful mathematical concepts from algebraic topology and algebraic geometry to study PSD matrix completion.
+\item Useful for detailed understanding of sparse semidefinite programming.
+\item Hosted on the \href{https://arxiv.org/abs/2106.13894}{arxiv}.
+\end{itemize}
+{\bf    Causal Channels} \\ 2021
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Describes a connection between causal theory, which is a topic in probability regarding the distinction between correlational and causal data.
+\item Gives quantitative methods for analysing possible discrepancies in data due to confounding variables.
+\item Hosted on the \href{https://arxiv.org/abs/2103.02834}{arxiv}.
+\end{itemize}
+{\bf    Hyperbolic Relaxation of k-Locally Positive Semidefinite Matrices,} with Grigoriy Blekherman, Santanu Dey, Shengding Sun\\ 2021
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Describes a relaxation of a collection of matrices where certain block submatrices are PSD, giving exact bounds on their minimum eigenvalues.
+\item Hosted on the \href{https://arxiv.org/abs/2012.04031}{arxiv}.
+\end{itemize}
+{\bf   Sums of Squares and Sparse Semidefinite Programming,} with Grigoriy Blekherman \\ 2020
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Accepted for publication in \textbf{SIAM Journal for Applied Algebra and Geometry}.
+\item Gives approximations of sparse semidefinite programs using ideas from algebraic geometry and graph theory.
+\end{itemize}
+{\bf  Syntactic Structures and Code Parameters,} with Matilde Marcolli \\ 2017
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Published in \textbf{Mathematics in Computer Science}.
+\item Describes the connection between the syntactic parameters framework in linguistics with coding theory and theoretical physics.
+\end{itemize}
+
+
+\section{Talks and Presentations Given}
+
+
+{\bf  Poster on Sparse Semidefinite Programs,} presented at the MIP and IPCO conferences \\ 2021 
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Describes work on approximating sparse semidefinite programs using a relaxation based on the relationship between nonnegative and sum-of-squares quadratics.
+\item Won honorable mentions in both poster competitions.
+\end{itemize}
+
+{\bf  Causal Inference and Optimization,} presented at the ACO Student Seminar \\ 2021
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Describes work on connections between causality theory and polynomial optimization.
+\end{itemize}
+
+{\bf  Lightning Talk on Hyperbolic Relaxations of Locally-PSD Matrices.
+,} 
+presented at the ICERM - Symmetry, Randomness, and Computations in Real Algebraic Geometry.
+ \\ 2020
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Describes work on a relaxation of the positive semidefinite cone where only certain submatrices of a given matrix are required to be positive semidefinite.
+\end{itemize}
+
+
+\section{Academic \\ Honors} 
+2021 Honorable Mention at the MIP Conference Poster Competition\\
+2021 Honorable Mention at the IPCO Conference Poster Competition\\
+2021 David L. Brown Fellowship from the Georgia Tech Math Department\\
+2018 National Science Foundation Graduate Research Fellowship Recipient\\
+2018 Georgia Institute of Technology President's Fellowship Recipient
+
+\section{Research Experience}
 {\bf Research Assistantship,} Georgia Tech, Atlanta, GA \\ Summer 2020
 \begin{itemize} \itemsep -2pt %reduce space between items
 \item Funded in part by NSF grant DMS-1901950 and the ACO department.
@@ -49,34 +112,18 @@ GPA 3.9
 \item Used algebraic geometry to compute phylogenetic trees.
 \item Advised by Matilde Marcolli.
 \end{itemize}
- \section{Work\\ Experience}
- {\bf Full-time Software Engineer,} Google, Mountain View, CA \\ August 2018-July 2019
- \begin{itemize} \itemsep -2pt  % reduce space between items
- \item Full stack web development for a data labelling service (Crowd-Compute)
- \item Lead an initiative to update authentication/authorization to more modern technologies.
- \item Added a major feature for tracking work in the system.
- \item Managed production releases and infrastructure issues.
- \item Worked with C++, Java.
- \end{itemize}
- 
-{\bf Software Engineering Intern,} Google, Mountain View, CA \\ Aug 2018-Jul 2019
-\begin{itemize} \itemsep -2pt %reduce space between items
-\item Gathered data from online sources by parsing Reddit pages.
-\item Built a machine learning model to provide movie recommendations.
-\item Worked with C++, Python.
-\end{itemize}
-
- {\bf Full-time Software Engineer,}\\
- \begin{itemize} \itemsep -2pt  % reduce space between items
- \item Full stack web development for a data labelling service (Crowd-Compute)
- \item Lead an initiative to update authentication/authorization to more modern technologies.
- \item Added a major feature for tracking work in the system.
- \item Managed production releases and infrastructure issues.
- \item Worked with C++, Java.
- \end{itemize}
 
 \section{Teaching Experience}
-{\bf Linear Algebra Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Aug 2018-Dec 2018
+{\bf Number Theory Lecture Assistant,} Georgia Tech, Atlanta, GA \\ Jan 2021-May 2021
+\begin{itemize} \itemsep -2pt %reduce space between items
+    \item Graded homework and gave office hours for an undergraduate number theory course.
+\end{itemize}
+{\bf Differential Equations Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Jan 2020-May 2020
+\begin{itemize} \itemsep -2pt %reduce space between items
+    \item Graded homework and gave recitations in second year differential equations course.
+\end{itemize}
+
+{\bf Linear Algebra Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Aug 2019-Dec 2019
 \begin{itemize} \itemsep -2pt %reduce space between items
     \item Graded homework and gave recitations in first year linear algebra course.
     \item Covered introductory linear algebra material.
@@ -132,20 +179,29 @@ interpolation, and principal components analysis.
           \item Supervised project involving studying games of imperfect information with chance.
 		 \end{itemize}
 
-
-\section{Academic \\ Honors} 
-2021 Honorable Mention at the MIP Conference Poster Competition\\
-2021 Honorable Mention at the IPCO Conference Poster Competition\\
-2021 David L. Brown Fellowship from the Georgia Tech Math Department\\
-2018 National Science Foundation Graduate Research Fellowship Recipient\\
-2018 Georgia Institute of Technology President's Fellowship Recipient
+ \section{Work\\ Experience}
+ {\bf Full-time Software Engineer,} Google, Mountain View, CA \\ August 2018-July 2019
+ \begin{itemize} \itemsep -2pt  % reduce space between items
+ \item Full stack web development for a data labelling service (Crowd-Compute)
+ \item Lead an initiative to update authentication/authorization to more modern technologies.
+ \item Added a major feature for tracking work in the system.
+ \item Managed production releases and infrastructure issues.
+ \item Worked with C++, Java.
+ \end{itemize}
+ 
+{\bf Software Engineering Intern,} Google, Mountain View, CA \\ Aug 2018-Jul 2019
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Gathered data from online sources by parsing Reddit pages.
+\item Built a machine learning model to provide movie recommendations.
+\item Worked with C++, Python.
+\end{itemize}
 
 % Tabulate Computer Skills; p{3in} defines paragraph 3 inches wide
 \section{Computer \\ Skills}
    \begin{tabular}{l p{3in}}
     \underline{Languages:} & C++, Java, Python, HTML, Javascript \\
 
-     \underline{Software:} & Flask server development, \LaTeX
+     \underline{Software:} & Flask server development, \LaTeX, vim
  \end{tabular}
 
 \end{resume} 
