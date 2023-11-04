@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Linear Programming</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.css">
+		<link rel="stylesheet" href="solarized.css" id="theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h2>Linear Programming and You</h2>
+					<p>How to eat better, live better, and optimize large scale industrial systems.</p>
+				</section>
+
+                <section>
+					<h3 style="margin-top:100px">Diet</h3>
+                    <section>
+                    <p>
+                    An adult human male needs
+                    <ul style="font-size:27px">
+                        <li class="fragment fade-in">2200-2400 Calories</li>
+                        <li class="fragment fade-in">56 g Protein</li>
+                        <li class="fragment fade-in">225-325 g Carbs</li>
+                        <li class="fragment fade-in">44-78 g Fat</li>
+                        <li class="fragment fade-in">...</li>
+                    </ul>
+                    </p>
+                    <p class="fragment fade-in" style="margin-left:-370px"> in a day.</p>
+                    </section>
+                    <section>
+                    <p>
+                    We get these nutrients from food
+                        <table border="1" style="font-size:20px">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Calories (Cal)</th>
+                                <th>Protein (g)</th>
+                                <th>Carbohydrates (g)</th>
+                                <th>Fat (g)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apple</td>
+                                <td>52</td>
+                                <td>0.3</td>
+                                <td>14</td>
+                                <td>0.2</td>
+                            </tr>
+                            <tr>
+                                <td>Banana</td>
+                                <td>105</td>
+                                <td>1.3</td>
+                                <td>27</td>
+                                <td>0.3</td>
+                            </tr>
+                            <tr>
+                                <td>Chicken Breast (cooked)</td>
+                                <td>165</td>
+                                <td>31</td>
+                                <td>0</td>
+                                <td>3.6</td>
+                            </tr>
+                            <tr>
+                                <td>Salmon (cooked)</td>
+                                <td>206</td>
+                                <td>22</td>
+                                <td>0</td>
+                                <td>13</td>
+                            </tr>
+                            <tr>
+                                <td>Pasta (cooked)</td>
+                                <td>200</td>
+                                <td>7</td>
+                                <td>42</td>
+                                <td>1.3</td>
+                            </tr>
+                            <tr>
+                                <td>Spinach (cooked)</td>
+                                <td>41</td>
+                                <td>5.3</td>
+                                <td>3.6</td>
+                                <td>0.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </p>
+                    <p style="font-size:15px">Table provided by ChatGPT. Accuracy not guaranteed.</p>
+                    </section>
+                    <section style="margin-top:20px">
+                    <p style="font-size:30px">
+                        <b> Diet problem: </b> How do we decide how what to eat every day, while keeping to a budget?
+                    </p>
+                    <div class="fragment fade-in" style="display:flex">
+                        <div style="flex:1; margin-left:60px">
+                        <p style="font-size:30px; text-align:left">
+                            <b> History: </b> 
+                            In the 1940's, Soviet mathematician Leonid Kantorovich was trying to solve similar kinds problems, but for a whole country.
+                        </p>
+                        </div>
+                        <div style="flex:1">
+                            <img src="Leonid_Kantorovich_1975.jpg" width="200"></img>
+                        </div>
+                    </div>
+                    </section>
+                    <section>
+                        <p>For this he (and many others) invented <b>linear programming</b>, a mathematical framework for describing resource allocation problems.</p>
+                    </section>
+                </section>
+
+				<section>
+                    <section>
+                        <h3>Linear Programming</h3>
+                        <p> At a high level, there are <b> variables </b>, <b> constraints </b> and an <b>objective.</b></p>
+                    <p style="font-size:30px"> Variables represent how much of each resource is used. Constraints require a certain allocation of resources to satisfy it, or limits how much of each resouce we can produce. The objective tells us which allocation we prefer over others.<p>
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <div style="margin-left:70px">
+                        <p style="font-size:30px; text-align:left"> For each food item \(i\) (rice, broccoli, cheese,...) we introduce a variable \(x_i\) that represents how many grams of that food item we consume in a day. </p>
+
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img src="brocolli.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(x_1\)
+                            </div>
+                            <div style="flex:1">
+                                <img src="eggplant.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(x_2\)
+                            </div>
+                            <div style="flex:1">
+                                <img src="carrot.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(x_3\)
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <div style="margin-left:70px">
+                        <p style="font-size:30px; text-align:left"> Each food item provides a certain amount of each nutrient \(j\) (calories, calories,...), \(n_{ij}\). This information can be stored in a table (like on an earlier slide). </p>
+
+                        <p style="font-size:30px; text-align:left"> For example, if we take the first nutrient to be calories, </p>
+                        
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img src="brocolli.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(n_{11} = 10\)
+                            </div>
+                            <div style="flex:1">
+                                <img src="eggplant.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(n_{21} = 20\)
+                            </div>
+                            <div style="flex:1">
+                                <img src="carrot.jpg" width="100px" height="100px"></img>
+                                <br>
+                                \(n_{31} = 7\)
+                            </div>
+                        </div>
+                        <p style="font-size:30px; text-align:left" class="fragment"> The constraints say we need to eat a certain amount of each nutrient. </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <p> We write our constraints like this:</p>
+                        <div class="fragment">
+							\[\begin{aligned}
+                            (\text{Calories}) \quad \sum_{i=1}^m n_{i1} x_i &amp; \ge 2000\\
+                            (\text{Protein}) \quad \sum_{i=1}^m n_{i2} x_i &amp; \ge 56\\
+                            \dots
+							\end{aligned} \]
+                            <p style="font-size:30px">Each constraint says that if we add up all of the nutrients we get from each food item, they meet our nutritional requirements.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <p> Our objective might be to minimize the cost of all of the food we eat in a day. If the price of item \(i\) is \(p_i\), then we write our objective as</p>
+                        \[\begin{aligned}
+                        \text{Minimize} \quad \sum_{i=1}^m p_{i} x_i
+                        \end{aligned} \]
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <p> Putting it all together, our linear program is</p>
+							\[\begin{aligned}
+                            \text{Minimize} \quad \sum_{i=1}^m p_{i} x_i\\
+                            \text{s.t.} \quad \sum_{i=1}^m n_{i1} x_i &amp; \ge 2000\\
+                            \quad \sum_{i=1}^m n_{i2} x_i &amp; \ge 56\\
+                            \dots
+							\end{aligned} \]
+                    </section>
+                    <section>
+                        <h3> The Diet Linear Program</h3>
+                        <p style="font-size:30px"> People have studied this linear program intently. At first, they would solve these problems by hand, and nowadays, linear program solving is a cornerstone of computer science. </p>
+                        <a href="https://neos-guide.org/case-studies/om/the-diet-problem/"><img src="diet_problem.png" width="1000"></img></a>
+                    </section>
+				</section>
+				<section>
+                    <h3>Linear Programming</h3>
+                    <p> There are a wide variety of algorithms for solving linear programs (the simplex method, interior point methods, the ellipsoid method). </p>
+                    <p style="font-size:30px"> The first practical theoretically efficient algorithm for this problem was developed by Arkadi Nemirovski, currently at Georgia Tech.</p>
+                    <p style="font-size:30px"> Modern linear program solvers can solve problems with billions of variables and constraints.</p>
+                </section>
+				<section>
+                    <section>
+                        <h3> What makes a linear program linear?</h3>
+                        <p> There is a key assumption that each resource gives an amount of utility proportional to the amount of that resource you have. </p>
+                        <p> If this assumption is violated, then it's not a linear program anymore. </p>
+                    </section>
+                    <section>
+                        <p style="font-size:30px"> Let's imagine that instead of wanting to minimize cost, we introduce a budget constraint that says we can't spend more than $50 on groceries a day. </p>
+							\[\begin{aligned}
+                            \sum_{i=1}^m n_{i1} x_i &amp; \ge 2000\\
+                            \sum_{i=1}^m n_{i2} x_i &amp; \ge 56\\
+                            \dots\\
+                            \sum_{i=1}^m p_{i} x_i &amp; \le 50
+							\end{aligned} \]
+                    </section>
+                    <section>
+                        <p style="font-size:30px"> We might try to add an objective that maximizes how much we enjoy the food we eat each day. </p>
+                        <p style="font-size:30px"> The linear programming approach would be to introduce `values' for each food item, and weight the objective by their value. </p>
+                        <div class="fragment">
+                        \[\begin{aligned}
+                        \text{Maximize} \quad \sum_{i=1}^m v_{i} x_i
+                        \end{aligned} \]
+                        </div>
+                    </section>
+                    <section>
+                        <h3> Nonlinear Utility </h3>
+                        <p style="font-size:30px"> <b>There is an issue!</b> Doubling the amount of candy I eat does not make me twice as happy. </p>
+                        <p class="fragment" style="font-size:30px"> There is a phenomenon in people's preferences called <b>diminishing marginal returns,</b> the more of something I have, the less having a little more of it is of value to me. </p>
+                        <p class="fragment" style="font-size:30px"> A utility function that satisfies a formal notion of diminishing marginal returns is called <b>concave</b>. </p>
+                    </section>
+                    <section>
+                        <h3> What makes a linear program linear?</h3>
+                        <p style="font-size:30px"> <b>There is an issue!</b> Doubling the amount of candy I eat does not make me twice as happy. </p>
+                        <div style="display:flex" class="fragment">
+                            <p style="font-size:30px"> Maybe my utility function for candy looks like \[f_{candy}(x) = x - \frac{1}{2}x^2.\] </p>
+                        <img src="utility.png" width="400px"></img>
+                        </div>
+                    </section>
+                    <section>
+                        <p style="font-size:30px;margin-top:-50px"> My new problem might look like </p>
+							\[\begin{aligned}
+                            \text{Maximize} \quad \sum_{i=1}^m f_i(x_i)\\
+                            \sum_{i=1}^m n_{i1} x_i &amp; \ge 2000\\
+                            \sum_{i=1}^m n_{i2} x_i &amp; \ge 56\\
+                            \dots\\
+                            \sum_{i=1}^m p_{i} x_i &amp; \le 50,
+							\end{aligned} \]
+                        <p style="font-size:30px"> where \(f_i\) is my utility from food \(i\).</p>
+                    </section>
+                    <section>
+                        <h3> Convex Optimization </h3>
+                        <p> <b> Can we still solve these nonlinear optimization problems? </b><p>
+                        <p style="font-size:30px"> We might not even know what our actual utility function is, how can we possibly solve this problem?<p>
+                        <p class="fragment fade-up" style="font-size:30px"> <b> Modern convex optimization shows that it is possible to solve these problems efficiently as long as you can know your marginal utility from eating each item. </b><p>
+                    </section>
+                </section>
+                <section>
+                    <h3> Beyond the Diet Problem </h3>
+                    <p> Linear programming (and more general convex programming) is useful for all sorts of different kinds of things, from allocating space for chips, designing networks, and more.<p>
+                    <p> There are also a lot of extensions beyond convex optimization involving discrete variables, longer term planning, etc. with mathematical guarantees, though these are much harder.<p>
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="reveal.js"></script>
+		<script src="math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+		</script>
+
+	</body>
+</html>
