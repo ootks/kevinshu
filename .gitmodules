@@ -1,3 +1,6 @@
 [submodule "hugo-blog"]
 	path = hugo-blog
 	url = https://github.com/ootks/hugo-blog
+[submodule "SO_n_Presentation"]
+	path = SO_n_Presentation
+	url = https://github.com/ootks/SO_n_Presentation
