@@ -4,3 +4,6 @@
 [submodule "SO_n_Presentation"]
 	path = SO_n_Presentation
 	url = https://github.com/ootks/SO_n_Presentation
+[submodule "ThesisPresentation"]
+	path = ThesisPresentation
+	url = git@github.com:ootks/ThesisPresentation.git
