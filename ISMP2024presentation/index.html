@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title> A Semidefinite Hierarchy for Expected Independence Numbers of Random Graphs </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.css">
+		<link rel="stylesheet" href="solarized.css" id="theme">
+        <style>
+            p {font-size: 30px}
+            li {font-size: 30px}
+            .path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s linear forwards;
+            }
+
+            @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+            }
+
+            tr {
+                border-style:hidden;
+            }
+            
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+                    <section>
+                        <h2> A Semidefinite Hierarchy for Expected Independence Numbers of Random Graphs </h2>
+                        <p>Kevin Shu</p>
+                    </section>
+                    <section>
+                        <h2> Coauthors </h2>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img src="diegocifuentes.jpg" height=300px></img>
+                                <p> <b>Diego Cifuentes</b></p>
+                                <p style="font-size:0.5em"> Georgia Tech</p>
+                            </div>
+                            <div style="flex:1">
+                                <img src="atoriello.jpg" height=300px></img>
+                                <p> <b>Alejandro Toriello</b></p>
+                                <p style="font-size:0.5em"> Georgia Tech</p>
+                            </div>
+                        </div>
+                        <div style="font-size:0.75em">Funded in part by the Office of Naval Research, N00014- 23-1-2631</div>
+                    </section>
+                    <section>
+                        <h4>Outline</h4>
+                        <ul>
+                            <li>
+                                Deterministic Independent Set Problem
+                            </li>
+                            <ul>
+                                <li> Definitions </li>
+                                <li> Lovász Theta </li>
+                                <li> Higher Moments </li>
+                            </ul>
+                            <li>
+                                Expected Independent Sets of Random Graphs
+                            </li>
+                            <ul>
+                                <li> Analogues of Deterministic Setting </li>
+                                <li> Symmetry reduction </li>
+                            </ul>
+                            <li>
+                                Examples
+                            </li>
+                            <ul>
+                                <li> Erdős-Rényi Graphs </li>
+                                <li> Uniformly Random Trees </li>
+                                <li> Numerical Examples </li>
+                            </ul>
+                            <li>
+                                Conclusions
+                            </li>
+                        </ul>
+                    </section>
+				</section>
+
+                <section>
+                    <section data-auto-animate>
+                        <h4>Maximum Independent Set Problem</h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <p> Input: a graph </p>
+                                <?xml version="1.0" standalone="no"?>
+                                <!-- Creator: fig2dev Version 3.2.6a -->
+                                <!-- CreationDate: 2024-03-26 13:14:28 -->
+                                <!-- Magnification: 1 -->
+                                <svg	xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="142pt" height="136pt"
+                                    viewBox="1207 439 2356 2257">
+                                <g fill="none">
+                                <!-- Line -->
+                                <polygon points=" 2385,480 1245,1305 1680,2655 3090,2655 3525,1305"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 2385,480 2385,1080"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 2400,1080 2745,2145 1815,1500 2955,1500 2010,2160 2385,1080"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 1245,1320 1830,1500"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 1695,2670 2025,2145"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 3090,2670 2760,2160"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Line -->
+                                <polyline points=" 3540,1320 2925,1500"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="3090" cy="2655" r="34" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <circle cx="3090" cy="2655" r="34" fill="#FF0000"
+                                    stroke="#FF0000" stroke-width="8px" class="fragment" data-fragment-index="1"/>
+                                <!-- Circle -->
+                                <circle cx="1695" cy="2655" r="34" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="2760" cy="2175" r="34" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="2010" cy="2160" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <circle cx="2010" cy="2160" r="30" fill="#FF0000"
+                                    stroke="#FF0000" stroke-width="8px" class="fragment" data-fragment-index="1"/>
+                                <!-- Circle -->
+                                <circle cx="1815" cy="1500" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="1815" cy="1500" r="30" fill="#FF0000"
+                                    stroke="#FF0000" stroke-width="8px" class="fragment" data-fragment-index="3"/>
+                                <!-- Circle -->
+                                <circle cx="2925" cy="1500" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="1245" cy="1305" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="3525" cy="1305" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="2385" cy="1095" r="30" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <!-- Circle -->
+                                <circle cx="2385" cy="480" r="34" fill="#FF0000"
+                                    stroke="#FF0000" stroke-width="8px" class="fragment" data-fragment-index="1"/>
+                                <circle cx="2385" cy="480" r="34" fill="#000000"
+                                    stroke="#000000" stroke-width="8px"/>
+                                <circle cx="2385" cy="480" r="34" fill="#FF0000"
+                                    stroke="#FF0000" stroke-width="8px" class="fragment" data-fragment-index="1"/>
+                                </g>
+                                </svg>
+
+                            </div>
+                            <div style="flex:1">
+                                <p class="fragment" data-fragment-index="1"> An <b>independent set</b> is a collection of vertices in a graph where no two vertices share an edge. </p>
+                                <p class="fragment fade-in" data-fragment-index="2"> <b>Maximum Independent Set:</b> Find the largest independent set in a graph. The size of this set is denoted $\alpha(G)$. </p>
+                            </div>
+                    </section>
+                    <section>
+                        <h4> Maximum Independent Set Problem </h4>
+                        <p> This problem is very hard; it is NP-hard to approximate to within a factor of $n^{\epsilon}$ for some $\epsilon &gt; 0$. </p>
+                        <p class="fragment fade-in"> For some classes of graphs, it can be computed efficiently.</p>
+                        <p class="fragment fade-in"> For the class of perfect graphs, the best known algorithms are still based on semidefinite programming.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> A Derivation of Lovász Theta </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <p> Let $G$ be a graph with $n$ vertices, and suppose that $S$ is a maximum independent set in $G$. </p>
+                                <p> Let $v$ be a vector in $\R^{n + 1}$ so that $v_0 = 1$, and for $n \ge i \ge 1$,
+                                \[
+                                v_i = \begin{cases} 1 \text{ if }i\in S\\ 0 \text{ otherwise.} \end{cases}
+                                \]</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> A Derivation of Lovász Theta </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <p> Let $G$ be a graph with $n$ vertices, and suppose that $S$ is a maximum independent set in $G$. </p>
+                                <p> Let $v$ be a vector in $\R^{n + 1}$ so that $v_0 = 1$, and for $n \ge i \ge 1$,
+                                \[
+                                v_i = \begin{cases} 1 \text{ if }i\in S\\ 0 \text{ otherwise.} \end{cases}
+                                \]</p>
+                            </div>
+                            <div class="fragment fade-in" style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px; font-size:0.5em;">
+                                <p><b> Let $M$ be the matrix $v v^{\intercal}$, then</b> </p>
+                                <p class="fragment fade-in">
+                                \[
+                                    \alpha(G) = \sum_{i=1}^nv_i,
+                                \]
+                                <p class="fragment fade-in"> $M_{ij} = 0$ when $ij \in G$, </p>
+                                <p class="fragment fade-in"> $M$ is PSD <span>and rank 1</span>, and </p>
+
+                                <div class="fragment fade-in" style="font-size:0.5em">
+                                    \[
+                                    M =\underbrace{\begin{pmatrix} 1 & v_1 & v_2 & \dots & v_n\\
+                                       v_1 & v_1 & M_{12} & \dots & M_{1n}\\
+                                       v_2 & M_{12} & v_2 & \dots & M_{2n}\\
+                                       \ddots & \ddots & \ddots & \ddots & \ddots \\
+                                       v_n & M_{1n} & M_{2n} & \dots & v_n
+                                       \end{pmatrix}}_{n+1}
+                                   \]
+                                </style>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h4> A Derivation of Lovász Theta </h4>
+                            <table style="border-style:hidden;">
+                                <tr style="border-style:hidden;">
+                                    <td>$\alpha(G)$</td>
+                                    <td><span class="fragment fade-out" data-fragment-index="2">=</span><span class="fragment" data-fragment-index="2">$\le$</span></td>
+                                    <td>$\max_M$</td>
+                                    <td>$\sum_{i=1}^nv_i$</td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td>such that</td>
+                                    <td>$M_{ij} = 0\text{ when }ij \in G$</td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>$M$ is PSD <span class="fragment strike" data-fragment-index="2"> and rank 1</span></td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size:0.5em">
+                                            \[
+                                            M=
+                                            \begin{pmatrix} 1 & v_1 & v_2 & \dots & v_n\\
+                                               v_1 & v_1 & M_{12} & \dots & M_{1n}\\
+                                               v_2 & M_{12} & v_2 & \dots & M_{2n}\\
+                                               \ddots & \ddots & \ddots & \ddots & \ddots \\
+                                               v_n & M_{1n} & M_{2n} & \dots & v_n
+                                               \end{pmatrix}
+                                           \]
+                                   </td>
+                                </tr>
+                                <tr style="border-style:hidden;" class="fragment" data-fragment-index="2">
+                                    <td></td>
+                                    <td>=</td>
+                                    <td></td>
+                                    <td>
+                                        $\vartheta(G)$.
+                                   </td>
+                                </tr>
+                            </table>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Incorporating Higher Order Moments </h4>
+                        <p> $M$ tells us about <i>pairs of vertices</i> and how the presence of one vertex affects the presence of another in the maximum independent set.  </p>
+                        <p> How do we make use of correlations between larger sets of vertices to improve this relaxation? </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Incorporating Higher Order Moments </h4>
+                        <p> Fix $2 \le k \le n$, and let $m = \sum_{i=0}^k \binom{n}{i}$. For a graph $G$ with maximum independent set $S$, let $v \in \R^m$ (indexed by sets of size at most $k$) with \[v_T = 1_{T \subseteq S}.\] </p>
+                        <p class="fragment fade-in"> Now, $M = vv^{\intercal}$ is a $m \times m$ matrix with entries indexed by pairs of sets of size at most $k$. </p>
+                        <p class="fragment fade-in"> We get constraints that say that if $S \cup T = U \cup V$, then $M_{ST} = M_{UV}$ (equivalently, there is a variable for each set of size at most $\min \{2k, n\}$), that $M$ is PSD and rank 1. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Incorporating Higher Order Moments </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <svg fill="#000000" height="300px" width="300px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     viewBox="0 0 520 520" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <rect width="480" height="480" x="20" y="20" fill="none" stroke="black" stroke-width="8px"/>
+                                        <!-- Circle -->
+                                        <circle cx="20" cy="20" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="500" cy="500" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="20" cy="500" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="500" cy="20" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div style="flex:1;font-size:0.5em">
+                                \[
+                                M = \begin{pmatrix}
+                                    1 & v_1 & v_2 & v_3 & v_4\\
+                                    v_1 & v_1 & M_{12} & 0 & M_{14}\\
+                                    v_2 & M_{12} & v_2 & M_{23} & 0\\
+                                    v_3 & 0 & M_{23} & v_3 & M_{34}\\
+                                    v_4 & M_{14} & 0 & M_{34} & v_4\\
+                                \end{pmatrix}
+                                \]
+                                <span> Lovász theta number variable. </span>
+
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Incorporating Higher Order Moments </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <svg fill="#000000" height="300px" width="300px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     viewBox="0 0 520 520" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <rect width="480" height="480" x="20" y="20" fill="none" stroke="black" stroke-width="8px"/>
+                                        <!-- Circle -->
+                                        <circle cx="20" cy="20" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="500" cy="500" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="20" cy="500" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        <circle cx="500" cy="20" r="20" fill="#000000"
+                                            stroke="#000000"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div style="flex:1;font-size:0.5em">
+                                \[
+                                M = 
+                                \begin{array}{c}
+                                {\small
+                                    \begin{array}{cccr}
+                                        \varnothing & \{1\} & \{2\} & \{3\} & \{4\} & \{1,2\} & \{1,3\} & \{1,4\} & \{2,3\} & \{2,4\} & \{3,4\}\\
+                                        \end{array}}\\
+                                    \left(
+                                    \begin{array}
+                                        11 & v_1 & v_2 & v_3 & v_4 & M_{12} &  M_{13} &  M_{14} & M_{23} & M_{24} & M_{34}\\
+                                        v_1 & v_1 & M_{12} & 0 & M_{14} & M_{12} & M_{13} & M_{14} & M_{123} = 0 & 0 & 0\\
+                                        v_2 & M_{12} & v_2 & M_{23} & 0 & M_{12} & 0 & 0 & M_{23} & M_{24} & 0\\
+                                        v_3 & 0 & M_{23} & v_3 & M_{34} & 0 & M_{13} & 0 & M_{23} & 0 & M_{34}\\
+                                        v_4 & M_{14} & 0 & M_{34} & v_4 & 0 & 0 & M_{14} & 0 & M_{24}& M_{24}\\
+                                        &&&&&&\dots
+                                    \end{array}
+                                    \right).
+                                \end{array}
+                                \begin{array}
+                                \hline 
+                                \end{array}
+                                \]
+
+                                <span>Moment matrix for second level Lasserre hierarchy.</span>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Incorporating Higher Order Moments </h4>
+                        <p> For a fixed $k$, relaxing the constraint that $M$ be rank 1 leads to a semidefinite program. </p>
+
+                        <p> These semidefinite programs form a hierarchy of bounds for $\alpha$, which is a special case of the Lasserre-Parrilo hierarchy of semidefinite programs. When $k = n$, the program is tight. </p>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h4> Randomized Setting </h4>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h4> Randomized Setting </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <p> Instead of $G$ being a fixed graph, we may take $G$ sampled from a probability distribution, so that it is a random variable.  </p>
+                                <p> This comes in the form of a probability distribution on all graphs on $n$ vertices.  </p>
+                            </div>
+                            <div style="flex:1">
+                                <img src="randomGraph.gif" height=300px/>
+                                <p style="font-size:0.5em"> As an example, we may take $G$ to be the Erdős–Rényi random graph where each edge appears independently with probability $p$. </p>
+                            </div>
+                        </div>
+
+                        <p class="fragment fade-in"> Can we bound the <i>expected</i> indepdendence number of $G$ $\E[\alpha(G)] = \sum_{G} p(G)\alpha(G)$?  </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Randomized Setting </h4>
+                        <p> Can we bound the <i>expected</i> indepdendence number of $G$ $\E[\alpha(G)] = \sum_{G} p(G)\alpha(G)$?  </p>
+
+                        <p> <b>Yes!</b> Use the same hierarchy, but modifying the constraints to yield bounds on the probabilities of subsets being independent. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> A Random Variant of Lovász Theta </h4>
+                        <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px; font-size:0.75em">
+                            <h5 style="color: white; font-size:2em">theorem</h5>
+                            <p>If $G$ is a random graph, and $q_{ij}$ is the probability that the edge $ij$ does not appear in $G$, then</p>
+                            <table style="border-style:hidden;">
+                                <tr style="border-style:hidden;">
+                                    <td>$\E[\alpha(G)]$</td>
+                                    <td>$\le$</td>
+                                    <td>$\max_M$</td>
+                                    <td>$\sum_{i=1}^nv_i$</td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td>such that</td>
+                                    <td>$M_{ij} \le q_{ij}$</td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>$M$ is PSD </td>
+                                </tr>
+                                <tr style="border-style:hidden;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="font-size:0.5em">
+                                            \[
+                                            M=
+                                            \begin{pmatrix}
+                                                1 & v_1 & v_2 & \dots & v_n\\
+                                               v_1 & v_1 & M_{12} & \dots & M_{1n}\\
+                                               v_2 & M_{12} & v_2 & \dots & M_{2n}\\
+                                               \ddots & \ddots & \ddots & \ddots & \ddots \\
+                                               v_n & M_{1n} & M_{2n} & \dots & v_n
+                                           \end{pmatrix}
+                                           \]
+                                   </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>$:=$</td>
+                                    <td>$\phi_1(G)$.</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> A Random Variant of Hierarchy </h4>
+                        <p> We may generalize the higher levels of the hierarchy similarly, where each level of the hierarchy depends on the values of $q_S$, where $q_S$ is the probability that $S \subseteq V$ is independent in $G$, yielding a sequence of bounds
+                        \[
+                            \E[\alpha(G)] \le \phi_n(G) \le \phi_{n-1}(G) \le \dots \le \phi_1(G).
+                        \]</p>
+                        <p> Equations are the same as in the deterministic case, only have inequalities of the form $M_S \le q_S$.</p>
+                        <p class="fragment fade-in"> Note that these probabilities are often much easier to calculate explicitly than the expected independence numbers of $G$ directly. </p>
+                        <p class="fragment fade-in"> This hierarchy does not always converge to the optimum in all cases because there are multiple graphs with the same probabilities of subsets being independent. </p>
+                    </section>
+                </section>
+                <section data-auto-animate>
+                    <section>
+                        <h3> Symmetric Random Graphs </h3>
+                    </section>
+                    <section>
+                        <h4> A Simplification for Symmetric Random Graphs </h4>
+                        <p> A symmetric random graph for us is a random graph in which $q_S$ only depends on $|S|$. </p>
+                        <p> For example: 
+                        <ul>
+                            <li> Erdős–Rényi</li>
+                            <li> Uniformly random spanning trees </li>
+                            <li> Uniformly random graphs with fixed degree </li>
+                            <li> Geometric random graphs </li>
+                        </ul>
+                        </p>
+                    </section>
+                    <section>
+                        <h4> A Simplification for Symmetric Random Graphs </h4>
+                        <p> For these symmetric random graphs, it is possible to give a simpler version of the last level of the hierarchy. </p>
+                        <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px; font-size:0.75em;">
+                            <h5 style="color: white">theorem</h5>
+                            <p>The last level of the hierarchy is equivalent to a linear program if the underlying graph is symmetric.</p>
+                            <table>
+                                <tr>
+                                    <td> $\phi_n(G) =$</td>
+                                    <td>min </td>
+                                    <td>$\sum_{i=1}^n i x_i$ </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>such that</td>
+                                    <td>$\sum_{i=\ell}^{n} \binom{i}{\ell} x_i \le \binom{n}{\ell}q_{\ell},$ for each $\ell \le n$.</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>$\sum_{i=1}^n x_i = 1$</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>$x_i \ge 0$ for each $i \le n$.</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p> 
+                            Intuitively, $x_i$ is the probability that the independence number of $G$ is exactly equal to $i$.
+                        </p>
+                    </section>
+                    <section>
+                        <h4> A Simplification for Symmetric Random Graphs </h4>
+                        <table style="font-size:0.5em">
+                            <tr>
+                                <td>min </td>
+                                <td>$\sum_{i=1}^n i x_i$ </td>
+                            </tr>
+                            <tr>
+                                <td>such that</td>
+                                <td>$\sum_{i=\ell}^{n} \binom{i}{\ell} x_i \le \binom{n}{\ell}q_{\ell},$ for each $\ell \le n$.</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>$\sum_{i=1}^n x_i = 1$</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>$x_i \ge 0$ for each $i \le n$.</td>
+                            </tr>
+                        </table>
+                        <p> 
+                            <b>Proof idea:</b> We can think of the feasible region of the last level of the Lasserre hierarchy as a polytope, so we can reduce the SDP to a linear program at that point.
+                            That linear program is symmetric, so many of its inequalities can be made redundant.
+
+                            Symmetry reduction applied to that linear program yields this linear program.
+                        </p>
+                    </section>
+                    <section>
+                        <h4> A Simplification for Symmetric Random Graphs </h4>
+                        <p> In fact, we can analyze this linear program a little more and get an even simpler (almost) closed form solution. </p>
+                        <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px; font-size:0.75em;">
+                            <h5 style="color: white">theorem</h5>
+                            <p> 
+                                There is an optimal solution to the above linear program with the property that at most 2 of its entries are nonzero. Its optimum value is equal to
+                                \[
+                                    \min_{1 \le \ell \le k+1 \le n} k - \frac{\binom{k}{\ell}}{\binom{k}{\ell-1}}+\frac{\binom{n}{\ell}}{\binom{k}{\ell-1}}q_{\ell}.
+                                \]
+                            </p>
+                        </div>
+                        <p> 
+                            We can use this closed form to analyze the performance of the algorithm in some cases.
+                        </p>
+                    </section>
+                    <section>
+                        <h3> Examples for Symmetric Graphs </h3>
+                    </section>
+                    <section>
+                        <h4> Erdős–Rényi </h4>
+                        <p> It is known that for any fixed $p$, the expected independence number of the Erdős–Rényi random graph is very close to 
+                        \[
+                            k^* = \min \{k : \binom{n}{k} (1-p)^{\binom{k}{2}} \le \log(n)\}.
+                        \]
+                        </p>
+                        <p> 
+                        On the other hand, our methods show that the expected independence number of $G$ is at most
+                        \[
+                            \kappa^* = \min \{k : \binom{n}{k} (1-p)^{\binom{k}{2}} \le 1\}.
+                        \]
+                        </p>
+                    </section>
+                    <section>
+                        <h4> Random Trees </h4>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <p> Consider $G_n$ chosen uniformly at random from all spanning trees on $n$ vertices. It is known that 
+                                \[
+                                \lim_{n\rightarrow \infty} \frac{\alpha(G_n)}{n} = \rho \sim 0.5671.
+                                \]
+                                </p>
+                            </div>
+                            <div style="flex:1">
+                                <img src="randomTree.png" height=200px/>
+                            </div>
+                        </div>
+                        <p> 
+                        On the other hand, our methods show that the expected independence number of $G_n$ is at most
+                        \[
+                            \frac{\alpha(G_n)}{n} \le \rho' \sim 0.6399.
+                        \]
+                        </p>
+                    </section>
+                    <section>
+                        <h3> Example for Nonsymmetric Graphs </h3>
+                    </section>
+                    <section>
+                        <p>If we consider a variant of the Erdős–Rényi graph in which the edge probabilities are not all the same, then we obtain a nonsymmetric graph.</p>
+
+                        <img src="histogram.png" height=400px/>
+                        <p style="font-size:0.5em">Optimality gaps for different rounds of the Lasserre hierarchy for different (randomly chosen) random graph families on 10 vertices. The lines represent the geometric mean of the optimality gaps.</p>
+                    </section>
+                </section>
+                <section>
+                    <h3> Open Questions </h3>
+                    <ul>
+                        <li> How can we improve the bound on expected independence number? </li>
+                        <li> What is the rate of convergence for the hierarchy (even for Erdős–Rényi)? </li>
+                    </ul>
+                </section>
+            </section> </div>
+
+		</div>
+
+		<script src="reveal.js"></script>
+		<script src="math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							E: '\\mathbb{E}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+            Reveal.addEventListener( 'drawCurve', function() {
+                element = document.getElementById("curveDrawing");
+                element.classList.add("path");
+            } );
+		</script>
+
+	</body>
+</html>
