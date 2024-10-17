@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title> Gradient Descent: An Algebraic Perspective </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.css">
+		<link rel="stylesheet" href="solarized.css" id="theme">
+        <style>
+            p {font-size: 30px}
+            li {font-size: 30px}
+            .path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s linear forwards;
+            }
+
+            @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+            }
+
+            tr {
+                border-style:hidden;
+            }
+            
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+                    <section>
+                        <h2> Accelerating Gradient Descent with Long Steps </h2>
+                        <p>Kevin Shu</p>
+                        <p style="font-size:0.75em">California Institute of Technology</p>
+                    </section>
+                    <section>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img src="ben.jpg" height="200px"></img>
+                                <p> <b>Ben Grimmer</b> - Johns Hopkins University</p>
+                            </div>
+                            <div style="flex:1">
+                                <img src="alex.jpeg" height="200px"></img>
+                                <p> <b>Alex Wang</b> - Perdue University</p>
+                            </div>
+                    </section>
+				</section>
+
+                <section>
+                    <section data-auto-animate>
+                        <h3>Convex Optimization</h3>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
+                        <h4> Definition </h4>
+                        <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its gradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
+                        \[\|\nabla f(x) - \nabla f(y)\|^2 \le L \|x-y\|^2.\]
+                        <p>We will write $\mathcal{F}^{0,L}$ for the set of $L$-smooth convex functions, and note that any such function can be scaled to have $L=1$. </p>
+                        </div>
+                        <p class=fragment><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
+                        <p class = fragment>
+                            In general, a first order method starts at $x_0 \in \R^d$, and iteratively defines
+                            \[
+                                x_{i+1} = x_i - \frac{1}{L}\sum_{j=0}^i H_{ij} \nabla f(x_j).
+                            \]
+                        </p>
+                        <p class = fragment>
+                            Gradient descent is the special case where
+                            \[
+                                x_{i+1} = x_i - \frac{h_i}{L} \nabla f(x_j).
+                            \]
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
+
+                        <h4> History </h4>
+                        <div style="text-align:left; font-size:0.25em ">
+                        <ul>
+                            <li style="font-size:2em"> <b>Standard: </b> If each $h_i = 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{2n} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em"> <b>Fast Gradient Method (Nesterov):</b> There is a gradient method (using momentum) so that, \[f(x_n) - f(x_*) \le \frac{2L}{(n+1)^2} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with 0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em"> <b>Optimized Gradient Method (Kim and Fessler):</b> Gives an explicit gradient method that achieves the best possible convergence rate (even up to constants).
+                        </ul>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
+
+                        <h4> History </h4>
+                        <div style="text-align:left; font-size:0.25em ">
+                        <ul>
+                            <li style="font-size:2em; color:red"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with 0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em; color:red"> <b>Optimized Gradient Method (Kim and Fessler):</b> Gives an explicit gradient method that achieves the best possible convergence rate (even up to constants).
+                        </ul>
+                        </div>
+                        <p> The last two bounds use the Performance Estimation Problem (PEP) framework to prove these bounds. We will discuss a formulation of this framework in this talk. </p>
+                    </section>
+                    <section data-auto-animate> <h3> Convex Optimization </h3>
+                        <p class = fragment>
+                            Gradient descent:
+                            \[
+                                x_{i+1} = x_i - \frac{h_i}{L} \nabla f(x_j).
+                            \]
+                        </p>
+                        <p class=fragment><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
+
+                        <p> A target we might try to achieve is something like:
+                        \[
+                            f(x_n) - f(x_*) \le r \|x_0 - x_*\|^2,
+                        \]
+                        where $x_*$ is a minimizer of $f$, and $r$ is some (hopefully small) constant.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
+
+                        <p> We may define the rate function of $h \in \R^n$ to be </p>
+                        <p> \[\rho(h) = \min \{r :\forall f \in \mathcal{F}^{0,L}\; f(x_n) - f(x_*) \le r \|x_0 - x_*\|^2 \}\]</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
+                        <p>
+                        Finding the best possible step size sequence would correspond to minimizing
+                        \[
+                            \min_h \rho(h).
+                        \]
+                        </p>
+
+                        <p style="font-size:0.7em"> For a fixed $h$, computing $\rho(h)$ is an <i> infinite dimensional </i> optimization problem over the function class. </p>
+                        <p style="font-size:0.7em"> Suprisingly, it is equivalent to a finite dimensional optimization problem. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p style="background-color: white">
+                        <b>Coercive inequalities</b>
+                        For any $1$-smooth convex function $f$, and any $x, y\in \R^d$,
+                        \[
+                            f(x) - f(y) \le \langle \nabla f (y), x - y\rangle  - \frac{1}{2}\|\nabla f(x) - \nabla f(y)\|^2.
+                        \]
+                        </p>
+                        <p>These inequalities (for each pair $x, y$) completely specify $\mathcal{F}^{0,1}$.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p>
+                            The interpolation theorem of Taylor et al. shows that these inequalities characterize the first order data of convex functions for a finite set of points.
+                        </p>
+                        <p style="font-size:0.5em;color=blue">
+                        Formally, if we are given a sequence $x_*, x_0, \dots, x_n \in \R^d$ of points and sequences $f_*, f_0, \dots, f_n \in \R$ and $g_0, \dots, g_n \in \R^d$, if for each $i, j$,
+                        \[
+                            f_i - f_j \le \langle \nabla f_j, x_i - x_j\rangle  - \frac{1}{2}\|g_i - g_j\|^2,
+                        \]
+                        then there is a function $f \in \mathcal{F}^{0,L}$ so that $f(x_i) = f_i$ and $\nabla f(x_i) = g_i$ for each $i$.
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p>
+                            We can try to combine the inequalities 
+                            \[
+                                Q_{ij} = f_i - f_j -  \langle \nabla f_j, x_i - x_j\rangle  +  \frac{1}{2}\|g_i - g_j\|^2 \ge 0.
+                            \]
+                            To obtain the desired rate inequality, 
+                            \[
+                                f_n - f_* \le r \|x_0 - x_*\|^2 - S,
+                            \]
+                            where $S$ is some positive semidefinite quadratic function of the first order data.
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p>
+                        <b>Algebraic formulation:</b>
+                        Can we find coefficients $\lambda_{ij}$ and a positive semidefinite quadratic form $S$ so that so that 
+                        \[
+                            r \|x_0 - x_n\|^2 - f_*-f_n = \sum_{i,j} \lambda_{ij}Q_{ij} - S?
+                        \]
+
+                        </p>
+                        <p> This is equivalent to the dual of the performance estimation problem of Teboulle and Drori and exactly computes the rate function $r(h)$. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p>
+                            The matrix of coefficients $\lambda$ is a certificate of the rate guaranteed by $h$. The game is to find sequences of step sizes $h$ and certificates that achieve good rates.
+                        </p>
+                        <p> In our original work, we found such a sequence of $h's$ and associated certificates that achieved a rate of 
+                        \[f(x_n) - f(x_*) \le O\left(\frac{LD^2}{n^{1+\epsilon}}\right)\]
+                        for some $\epsilon &gt; 0$, where $D$ is an measure of distance from the starting iterate to optimality. </p>
+                        <p class=fragment> Our analysis was messy and did not achieve the best exponent available. Altschuler and Parrilo found a better analysis of a different (similar) sequence.  </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <div style="display:flex">
+                            <div style="flex:1;padding:0.5in">
+                                <p>
+                                 For each $k \ge 0$, we let $h^{(k)} \in \R^{2^k-1}$ so that $h^{(0)} = (\sqrt{2})$, and inductively concatenate
+                                    \[
+                                        h^{(k+1)} = [h^{(k)}, 1+(1+\sqrt{2})^{k-1}, h^{(k)}].
+                                    \]
+                                </p>
+                            </div>
+                            <div style="flex:1">
+                                <img height=200px src="silver.png"/>
+                                <p style="font-size:0.5em">From Altschuler-Parrilo 2023.</p>
+                            </div>
+                        </div>
+                        <p class=fragment>
+                            \[f(x_n) - f(x_*) \le O(\frac{LD^2}{n^{1.27\dots}}),\]
+                            where $\log_2(1+\sqrt{2}) = 1.27\dots$.
+                        </p>
+                        
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p>
+                            The silver step sizes do not produce the optimal rate for a given $n$, even when $n$ is a power of 2. By cleaning up our analysis of our original sequence, and truncating the sequence early, we have since improved on this rate (though not the asymptotic rate).
+                        </p>
+                        <p style="text-align:left">First, some intution:</p>
+                        <p><b> Why is acceleration possible in this setting? </b></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b> Why is acceleration possible in this setting? </b>
+
+                        <p> Two extreme functions: </p>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img  height=200px src="quadratic.png"/>
+                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
+                            </div>
+                            <div style="flex:1">
+                                <img height=200px src="linear.png"/>
+                                <p style="font-size:0.5em">$f(x) = x$</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b> Why is acceleration possible in this setting? </b>
+
+                        <p> Two extreme functions: </p>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img  height=200px src="quadratic.png"/>
+                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
+                                <p class=fragment style="font-size:0.5em">Large steps lead to divergence.</p>
+                            </div>
+                            <div style="flex:1">
+                                <img height=200px src="huber.png"/>
+                                <p style="font-size:0.5em">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
+                                <p  class=fragment style="font-size:0.5em">Small steps converge slowly.</p>
+                            </div>
+                        </div>
+                        <p class=fragment> Alternating step sizes leads to faster convergence in both settings. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p> These two functions (quadratic and Huber) appear to be more than just illustrative: </p>
+                        <ul>
+                            <li>They are both worst case functions for the optimal gradient method (defined above). </li>
+                            <li>They are conjectured to be worst case for the best constant step size gradient descent method. </li>
+                        </ul>
+                        <p class=fragment> For silver step sizes, only the Huber function is worst case. This suggests that we can make some steps bigger to improve. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p> Our step sizes are defined so that 
+                        \[
+                            h^{(k+1)} = [\sigma^{(k)}, \alpha_k, h^{(k)}].
+                        \]
+                        </p>
+                        <p> Here, $\alpha_k$ is chosen so that these step sizes achieve equal rates on the Huber function and the quadratic function, and $\sigma^{(k)}$ is the silver step size sequence. </p>
+                        <p> This achieves strictly better rates than the silver step size sequence by a constant factor. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Convex Optimization </h3>
+                        <p><b> More recent work </b> </p>
+                        <ul>
+                            <li>Generalized our original sequence as well as the silver step size sequence to work for arbitrary size (not just a power of 2), while improving the rates by constant factors. </li>
+                            <li>Gave cleaner explanations of what we need for recursive certificates (though no conceptual answer for where these numbers come from). </li>
+                            <li>Found analogous seqeunces for minimizing the gradient norm of the final iterate. </li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1> Thanks for listening!</h1>
+                    </section>
+            </section> </div>
+
+		</div>
+
+		<script src="reveal.js"></script>
+		<script src="math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							E: '\\mathbb{E}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+            Reveal.addEventListener( 'drawCurve', function() {
+                element = document.getElementById("curveDrawing");
+                element.classList.add("path");
+            } );
+		</script>
+
+	</body>
+</html>
