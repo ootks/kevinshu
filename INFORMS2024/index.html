@@ -52,25 +52,34 @@
                             </div>
                             <div style="flex:1">
                                 <img src="alex.jpeg" height="200px"></img>
-                                <p> <b>Alex Wang</b> - Perdue University</p>
+                                <p> <b>Alex L. Wang</b> - Purdue University</p>
                             </div>
+                    </section>
+                    <section>
+                        <h3> Outline </h3>
+                        <ul>
+                            <li> Introduction and History of First Order Methods</li>
+                            <li> Long steps and our contributions </li>
+                            <li> Composition of step size sequences </li>
+                            <li> Recursive certificates </li>
+                        </ul>
                     </section>
 				</section>
 
                 <section>
                     <section data-auto-animate>
-                        <h3>Convex Optimization</h3>
+                        <h3>Introduction and History</h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
                         <h4> Definition </h4>
                         <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its gradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
-                        \[\|\nabla f(x) - \nabla f(y)\|^2 \le L \|x-y\|^2.\]
+                        \[\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|.\]
                         <p>We will write $\mathcal{F}^{0,L}$ for the set of $L$-smooth convex functions, and note that any such function can be scaled to have $L=1$. </p>
                         </div>
                         <p class=fragment><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
                     </section>
 
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3>Introduction and History</h3>
                         <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
                         <p class = fragment>
                             In general, a first order method starts at $x_0 \in \R^d$, and iteratively defines
@@ -86,7 +95,7 @@
                         </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3>Introduction and History</h3>
                         <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
 
                         <h4> History </h4>
@@ -94,13 +103,13 @@
                         <ul>
                             <li style="font-size:2em"> <b>Standard: </b> If each $h_i = 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{2n} \|x_0 - x_*\|^2.\]</li>
                             <li style="font-size:2em"> <b>Fast Gradient Method (Nesterov):</b> There is a gradient method (using momentum) so that, \[f(x_n) - f(x_*) \le \frac{2L}{(n+1)^2} \|x_0 - x_*\|^2.\]</li>
-                            <li style="font-size:2em"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with 0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
                             <li style="font-size:2em"> <b>Optimized Gradient Method (Kim and Fessler):</b> Gives an explicit gradient method that achieves the best possible convergence rate (even up to constants).
                         </ul>
                         </div>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3>Introduction and History</h3>
                         <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
 
                         <h4> History </h4>
@@ -110,139 +119,17 @@
                             <li style="font-size:2em; color:red"> <b>Optimized Gradient Method (Kim and Fessler):</b> Gives an explicit gradient method that achieves the best possible convergence rate (even up to constants).
                         </ul>
                         </div>
-                        <p> The last two bounds use the Performance Estimation Problem (PEP) framework to prove these bounds. We will discuss a formulation of this framework in this talk. </p>
-                    </section>
-                    <section data-auto-animate> <h3> Convex Optimization </h3>
-                        <p class = fragment>
-                            Gradient descent:
-                            \[
-                                x_{i+1} = x_i - \frac{h_i}{L} \nabla f(x_j).
-                            \]
-                        </p>
-                        <p class=fragment><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
+                        <p> The last two bounds use the Performance Estimation Problem (PEP) framework to prove these bounds. </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
-
-                        <p> A target we might try to achieve is something like:
-                        \[
-                            f(x_n) - f(x_*) \le r \|x_0 - x_*\|^2,
-                        \]
-                        where $x_*$ is a minimizer of $f$, and $r$ is some (hopefully small) constant.</p>
+                        <h3>Introduction and History</h3>
+                        <p> Classic analysis for gradient descent concerned step sizes between 0 and 2 (short steps), for which $O\left(\frac{1}{n}\right)$ rates of convergence are best possible </p>
+                        <p class=fragment> Subsequent work (Altschuler; Das Gupta, Van Parys, Ryu; Grimmer) pushed the analysis beyond the short step regime, but could only handle sequences of a fixed size.</p>
+                        <p class=fragment> Grimmer, S. and Wang, and concurrently Altschuler and Parrilo found sequences of unbounded length that obtained rates of $O\left(\frac{1}{n^p}\right)$, where $p &gt; 1$. </p>
+                        <p class=fragment> <b> We will describe the methods by which these convergence rates are proven, and some families of step sizes that produce various guarantees. </b></p>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
-
-                        <p> We may define the rate function of $h \in \R^n$ to be </p>
-                        <p> \[\rho(h) = \min \{r :\forall f \in \mathcal{F}^{0,L}\; f(x_n) - f(x_*) \le r \|x_0 - x_*\|^2 \}\]</p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p><b>Big Question:</b><i> How do we select the step sizes $h_i$. </i></p>
-                        <p>
-                        Finding the best possible step size sequence would correspond to minimizing
-                        \[
-                            \min_h \rho(h).
-                        \]
-                        </p>
-
-                        <p style="font-size:0.7em"> For a fixed $h$, computing $\rho(h)$ is an <i> infinite dimensional </i> optimization problem over the function class. </p>
-                        <p style="font-size:0.7em"> Suprisingly, it is equivalent to a finite dimensional optimization problem. </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p style="background-color: white">
-                        <b>Coercive inequalities</b>
-                        For any $1$-smooth convex function $f$, and any $x, y\in \R^d$,
-                        \[
-                            f(x) - f(y) \le \langle \nabla f (y), x - y\rangle  - \frac{1}{2}\|\nabla f(x) - \nabla f(y)\|^2.
-                        \]
-                        </p>
-                        <p>These inequalities (for each pair $x, y$) completely specify $\mathcal{F}^{0,1}$.</p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p>
-                            The interpolation theorem of Taylor et al. shows that these inequalities characterize the first order data of convex functions for a finite set of points.
-                        </p>
-                        <p style="font-size:0.5em;color=blue">
-                        Formally, if we are given a sequence $x_*, x_0, \dots, x_n \in \R^d$ of points and sequences $f_*, f_0, \dots, f_n \in \R$ and $g_0, \dots, g_n \in \R^d$, if for each $i, j$,
-                        \[
-                            f_i - f_j \le \langle \nabla f_j, x_i - x_j\rangle  - \frac{1}{2}\|g_i - g_j\|^2,
-                        \]
-                        then there is a function $f \in \mathcal{F}^{0,L}$ so that $f(x_i) = f_i$ and $\nabla f(x_i) = g_i$ for each $i$.
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p>
-                            We can try to combine the inequalities 
-                            \[
-                                Q_{ij} = f_i - f_j -  \langle \nabla f_j, x_i - x_j\rangle  +  \frac{1}{2}\|g_i - g_j\|^2 \ge 0.
-                            \]
-                            To obtain the desired rate inequality, 
-                            \[
-                                f_n - f_* \le r \|x_0 - x_*\|^2 - S,
-                            \]
-                            where $S$ is some positive semidefinite quadratic function of the first order data.
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p>
-                        <b>Algebraic formulation:</b>
-                        Can we find coefficients $\lambda_{ij}$ and a positive semidefinite quadratic form $S$ so that so that 
-                        \[
-                            r \|x_0 - x_n\|^2 - f_*-f_n = \sum_{i,j} \lambda_{ij}Q_{ij} - S?
-                        \]
-
-                        </p>
-                        <p> This is equivalent to the dual of the performance estimation problem of Teboulle and Drori and exactly computes the rate function $r(h)$. </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p>
-                            The matrix of coefficients $\lambda$ is a certificate of the rate guaranteed by $h$. The game is to find sequences of step sizes $h$ and certificates that achieve good rates.
-                        </p>
-                        <p> In our original work, we found such a sequence of $h's$ and associated certificates that achieved a rate of 
-                        \[f(x_n) - f(x_*) \le O\left(\frac{LD^2}{n^{1+\epsilon}}\right)\]
-                        for some $\epsilon &gt; 0$, where $D$ is an measure of distance from the starting iterate to optimality. </p>
-                        <p class=fragment> Our analysis was messy and did not achieve the best exponent available. Altschuler and Parrilo found a better analysis of a different (similar) sequence.  </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <div style="display:flex">
-                            <div style="flex:1;padding:0.5in">
-                                <p>
-                                 For each $k \ge 0$, we let $h^{(k)} \in \R^{2^k-1}$ so that $h^{(0)} = (\sqrt{2})$, and inductively concatenate
-                                    \[
-                                        h^{(k+1)} = [h^{(k)}, 1+(1+\sqrt{2})^{k-1}, h^{(k)}].
-                                    \]
-                                </p>
-                            </div>
-                            <div style="flex:1">
-                                <img height=200px src="silver.png"/>
-                                <p style="font-size:0.5em">From Altschuler-Parrilo 2023.</p>
-                            </div>
-                        </div>
-                        <p class=fragment>
-                            \[f(x_n) - f(x_*) \le O(\frac{LD^2}{n^{1.27\dots}}),\]
-                            where $\log_2(1+\sqrt{2}) = 1.27\dots$.
-                        </p>
-                        
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p>
-                            The silver step sizes do not produce the optimal rate for a given $n$, even when $n$ is a power of 2. By cleaning up our analysis of our original sequence, and truncating the sequence early, we have since improved on this rate (though not the asymptotic rate).
-                        </p>
-                        <p style="text-align:left">First, some intution:</p>
-                        <p><b> Why is acceleration possible in this setting? </b></p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3> Acceleration with Gradient Descent </h3>
                         <p><b> Why is acceleration possible in this setting? </b>
 
                         <p> Two extreme functions: </p>
@@ -258,7 +145,7 @@
                         </div>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3> Acceleration with Gradient Descent </h3>
                         <p><b> Why is acceleration possible in this setting? </b>
 
                         <p> Two extreme functions: </p>
@@ -270,39 +157,262 @@
                             </div>
                             <div style="flex:1">
                                 <img height=200px src="huber.png"/>
-                                <p style="font-size:0.5em">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
+                                <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
                                 <p  class=fragment style="font-size:0.5em">Small steps converge slowly.</p>
                             </div>
                         </div>
-                        <p class=fragment> Alternating step sizes leads to faster convergence in both settings. </p>
+                        <p class=fragment style="margin-top:-20px"> <b> Alternating big and small steps leads to faster convergence for both. </b> </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
+                        <h3> Acceleration with Gradient Descent </h3>
                         <p> These two functions (quadratic and Huber) appear to be more than just illustrative: </p>
                         <ul>
                             <li>They are both worst case functions for the optimal gradient method (defined above). </li>
-                            <li>They are conjectured to be worst case for the best constant step size gradient descent method. </li>
+                            <li>They are (conjectured to be) worst case for the best constant step size gradient descent method. </li>
+                            <li>We will be designing gradient descent steps for which the worst case rate is obtained by both of these functions. </li>
                         </ul>
-                        <p class=fragment> For silver step sizes, only the Huber function is worst case. This suggests that we can make some steps bigger to improve. </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p> Our step sizes are defined so that 
+                        <h3> Recursive Construction of Step Sizes </h3>
+                        <p> The step sizes we construct are designed to be <b>recursive</b> and <b> have Huber and quadratic functions as their worst case.</b></p>
+                        <p class=fragment>
+                        Roughly, we will define a class of sequences that are `composable' so that if $h$ and $\ell$ are composable, then there is some $\alpha$ so that
                         \[
-                            h^{(k+1)} = [\sigma^{(k)}, \alpha_k, h^{(k)}].
+                            [h, \alpha, \ell]
+                        \]
+                        is still composable, and have an improved rate of convergence over either of the constituents.
+                        </p>
+                        <p class=fragment> <b> Slight complication: </b> We will actually need multiple `flavors' of composable sequences, that need to be composed slightly differently. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $f$-Composable Sequences</h3>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
+                        <h4> Definition </h4>
+                            <p>
+                            We will say that a sequence $h \in \R^n$ is <i>$f$-composable</i> with rate $r$ if for any smooth convex function $f$, if $x_0, \dots, x_n$ are the iterates of gradient descent with step sizes $h$,
+                            \[
+                                f(x_n) - f(x_*) \le \frac{r}{2}\|x_0 - x_*\|^2,
+                            \]
+                            and that this inequality is met with equality when $f$ is either the Huber function or the 1-d quadratic function $\frac{1}{2}x^2$.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $f$-Composable Sequences</h3>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                        <h4> Theorem </h4>
+                            <p>
+                            There are $f$-composable sequences with rate $r \le \frac{0.433}{(n+1)^{1.27\dots}},$ where
+                            $1.27\dots = \log_2(1+\sqrt{2})$.
+                            </p>
+                        </div>
+                        <ul class=fragment>
+                            <li> Best known constant factor for gradient descent methods.</li>
+                            <li> We find sequences that match or exceed the performance of the step size sequences found in Das Gupta et al. for each $n$ that they were able to compute.</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $g$-Composable Sequences</h3>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
+                        <h4> Definition </h4>
+                            <p>
+                                We will say that a sequence $h \in \R^n$ is <i>$g$-composable</i> with rate $r$ if for any smooth convex function $f$, if $x_0, \dots, x_n$ are the iterates of gradient descent with step sizes $h$,
+                                \[
+                                    \|\nabla f(x_n)\|^2 \le r(f(x_0) - f(x_*))
+                                \]
+                                and that this inequality is met with equality when $f$ is either the Huber function or the 1-d quadratic function $\frac{1}{2}x^2$.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $g$-Composable Sequences</h3>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                        <h4> Theorem </h4>
+                            <p>
+                            There are $g$-composable sequences with rate $r \le \frac{0.433}{(n+1)^{1.27\dots}},$ where
+                            $1.27\dots = \log_2(1+\sqrt{2})$.
+                            </p>
+                        </div>
+                        <ul class=fragment>
+                            <li> First work showing acceleration for gradient descent with respect to gradient norm metric.</li>
+                            <li> We find sequences in the short step size regime which recover those recently found in Rotaru et al.</li>
+                        </ul>
+                    </section>
+
+
+
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p>There is a third type of composable sequence that we consider. The definition is slightly more complicated than the others, so we will only mention the important theorem:</p>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem </h4>
+                            <p style="font-size:0.75em">
+                                If $h$ and $\ell$ are $s$-composable sequences with rates $r_1$ and $r_2$ respectively, then there is a unique constant $\mu$ so that 
+                                \[
+                                    [h, \mu, \ell]
+                                \]
+                                is $s$-composable with rate $\frac{2r_1r_2}{r_1 + r_2 + \sqrt{r_1^2 + 6r_1r_2 + r_2^2}}$. Denote this by $h \Join \ell$.
+                            </p>
+                        </div>
+                        <ul class=fragment>
+                            <li> The silver step size schedule found by Altschuler and Parrilo are $s$-composable, and can be obtained by repeatedly composing the empty sequence $[]$ with itself repeatedly.</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p> If we start with the $s$ composable sequence with no entries (which has rate 1), and repeatedly compose with itself, we get the sequence
+                        \[
+                        \sigma^1 = [] \Join [] = [\sqrt{2}]
+                        \]
+                        \[
+                            \sigma^2 = (\sigma^1)\Join(\sigma^1)  = 
+                            [\sqrt{2}, 2 ,\sqrt{2}]
+                        \]
+                        \[
+                            \sigma^3 = (\sigma^2)\Join(\sigma^2) = [\sqrt{2}, 2 ,\sqrt{2}, 2+\sqrt{2}, \sqrt{2}, 2 ,\sqrt{2}, ]
+                        \]
+                        $\dots$
+                        </p>
+                        <p> This is the silver step size sequence defined by Altschuler and Parrilo.  We also get sequences like
+                        \[
+                            \sigma^1 \Join \sigma^2 = [\sqrt{2}, \frac{2 \left(\sqrt{2}-1\right)}{\left(\sqrt{2}+2\right) \left(\sqrt{2 \sqrt{2}-1}+1\right)}, \sqrt{2}, 2, \sqrt{2}].
                         \]
                         </p>
-                        <p> Here, $\alpha_k$ is chosen so that these step sizes achieve equal rates on the Huber function and the quadratic function, and $\sigma^{(k)}$ is the silver step size sequence. </p>
-                        <p> This achieves strictly better rates than the silver step size sequence by a constant factor. </p>
+                    </section>
+
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p>We can also compose $s$-composable sequences with $f$ and $g$ composable sequences.</p>
+                        <div style="display:flex">
+                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem </h4>
+                                <p style="font-size:0.75em">
+                                    If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
+                                    \[
+                                        [h, \mu, \ell]
+                                    \]
+                                    is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
+                                </p>
+                            </div>
+                        </div>
                     </section>
                     <section data-auto-animate>
-                        <h3> Convex Optimization </h3>
-                        <p><b> More recent work </b> </p>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p>We can also compose $s$-composable sequences with $f$ and $g$ composable sequences.</p>
+                        <div style="display:flex">
+                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem </h4>
+                                <p style="font-size:0.75em">
+                                    If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
+                                    \[
+                                        [h, \mu, \ell]
+                                    \]
+                                    is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
+                                </p>
+                            </div>
+                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                                <h4> Theorem </h4>
+                                    <p style="font-size:0.75em">
+                                        If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $g$-composable with rate $r_2$, then there is a constant $\mu$ so that
+                                        \[
+                                            [\ell, \mu, h]
+                                        \]
+                                        is $g$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
+                                    </p>
+                                </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Basic Sequences</h3>
+                        <p> A <b>basic</b> $s$-composable sequence is either the empty sequence or a sequence that can be expressed as the composition of two smaller basic $s$-composable sequences. </p>
+                        <p> A <b>basic</b> $f$-composable sequence is one that can be constructed by repeatedly composing the empty sequence with basic $s$ composable sequences. </p>
+                        <p> We can enumerate such basic sequences and ask what the best possible rate is for a length $n$ basic sequence. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h2> Certificates </h2>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Recursive Certificates </h3>
+                        <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                        <h4> Theorem </h4>
+                            <p style="font-size:0.75em">
+                                If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
+                                \[
+                                    [h, \mu, \ell]
+                                \]
+                                is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
+                            </p>
+                        </div>
+                        <p>
+                            To prove the rate for $[h, \mu, \ell]$, we use PEP certificates for the appropriate inequalities for both $h$ and $\ell$ and combine them together.
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Recursive Certificates </h3>
+                        <p>
+                            Assume $\ell$ is $f$-composable with rate $r$,
+                            \[
+                                f(x_n) - f(x_*) \le \frac{r}{2}\|x_0 - x_*\|^2,
+                            \]
+                            we can extract a PEP proof of this fact.
+                        </p>
+                        <div class=fragment>
+                            <p>
+                            By examining that proof, we can show that there exists some sequence $\nu \in \R^{n+1}$ so that we get the (equivalent) inequality
+                        </p>
+                            <p style="color:blue">
+                            If $x_0, \dots, x_n$ are obtained by applying the step size sequence $\ell$, then
+                            \[
+                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
+                            \]
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Recursive Certificates </h3>
+                        <p style="color:blue">
+                            If $x_0, \dots, x_n$ are obtained by applying the step size sequence $\ell$, then
+                            \[
+                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
+                            \]
+                        </p>
+                        <p><b> Advantages </b></p>
                         <ul>
-                            <li>Generalized our original sequence as well as the silver step size sequence to work for arbitrary size (not just a power of 2), while improving the rates by constant factors. </li>
-                            <li>Gave cleaner explanations of what we need for recursive certificates (though no conceptual answer for where these numbers come from). </li>
-                            <li>Found analogous seqeunces for minimizing the gradient norm of the final iterate. </li>
+                            <li>
+                                This new inequality still holds even if we shift the index of $x_i$, so we can apply this inequality to the sequence $[h, \mu, \ell]$ (where $\ell$ is only applied starting after some number of steps have already been taken).
+                            </li>
+                            <li>
+                                It is also close to `separable', so that it is a sum of terms, each of which only depends on a single iterate $x_i$.
+                            </li>
                         </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Recursive Certificates </h3>
+                        <p style="color:blue">
+                            \[
+                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
+                            \]
+                        </p>
+                        <p>Take this inequality and shift the indices:</p>
+                        <p style="color:red;margin-left:-10px">
+                            \[
+                            \sum_{i=n+1}^{n'} \nu_i' (2(f_i-f_{n'})+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_{n+1} - x_i\rangle)-\|\sum_{i=n+1}^{n'} \nu_i'\nabla f(x_i)\|^2 \ge 0.
+                            \]
+                        </p>
+                        <div  class = fragment>
+                        <p>Compare this to the following (desired) inequality:</p>
+                        <p style="color:green;margin-left:-10px">
+                            \[
+                            \sum_{i=0}^{n'} \nu_i' (2(f_i-f_{n'})+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_{0} - x_i\rangle)-\|\sum_{i=0}^{n'} \nu_i'\nabla f(x_i)\|^2 \ge 0.
+                            \]
+                        </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Recursive Certificates </h3>
+                        <p> The $s$-composability definition is exactly the one that is needed so that when we linearly combine the inequality guaranteed by $s$-composability to the one guaranteed by $f$-composability, we get the desired extended $f$-composability inequality (up to a small correction from the middle step). </p>
+                        <p class=fragment> The fact that Huber and quadratic are tight for $f$-composable sequences furnishes additional algebraic identities needed to combine cleanly. </p>
+                        <p class=fragment> $g$ composable sequences have a similar recursive structure in their certificates . </p>
                     </section>
                     <section>
                         <h1> Thanks for listening!</h1>
