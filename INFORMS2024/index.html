@@ -40,7 +40,7 @@
 
 				<section>
                     <section>
-                        <h2> Accelerating Gradient Descent with Long Steps </h2>
+                        <h2> Novel First-Order Methods via Performance Estimation Programming</h2>
                         <p>Kevin Shu</p>
                         <p style="font-size:0.75em">California Institute of Technology</p>
                     </section>
@@ -71,26 +71,14 @@
                         <h3>Introduction and History</h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
                         <h4> Definition </h4>
-                        <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its gradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
+                        <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its aradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
                         \[\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|.\]
-                        <p>We will write $\mathcal{F}^{0,L}$ for the set of $L$-smooth convex functions, and note that any such function can be scaled to have $L=1$. </p>
                         </div>
-                        <p class=fragment><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
-                    </section>
-
-                    <section data-auto-animate>
-                        <h3>Introduction and History</h3>
-                        <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
+                        <p><b>Given an oracle for evaluating and differentiating an $L$-smooth convex $f$, we want to find an approximate minimum of $f$.</b></p>
                         <p class = fragment>
-                            In general, a first order method starts at $x_0 \in \R^d$, and iteratively defines
+                            Gradient descent repeatedly iterates
                             \[
-                                x_{i+1} = x_i - \frac{1}{L}\sum_{j=0}^i H_{ij} \nabla f(x_j).
-                            \]
-                        </p>
-                        <p class = fragment>
-                            Gradient descent is the special case where
-                            \[
-                                x_{i+1} = x_i - \frac{h_i}{L} \nabla f(x_j).
+                                x_{i+1} = x_i - \frac{h_i}{L} \nabla f(x_i).
                             \]
                         </p>
                     </section>
@@ -153,10 +141,26 @@
                             <div style="flex:1">
                                 <img  height=200px src="quadratic.png"/>
                                 <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
-                                <p class=fragment style="font-size:0.5em">Large steps lead to divergence.</p>
                             </div>
                             <div style="flex:1">
                                 <img height=200px src="huber.png"/>
+                                <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Acceleration with Gradient Descent </h3>
+                        <p><b> Why is acceleration possible in this setting? </b>
+
+                        <p> Two extreme functions: </p>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img  height=200px src="ezgif-2-cd40e6ea8b.gif"/>
+                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
+                                <p class=fragment style="font-size:0.5em">Large steps lead to divergence.</p>
+                            </div>
+                            <div style="flex:1">
+                                <img height=200px src="huber.gif"/>
                                 <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
                                 <p  class=fragment style="font-size:0.5em">Small steps converge slowly.</p>
                             </div>
@@ -167,18 +171,18 @@
                         <h3> Acceleration with Gradient Descent </h3>
                         <p> These two functions (quadratic and Huber) appear to be more than just illustrative: </p>
                         <ul>
-                            <li>They are both worst case functions for the optimal gradient method (defined above). </li>
+                            <li>They are both worst case functions for the optimized gradient method. </li>
                             <li>They are (conjectured to be) worst case for the best constant step size gradient descent method. </li>
                             <li>We will be designing gradient descent steps for which the worst case rate is obtained by both of these functions. </li>
                         </ul>
                     </section>
                     <section data-auto-animate>
                         <h3> Recursive Construction of Step Sizes </h3>
-                        <p> The step sizes we construct are designed to be <b>recursive</b> and <b> have Huber and quadratic functions as their worst case.</b></p>
+                        <p> The step sizes we construct are <b> recursively </b> designed to <b> have Huber and quadratic functions as their worst case.</b></p>
                         <p class=fragment>
-                        Roughly, we will define a class of sequences that are `composable' so that if $h$ and $\ell$ are composable, then there is some $\alpha$ so that
+                        Roughly, we will define a class of sequences that are `composable' so that if $h$ and $\ell$ are composable, then there is some $\mu \in \R$ so that
                         \[
-                            [h, \alpha, \ell]
+                            [h, \mu, \ell]
                         \]
                         is still composable, and have an improved rate of convergence over either of the constituents.
                         </p>
@@ -199,6 +203,66 @@
                     </section>
                     <section data-auto-animate>
                         <h3> $f$-Composable Sequences</h3>
+                        <p><b>How do construct such $f$-composable sequences?</b></p>
+                        <p class=fragment> If $h_1, h_2$ are two sequences, there is a unique value of $\mu&gt;1$ so that the concatenation
+                        \[
+                            [h_1, \mu, h_2]
+                        \]
+                        performs equally on the Huber and quadratic function.
+                        </p>
+                        <p class=fragment> <b>Composition of two $f$-composable sequences is not necessarily $f$-composable.</b></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p>There is another of composable sequence that we consider. The definition is slightly more complicated than $f$-composable, so we will only mention the important theorem:</p>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem </h4>
+                            <p style="font-size:0.75em">
+                            If $h$ and $\ell$ are $s$-composable sequences with rates $r_1$ and $r_2$ respectively, then there is a unique constant $\mu &gt; 1$ so that 
+                                \[
+                                    [h, \mu, \ell]
+                                \]
+                                is $s$-composable with rate $\frac{2r_1r_2}{r_1 + r_2 + \sqrt{r_1^2 + 6r_1r_2 + r_2^2}}$. Denote this by $h \Join \ell$.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p> If we start with the $s$ composable sequence with no entries (which has rate 1), and repeatedly compose with itself, we get the sequence
+                        \[
+                        \sigma^1 = [] \Join [] = [\sqrt{2}]
+                        \]
+                        \[
+                            \sigma^2 = (\sigma^1)\Join(\sigma^1)  = 
+                            [\sqrt{2}, 2 ,\sqrt{2}]
+                        \]
+                        \[
+                            \sigma^3 = (\sigma^2)\Join(\sigma^2) = [\sqrt{2}, 2 ,\sqrt{2}, 2+\sqrt{2}, \sqrt{2}, 2 ,\sqrt{2}, ]
+                        \]
+                        $\dots$
+                        </p>
+                        <p> This is the silver step size sequence defined by Altschuler and Parrilo.  We also get sequences like
+                        \[
+                            \sigma^1 \Join \sigma^2 = [\sqrt{2}, \frac{2 \left(\sqrt{2}-1\right)}{\left(\sqrt{2}+2\right) \left(\sqrt{2 \sqrt{2}-1}+1\right)}, \sqrt{2}, 2, \sqrt{2}].
+                        \]
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $s$-Composable Sequences</h3>
+                        <p>We can also compose $s$-composable sequences with $f$-composable sequences.</p>
+                        <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                        <h4> Theorem </h4>
+                            <p style="font-size:0.75em">
+                                If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
+                                \[
+                                    [h, \mu, \ell]
+                                \]
+                                is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> $f$-Composable Sequences</h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                         <h4> Theorem </h4>
                             <p>
@@ -208,9 +272,10 @@
                         </div>
                         <ul class=fragment>
                             <li> Best known constant factor for gradient descent methods.</li>
-                            <li> We find sequences that match or exceed the performance of the step size sequences found in Das Gupta et al. for each $n$ that they were able to compute.</li>
+                            <li> We find sequences that match or exceed the performance of the step size sequences found by branch-and-bound search in Das Gupta et al. for each $n$ that they considered.</li>
                         </ul>
                     </section>
+
                     <section data-auto-animate>
                         <h3> $g$-Composable Sequences</h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
@@ -238,95 +303,30 @@
                             <li> We find sequences in the short step size regime which recover those recently found in Rotaru et al.</li>
                         </ul>
                     </section>
-
-
-
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p>There is a third type of composable sequence that we consider. The definition is slightly more complicated than the others, so we will only mention the important theorem:</p>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem </h4>
-                            <p style="font-size:0.75em">
-                                If $h$ and $\ell$ are $s$-composable sequences with rates $r_1$ and $r_2$ respectively, then there is a unique constant $\mu$ so that 
-                                \[
-                                    [h, \mu, \ell]
-                                \]
-                                is $s$-composable with rate $\frac{2r_1r_2}{r_1 + r_2 + \sqrt{r_1^2 + 6r_1r_2 + r_2^2}}$. Denote this by $h \Join \ell$.
-                            </p>
-                        </div>
-                        <ul class=fragment>
-                            <li> The silver step size schedule found by Altschuler and Parrilo are $s$-composable, and can be obtained by repeatedly composing the empty sequence $[]$ with itself repeatedly.</li>
-                        </ul>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p> If we start with the $s$ composable sequence with no entries (which has rate 1), and repeatedly compose with itself, we get the sequence
-                        \[
-                        \sigma^1 = [] \Join [] = [\sqrt{2}]
-                        \]
-                        \[
-                            \sigma^2 = (\sigma^1)\Join(\sigma^1)  = 
-                            [\sqrt{2}, 2 ,\sqrt{2}]
-                        \]
-                        \[
-                            \sigma^3 = (\sigma^2)\Join(\sigma^2) = [\sqrt{2}, 2 ,\sqrt{2}, 2+\sqrt{2}, \sqrt{2}, 2 ,\sqrt{2}, ]
-                        \]
-                        $\dots$
-                        </p>
-                        <p> This is the silver step size sequence defined by Altschuler and Parrilo.  We also get sequences like
-                        \[
-                            \sigma^1 \Join \sigma^2 = [\sqrt{2}, \frac{2 \left(\sqrt{2}-1\right)}{\left(\sqrt{2}+2\right) \left(\sqrt{2 \sqrt{2}-1}+1\right)}, \sqrt{2}, 2, \sqrt{2}].
-                        \]
-                        </p>
-                    </section>
-
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p>We can also compose $s$-composable sequences with $f$ and $g$ composable sequences.</p>
-                        <div style="display:flex">
-                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem </h4>
-                                <p style="font-size:0.75em">
-                                    If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
-                                    \[
-                                        [h, \mu, \ell]
-                                    \]
-                                    is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p>We can also compose $s$-composable sequences with $f$ and $g$ composable sequences.</p>
-                        <div style="display:flex">
-                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem </h4>
-                                <p style="font-size:0.75em">
-                                    If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
-                                    \[
-                                        [h, \mu, \ell]
-                                    \]
-                                    is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
-                                </p>
-                            </div>
-                            <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                                <h4> Theorem </h4>
-                                    <p style="font-size:0.75em">
-                                        If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $g$-composable with rate $r_2$, then there is a constant $\mu$ so that
-                                        \[
-                                            [\ell, \mu, h]
-                                        \]
-                                        is $g$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
-                                    </p>
-                                </div>
-                        </div>
-                    </section>
                     <section data-auto-animate>
                         <h3> Basic Sequences</h3>
                         <p> A <b>basic</b> $s$-composable sequence is either the empty sequence or a sequence that can be expressed as the composition of two smaller basic $s$-composable sequences. </p>
                         <p> A <b>basic</b> $f$-composable sequence is one that can be constructed by repeatedly composing the empty sequence with basic $s$ composable sequences. </p>
-                        <p> We can enumerate such basic sequences and ask what the best possible rate is for a length $n$ basic sequence. </p>
+                        <p> We can enumerate such basic sequences and ask what the best possible rate is for a length $n$ basic sequence. This can be computed by dynamic program </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Basic Sequences</h3>
+                        <p><b> Examples </b><p>
+                        <table>
+                            <tr>
+                                <td> <img src="3_02.png" width=300px/></td>
+                                <td> <img src="4_08.png" width=300px/></td>
+                            </tr>
+                            <tr>
+                                <td> <img src="5_25.png"  width=300px/></td>
+                                <td> <img src="best_20.png" width=300px/></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Basic Sequences</h3>
+                        <p><b> Rate </b><p>
+                        <img src="rates.png"/>
                     </section>
                     <section data-auto-animate>
                         <h2> Certificates </h2>
@@ -416,6 +416,7 @@
                     </section>
                     <section>
                         <h1> Thanks for listening!</h1>
+                        <p> Grimmer, Benjamin, Kevin Shu, and Alex Wang. "Accelerated Objective Gap and Gradient Norm Convergence for Gradient Descent via Long Steps." arXiv preprint arXiv:2403.14045 (2024).</p>
                     </section>
             </section> </div>
 
