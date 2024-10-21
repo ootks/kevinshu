@@ -71,7 +71,7 @@
                         <h3>Introduction and History</h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
                         <h4> Definition </h4>
-                        <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its aradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
+                        <p>We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its gradient is $L$-Lipschitz, so that for any $x, y \in \R^d$,</p>
                         \[\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|.\]
                         </div>
                         <p><b>Given an oracle for evaluating and differentiating an $L$-smooth convex $f$, we want to find an approximate minimum of $f$.</b></p>
@@ -103,7 +103,7 @@
                         <h4> History </h4>
                         <div style="text-align:left; font-size:0.25em ">
                         <ul>
-                            <li style="font-size:2em; color:red"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with 0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
+                            <li style="font-size:2em; color:red"> <b>Performance estimation (Drori and Teboulle):</b> If each $h_i = h$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
                             <li style="font-size:2em; color:red"> <b>Optimized Gradient Method (Kim and Fessler):</b> Gives an explicit gradient method that achieves the best possible convergence rate (even up to constants).
                         </ul>
                         </div>
@@ -203,12 +203,12 @@
                     </section>
                     <section data-auto-animate>
                         <h3> $f$-Composable Sequences</h3>
-                        <p><b>How do construct such $f$-composable sequences?</b></p>
+                        <p><b>How do we construct such $f$-composable sequences?</b></p>
                         <p class=fragment> If $h_1, h_2$ are two sequences, there is a unique value of $\mu&gt;1$ so that the concatenation
                         \[
                             [h_1, \mu, h_2]
                         \]
-                        performs equally on the Huber and quadratic function.
+                        performs equally on the Huber and quadratic functions.
                         </p>
                         <p class=fragment> <b>Composition of two $f$-composable sequences is not necessarily $f$-composable.</b></p>
                     </section>
@@ -217,7 +217,7 @@
                         <p>There is another of composable sequence that we consider. The definition is slightly more complicated than $f$-composable, so we will only mention the important theorem:</p>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                             <h4> Theorem </h4>
-                            <p style="font-size:0.75em">
+                            <p>
                             If $h$ and $\ell$ are $s$-composable sequences with rates $r_1$ and $r_2$ respectively, then there is a unique constant $\mu &gt; 1$ so that 
                                 \[
                                     [h, \mu, \ell]
@@ -248,11 +248,11 @@
                         </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
+                        <h3> $f$-Composable Sequences</h3>
                         <p>We can also compose $s$-composable sequences with $f$-composable sequences.</p>
                         <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                         <h4> Theorem </h4>
-                            <p style="font-size:0.75em">
+                            <p>
                                 If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
                                 \[
                                     [h, \mu, \ell]
@@ -266,7 +266,7 @@
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                         <h4> Theorem </h4>
                             <p>
-                            There are $f$-composable sequences with rate $r \le \frac{0.433}{(n+1)^{1.27\dots}},$ where
+                            There are $f$-composable sequences with rate $r \le \frac{0.42311}{(n+1)^{1.27\dots}},$ where
                             $1.27\dots = \log_2(1+\sqrt{2})$.
                             </p>
                         </div>
@@ -283,7 +283,7 @@
                             <p>
                                 We will say that a sequence $h \in \R^n$ is <i>$g$-composable</i> with rate $r$ if for any smooth convex function $f$, if $x_0, \dots, x_n$ are the iterates of gradient descent with step sizes $h$,
                                 \[
-                                    \|\nabla f(x_n)\|^2 \le r(f(x_0) - f(x_*))
+                                    \|\nabla f(x_n)\|^2 \le \frac{r}{2}(f(x_0) - f(x_*))
                                 \]
                                 and that this inequality is met with equality when $f$ is either the Huber function or the 1-d quadratic function $\frac{1}{2}x^2$.
                             </p>
@@ -294,7 +294,7 @@
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                         <h4> Theorem </h4>
                             <p>
-                            There are $g$-composable sequences with rate $r \le \frac{0.433}{(n+1)^{1.27\dots}},$ where
+                            There are $g$-composable sequences with rate $r \le \frac{0.42311}{(n+1)^{1.27\dots}},$ where
                             $1.27\dots = \log_2(1+\sqrt{2})$.
                             </p>
                         </div>
@@ -415,7 +415,7 @@
                         <p class=fragment> $g$ composable sequences have a similar recursive structure in their certificates . </p>
                     </section>
                     <section>
-                        <h1> Thanks for listening!</h1>
+                        <h2> Watch out for the paper on the arxiv tonight! </h2>
                         <p> Grimmer, Benjamin, Kevin Shu, and Alex Wang. "Accelerated Objective Gap and Gradient Norm Convergence for Gradient Descent via Long Steps." arXiv preprint arXiv:2403.14045 (2024).</p>
                     </section>
             </section> </div>
