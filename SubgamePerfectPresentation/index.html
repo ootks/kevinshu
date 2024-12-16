@@ -95,8 +95,6 @@
                     </section>
                     <section data-auto-animate>
                         <h3>Introduction and History</h3>
-                        <p><b>Given an oracle for evaluating and differentiating $f$, we want to find an approximate minimum of $f$.</b></p>
-
                         <h4> History </h4>
                         <div style="text-align:left; font-size:0.25em ">
                         <ul style="color:red">
@@ -170,18 +168,18 @@
                         <p>Consider a 2 player zero sum extensive form game:</p>
                         <p><span style="color:blue">Alice</span> takes the role of the optimizer. </p>
                         <p><span style="color:red">Bob</span> takes the role of the function. </p>
-                        <div style="background-color:#779999;color:white;padding:10px">
+                        <div style="background-color:#779999;color:white;padding:10px" class="fragment">
                         <p style="text-align:left">
                             In round $i=0,\dots,N$:
                             <ol>
-                                <li> <span style="color:blue">Alice</span> chooses $x_i \in \R^d$. </li>
-                                <li> <span style="color:red">Bob</span> chooses values for $f(x_i)$ and $\nabla f(x_i)$. </li>
+                                <li class="fragment"> <span style="color:blue">Alice</span> chooses $x_i \in \R^d$. </li>
+                                <li class="fragment"> <span style="color:red">Bob</span> chooses values for $f(x_i)$ and $\nabla f(x_i)$. </li>
                             </ol>
                         </p>
-                        <p>
+                        <p class="fragment">
                             <span style="color:red">Bob</span> declares an $L$-smooth convex function $f : \R^d \rightarrow \R$ agreeing with the specified information and with a minimizer at $x_*$.
                         </p>
-                        <p>
+                        <p class="fragment">
                         <span style="color:blue">Alice</span> gets a payout of $\frac{L}{2} \frac{\|x_0-x_*\|^2}{f(x_N) - f(x_*)}$.
                         </p>
                         </div>
