@@ -55,16 +55,6 @@
                                 <p> <b>Alex L. Wang</b> - Purdue University</p>
                             </div>
                     </section>
-                    <section>
-                        <h3> Outline </h3>
-                        <ul>
-                            <li> Introduction and History of First Order Methods </li>
-                            <li> Minimax Optimal Algorithms for Convex Minimization </li>
-                            <li> Beyond Minimax Optimality: Subgame Perfection </li>
-                            <li> Performance Estimation and Algebraically Deriving Algorithms </li>
-                            <li> Reducing Memory with Longstep Gradient Descent </li>
-                        </ul>
-                    </section>
 				</section>
 
                 <section>
@@ -82,200 +72,23 @@
                         <p class="fragment"><b>Given an oracle for evaluating and differentiating an $L$-smooth convex $f$, we want to find an approximate minimum of $f$.</b></p>
                     </section>
                     <section data-auto-animate>
-                        <h3>Introduction and History</h3>
-                        <h4> History </h4>
-                        <div style="text-align:left; font-size:0.25em ">
-                        <ul>
-                            <li class="fragment" style="font-size:2em"> <b>Standard: </b> Gradient descent yields \[f(x_n) - f(x_*) \le \frac{L}{2n} \|x_0 - x_*\|^2.\]</li>
-                            <li class="fragment" style="font-size:2em"> <b>Fast Gradient Method (Nesterov 1983):</b> There is a gradient method (using momentum) so that \[f(x_n) - f(x_*) \le \frac{2L}{(n+1)^2} \|x_0 - x_*\|^2.\]</li>
-                            <li class="fragment" style="font-size:2em"> <b>Performance estimation (Drori and Teboulle 2014):</b> If each $h_i = h$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
-                            <li class="fragment" style="font-size:2em"> <b>Optimized Gradient Method (Kim and Fessler 2016):</b> Gives an explicit gradient method that achieves the minimax optimal convergence rate (even up to constants).
-                        </ul>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3>Introduction and History</h3>
-                        <h4> History </h4>
-                        <div style="text-align:left; font-size:0.25em ">
-                        <ul style="color:red">
-                            <li style="font-size:2em"> <b>Performance estimation (Drori and Teboulle 2014):</b> If each $h_i = h$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
-                            <li style="font-size:2em"> <b>Optimized Gradient Method (Kim and Fessler 2016):</b> Gives an explicit gradient method that achieves the minimax optimal convergence rate (even up to constants).
-                        </ul>
-                        </div>
-                        <p> The last two bounds use the Performance Estimation Problem (PEP) framework. We will look at OGM first. </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3>Optimized Gradient Method (OGM)</h3>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem (Kim and Fessler 2016) </h4>
-                            <p>
-                            If OGM is run for $N$ iterations it produces iterates $x_0, \dots, x_N$ satisfying
-                            \[
-                                f(x_N) - f(x_*) \le \frac{L}{2\tau_N} \|x_0-x_*\|^2,
-                            \]
-                            where $\tau_N \ge \frac{1}{2}(N+1)(N+1+\sqrt{2})$.
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3>Optimized Gradient Method (OGM)</h3>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem (Drori 2017)</h4>
-                            <p>
-                            There exists a function $f_{hard} :\R^{N+2} \rightarrow \R$ and $x_0 \in \R^{N+2}$ so that any iterative algorithm with the property that
-                            \[
-                                x_{i+1} \in x_0 + \text{span}(\nabla f_{hard}(x_0), \dots, \nabla f_{hard}(x_i)),
-                            \]
-                            \[
-                                f(x_N) - f_* \ge \frac{L}{2\tau_N} \|x_0 -x_*\|^2,
-                            \]
-                            where $\tau_N$ is defined by the OGM recurrence.
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3>Optimized Gradient Method (OGM)</h3>
+                        <h4>Introduction and History</h4>
                         <p>
-                            Together, we have an algorithm producing a guarantee 
-                            \[
-                            f(x_N) - f(x_*) \le \frac{L}{2\tau_N} \|x_0-x_*\|^2,
-                            \]
-                            for any function $f$ and a hard function showing that it is not possible to improve this bound for arbitrary functions.
-                        </p>
-                        <h1 class="fragment">
-                            THE END<span class="fragment" style="color:red">?</span>
-                        </h1>
-                    </section>
-                </section>
-                <section>
-                    <section> <h1> Beyond Minimiax Optimality </h1> </section>
-                    <section data-auto-animate>
-                        <h3> Difficiencies of Minimax Optimality </h3>
-                        <video src="ogm_vs_gd.mp4" controls/>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Difficiencies of Minimax Optimality </h3>
-                        <p>The function $f(x)=\frac{1}{2}x^2$ is worst case for OGM, i.e. for this $f$,
-                        \[
-                            f(x_N) - f(x_*) = \frac{L}{2\tau_N} \|x_0-x_*\|^2 = \Omega\left(\frac{1}{N^2}\right).
-                        \]
-                        </p>
-                        <p class="fragment"> There are many functions which are not adversarially chosen, but where OGM still has worst case performance. In this case, it turns out that after 2 steps, the gradient information obtained by OGM already determines the location of the minimum. </p>
-                        <p class="fragment"> How can we obtain convergence guarantees beyond the worst case setting?</p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> The Minimization Game </h3>
-                        <p>Consider a 2 player zero sum extensive form game:</p>
-                        <p><span style="color:blue">Alice</span> takes the role of the optimizer. </p>
-                        <p><span style="color:red">Bob</span> takes the role of the function. </p>
-                        <div style="background-color:#779999;color:white;padding:10px" class="fragment">
-                        <p style="text-align:left">
-                            In round $i=0,\dots,N$:
-                            <ol>
-                                <li class="fragment"> <span style="color:blue">Alice</span> chooses $x_i \in \R^d$. </li>
-                                <li class="fragment"> <span style="color:red">Bob</span> chooses values for $f(x_i)$ and $\nabla f(x_i)$. </li>
-                            </ol>
-                        </p>
-                        <p class="fragment">
-                            <span style="color:red">Bob</span> declares an $L$-smooth convex function $f : \R^d \rightarrow \R$ agreeing with the specified information and with a minimizer at $x_*$.
-                        </p>
-                        <p class="fragment">
-                        <span style="color:blue">Alice</span> gets a payout of $\frac{L}{2} \frac{\|x_0-x_*\|^2}{f(x_N) - f(x_*)}$.
-                        </p>
-                        </div>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> The Minimization Game </h3>
-                        <p>There is a pure Nash equillibrium for this game:</p>
-                        <p><span style="color:blue">Alice</span> chooses query points according to the OGM algorithm. </p>
-                        <p><span style="color:red">Bob</span> responds with the values and gradients of the Drori Hard function. </p>
-                        <p> Neither player can improve their score by deviating. </p>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> The Minimization Game </h3>
-                        <p>Nonadversarial function = Suboptimal play</p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img src="arkadi.jpg" height="80px"></img>
-                                <br>
-                                <img src="complicated.png" height="300px"/>
-                            </div>
-                            <div style="flex:1" class="fragment">
-                                <img src="kevin.jpg" height="80px"></img>
-                                <br>
-                                <img src="simple.gif" height="300px"/>
-                            </div>
-                        </div>
-                        <p class="fragment"> Want a notion of optimality that dynamically adjusts to either case. </p>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> The Minimization Game </h3>
-                        <h4>Subgame Perfect Equillibrium</h4>
-                        <p> A subgame for the minimization game is described by some history of gradients $\{(x_i, f(x_i), \nabla f(x_i)\}_{i=1}^n\}$ (if it's Alice's turn). </p>
-                        <p> A pair of strategies is in <i>subgame perfect equillibrium</i> if for every subgame, the strategies restricted to starting from that subgame is still in Nash equillibrium.</p>
-                        <p class="fragment"> The example of $f(x) = \frac{1}{2}x^2$ shows that OGM is not part of a subgame perfect equillibrium; a better first order method could find an optimum faster after seeing some gradients from $f$. </p>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> A Subgame Perfect Gradient Method </h3>
-                        <h4>Subgame Perfect Gradient Method (SPGM) </h4>
-                        <p> We found a first order method with the following <i>dynamic</i> guarantee: </p>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem (Grimmer, S, Wang) </h4>
-                            <p>
-                            The algorithm (SPGM) provides the following guarantee: if $\mathcal{H} = \{(x_i, f_i, g_i)\}_{i=0}^n$ were the first order information produced by $n$ iterations of SPGM, then there exists some $\hat{\tau}_N$ (depending on $\mathcal{H}$) so that for any function $f$ so that $f(x_i) = f_i$ and $\nabla f(x_i) = g_i$,
-                            \[
-                                f(x_N) - f(x_*) \le \frac{L}{2\hat{\tau}_N} \|x_0-x_*\|^2.
-                            \]
-                            </p>
-                        </div>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> A Subgame Perfect Gradient Method </h3>
-                        <h4>Subgame Perfect Gradient Method (SPGM) </h4>
-                        <p> We found a first order method with the following <i>dynamic</i> guarantee: </p>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem (Cont) </h4>
-                            <p>
-                            On the other hand, there exists a function $f_{\mathcal{H}}$ agreeing with the history $\mathcal{H}$ and so that any sequence $x_{n+1}, \dots, x_{N}$ satisfying
-                            \[
-                            x_i \in x_0 + \text{span} \{\nabla f(x_0), \dots, \nabla f(x_{i-1})\},
-                            \]
-                            \[
-                                f_{\mathcal{H}}(x_N) - f_{\mathcal{H}}(x_*) \ge \frac{L}{2\hat{\tau}_N} \|x_0-x_*\|^2.
-                            \]
-                            </p>
-                        </div>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> A Subgame Perfect Gradient Method </h3>
-                        <h4>Subgame Perfect Gradient Method (SPGM) </h4>
-                        <p>In other words, SPGM is able to optimally adapt its update rules and guarantees depending on the gradient information obtained on each iteration </p>
-                        <p class="fragment">Moreover, this method can be derived naturally using the performance estimation methodology.</p>
-                        <p class="fragment">The remainder of the talk is devoted to deriving this method.</p>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <h1> Performance Estimation </h1>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Performance Estimation </h4>
-                        <p>
-                            Basic idea of performance estimation: any first order method can only see the function and its gradients at a finite number of points.
+                            Basic idea: any first order method can only see the function and its gradients at a finite number of points.
                         </p>
                         <img src="3d_surface.svg"/>
                     </section>
                     <section data-auto-animate>
-                        <h4> Performance Estimation </h4>
+                        <h4>Introduction and History</h4>
                         <p>
-                            Basic idea of performance estimation: any first order method can only see the function and its gradients at a finite number of points.
+                            Basic idea: any first order method can only see the function and its gradients at a finite number of points.
                         </p>
                         <img src="3d_surface_with_points.svg"/>
                     </section>
                     <section data-auto-animate>
-                        <h4> Performance Estimation </h4>
+                        <h4>Introduction and History</h4>
                         <p>
-                            Basic idea of performance estimation (Drori and Teboulle 2012): any first order method can only see the function and its gradients at a finite number of points.
+                            Basic idea: any first order method can only see the function and its gradients at a finite number of points.
                         </p>
                         <div style="text-align:left; padding:0.35in; background:#EEEEEE">
                         <h4> Definition </h4>
@@ -283,7 +96,7 @@
                         </div>
                     </section>
                     <section data-auto-animate>
-                        <h4> Performance Estimation </h4>
+                        <h4>Introduction and History</h4>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                             <h4> Theorem (Taylor, Hendrickx, Glineur 2016)</h4>
                             <p>
@@ -296,7 +109,7 @@
                         <p> It turns out that this implies that the problem of determining the convergence rate for a fixed number of steps of many algorithms reduces to an SDP.</p>
                     </section>
                     <section data-auto-animate>
-                        <h4> Performance Estimation </h4>
+                        <h4>Introduction and History</h4>
                         <p>
                             An iterative algorithm defines a sequence of query points $x_0, x_1, \dots, x_N$, where $x_i$ depends on the values of the function and its gradients at $x_0, \dots, x_{i-1}$.
                         </p>
@@ -309,12 +122,34 @@
                         </p>
                     </section>
                     <section data-auto-animate>
+                        <h4> Performance Estimation (Sums of Squares)</h4>
+                        <p>
+                        Want to show that for any $L$-smooth convex function $f$ with minimizer $x_*$, 
+                        \[
+                             P = \frac{L}{2\tau} \|x_0-x_*\|^2 - (f(x_N) - f(x_*)) \ge 0.
+                        \]
+                        </p>
+                        <p>
+                            This is a polynomial we want to be nonnegative on a semialgebraic set: apply sums of squares techniques.
+                        </p>
+                        <p class="fragment">
+                            Find a certificate of the form
+                            \[
+                                P = \sum_{i,j} \lambda_{ij}Q_{ij} + S,
+                            \]
+                            where $\lambda_{ij} \ge 0$, and $S$ is something positive semidefinite.
+                        </p>
+                        <p class="fragment">
+                        This is equivalent to the performance estimation problem methodology popularized by Drori and Teboulle in 2012.
+                        </p>
+                    </section>
+                    <section data-auto-animate>
                         <h4> Performance Estimation </h4>
                         <p>
-                            <b>Proof idea:</b>
+                            <b>First try:</b>
                             For each $i,j \in [n] \cup \{*\}$, find  $\lambda_{ij} \ge 0$ so that
                             \[
-                            \frac{L}{2} \|x_0-x_*\|^2 - \tau(f(x_N) - f(x_*)) = \sum_{i, j \in [n] \cup \{*\}} \lambda_{ij} Q_{ij} \ge 0.
+                                \frac{L}{2} \|x_0-x_*\|^2 - \tau(f(x_N) - f(x_*)) = \sum_{i, j \in [n] \cup \{*\}} \lambda_{ij} Q_{ij} \ge 0.
                             \]
                             Rearranging would imply the bound we want for the final suboptimality.
                         </p>
@@ -338,6 +173,9 @@
                         </p>
                         <p class="fragment">
                         This introduces a "slack" term $\color{red}{\|z_N - x_*\|^2}$, and this turns out to the minimal slack needed for such a proof to work.
+                        </p>
+                        <p class="fragment">
+                            This $z_N$ appears in many algorithms as a `momentum' variable.
                         </p>
                     </section>
                     <section data-auto-animate>
@@ -387,14 +225,6 @@
                                  \]
                         </p>
                     </section>
-                </section>
-                <section>
-                    <section>
-                        <h1> Momentum in 3 parts </h1>
-                    </section>
-                    <section data-auto-animate>
-                        <h1> Momentum: a first taste </h1>
-                    </section>
                     <section data-auto-animate>
                         <h4> Momentum: a first taste </h4>
                         <p> Suppose that we have taken $n-1$ steps in some algorithm, and can certify that 
@@ -434,7 +264,7 @@
                         <h4> Momentum: a first taste </h4>
                         <p>
                             In fact, in this setting, we can restrict our attention to just 3 inequalities:
-                            \[ Q_{n-1, n}, Q_{* n}, Q_{*n-1}.\]
+                            \[ Q_{n-1, n}, Q_{* n}, Q_{*n-1} \ge 0.\]
                         </p>
                         <p class="fragment">
                             No matter what $f_n, g_n, f_*, x_*$ are, we want
@@ -445,7 +275,6 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Momentum: a first taste </h4>
-                        <p><b> An aside about algebra </b></p>
                         <p>
                             No matter what $f_n, g_n, f_*, x_*$ are, we want
                             \[
@@ -463,7 +292,6 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Momentum: a first taste </h4>
-                        <p><b> An aside about algebra </b></p>
                         <p>
                             Each term in this expression should be thought of as a polynomial in the unknown expressions 
                             $f_n, g_n, f_*, x_*$:
@@ -482,7 +310,6 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Momentum: a first taste </h4>
-                        <p><b> An aside about algebra </b></p>
                         <p>
                             There are 6 <span style="color:blue">scalar</span> coefficients and 2 <span style="color:red">vector</span> coefficients in this expression, so the equation
                             \[
@@ -493,37 +320,11 @@
                         <p>
 
                             We are allowed to make choices for <span style="color:blue">$\tau$, $\mu$, $\lambda_{n-1 n}$, $\lambda_{* n}$, $\lambda_{* n-1}$</span> and 
-                            <span style="color:red">$x_n$, $z'$</span>, so the number of equations is equal to the number of degrees of freedom. We would expect a <b>unique</b> choice of these parameters that allows for this equation to hold.
+                            <span style="color:red">$x_n$, $z'$</span>, so the number of equations is equal to the number of degrees of freedom. We would expect a <b>finite number of </b> solutions that allows for this equation to hold.
                         </p>
                     </section>
                     <section data-auto-animate>
                         <h4> Momentum: a first taste </h4>
-                        <p><b> An aside about algebra </b></p>
-                        <p>A table showing the decomposition of each term as a polynomial. </p>
-                        <table style="font-size:0.5em; border-collapse: collapse">
-                            <tr style="border-bottom: 1px solid black">
-                                <td style="border-right: 1px solid black"></td><td> $1$ </td><td> $f_\star$ </td><td> $f_n$ </td><td> $g_n$ </td><td> $x_\star$ </td><td> $\frac{1}{2L}\|g_n\|^2$ </td><td>  $\langle g_n, x_\star\rangle$ </td>
-                            </tr>
-                            <tr style="border-top: 1px solid black">
-                                <td style="border-right: 1px solid black">$H_n$ </td><td> $\frac{L}{2}\|x_0\|^2 - \frac{L}{2} \|z'\|^2$ </td><td> $\tau_n$ </td><td> $-\tau_n$ </td><td> $\alpha z'$ </td><td> $L(z'-x_0)$ </td><td> $- \alpha^2$ </td><td>  $\alpha$</td>
-                            </tr>
-                            <tr>
-                            <td style="border-right: 1px solid black">$H_i$ </td><td> $-h_i$ </td><td> $\tau_i$ </td><td> </td><td> </td><td> $L(z_{i+1} - x_0)$ </td>
-                            </tr>
-                            <tr>
-                            <td style="border-right: 1px solid black">$Q_{\star,i}$</td><td> $-q_i$ </td><td> $1$ </td><td> </td><td> </td><td> $-g_i$ </td><td> </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right: 1px solid black">$Q_{i,n}$</td><td> $v_i$ </td><td> </td><td> $-1$ </td><td> $x_n - (x_i - \frac{1}{L}g_i)$ </td><td> </td><td>$-1$  </td><td> </td>
-                            </tr>
-                            <tr>
-                                <td style="border-right: 1px solid black">$Q_{\star,n}$ </td><td> </td><td> $1$ </td><td> $-1$ </td><td> $x_n$ </td><td> </td><td> $-1$ </td><td>  $1$ </td>
-                            </tr>
-                        </table>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Momentum: a first taste </h4>
-                        <p><b> An aside about algebra </b></p>
                         <img src="mathematica_example.png"/>
                     </section>
                     <section data-auto-animate>
@@ -535,70 +336,30 @@
                              \[z_{n} = z_{n-1} - \sqrt{\tau_n}(\beta-\alpha)g_{n-1}-\sqrt{\tau_n} g_n,\]
                              where $\delta, \alpha, \beta$ are some expressions in terms of $\tau_n$.
                         </p>
-                        <p>This turns out to be a variant of the Nesterov fast gradient method, which was the first method to achieve a convergence rate of $\tau_n = \Omega(n^2)$.</p>
+                        <p>This turns out to be a variant of the Nesterov fast gradient method, which was the first method to achieve a convergence rate of $\tau_n = \Omega(n^2)$ (this is the best possible up to constant factors).</p>
+                        <p class="fragment">Can we do better?</p>
                     </section>
                     <section data-auto-animate>
-                        <h4> Momentum: a first taste </h4>
+                        <h4> Momentum: Optimized </h4>
                         <p>
-                        <b>Key takeaways: </b>
+                        Modify the inductive hypothesis a little
+                        \[
+                            H_{n-1} = \tau_{n-1}(f_* - f_{n-1} \color{red}{+ \frac{1}{2}\|g_{n-1}\|^2}) + \frac{L}{2}(\|x_0 - x_*\|^2 - \|z_{n-1} - x_*\|^2) \ge 0
+                        \]
                         </p>
-                        <ul>
-                            <li>We want to inductively bound quantities of the form
-                            \[
-                                H_{i} = \tau_{i}(f_* - f_{i}) + \frac{L}{2}(\|x_0 - x_*\|^2 - \|z_{n-1} - x_*\|^2) \ge 0
-                            \]
-                            </li>
-                            <li>We prove this inequality by writing it as a sum of $H_{i-1}$ and $Q_{ij}$ where $i,j$ are in a small subset of the possible pairs. </li>
-                            <li>Once the coefficients used to express $H_i$ as such a sum are chosen, the next step $x_n$ and $z_n$ are uniquely determined.</li>
-                        </ul>
-                    </section>
-                    <section data-auto-animate>
-                        <h1> Momentum: Optimized </h1>
-                        </ul>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Momentum: optimized </h4>
                         <p>
-                            Can we improve the convergence rate of this method, i.e. increase the number $\tau_N$ somehow?
-                        </p>
-                        <p class="fragment">
-                            Yes! By modifying the inductive hypothesis.
-                            \[
-                                H_{i} = \tau_{i}(f_* - f_{i} \color{red}{+\frac{1}{2}\|g_i\|^2}) + \frac{L}{2}(\|x_0 - x_*\|^2 - \|z_{n-1} - x_*\|^2) \ge 0,
-                            \]
-                            whenever $i \le N-1$.
+                        Applying the same methodology as above leads to the optimized gradient method (OGM) found by Kim and Fessler in 2016.
                         </p>
                     </section>
                     <section data-auto-animate>
-                        <h4> Momentum: optimized </h4>
+                        <h4> Momentum: Optimized </h4>
                         <p>
-                            Applying the exact same technique as before with this modified inductive hypothesis, we get the <b> optimized gradient method (OGM)</b>. This is defined by the update rule
-                            \[
-                                \psi_n = \begin{cases}
-                                    1 +\sqrt{1 + 2\tau_{n-1}} &\text{if }n &lt; N-1\\
-                                    \frac{1+\sqrt{1+4\tau_{n-1}}}{2} &n = N-1
-                                    \end{cases}
-                            \]
-                            \[
-                                \tau_n = \tau_{n-1} + \psi_n
-                            \]
-                            \[
-                                x_n = \frac{\tau_{n-1}}{\tau_n}\left(x_{n-1}-\frac{1}{L}g_{n-1}\right) + \frac{\psi_n}{\tau_n} z_{n-1}
-                            \]
-                            \[
-                                z_{n} = z_{n-1} - \frac{\psi_n}{L} g_n
-                            \]
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Momentum: optimized </h4>
-                        <p>
-                            OGM turns out to be minimax optimal in the following sense:
+                        OGM is optimal in the following (minimax sense):
                         </p>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem </h4>
+                            <h4> Theorem (Drori 2017)</h4>
                             <p>
-                            There exists a function $f_{hard} :\R^{N+2} \rightarrow \R$ and $x_0 \in \R^{N+2}$ so that any iterative algorithm with the property that 
+                            There exists a function $f_{hard} :\R^{N+2} \rightarrow \R$ and $x_0 \in \R^{N+2}$ so that any iterative algorithm with the property that
                             \[
                                 x_{i+1} \in x_0 + \text{span}(\nabla f_{hard}(x_0), \dots, \nabla f_{hard}(x_i)),
                             \]
@@ -609,476 +370,129 @@
                             </p>
                         </div>
                     </section>
-                </section>
-                <section>
                     <section data-auto-animate>
-                        <h1> Beyond Minimax Optimality: Subgame Perfect Gradient Method </h1>
+                        <h4> Momentum: Beyond Worst Case </h4>
+                        <p>OGM converges at the same rate for these functions:</p>
+                        <div style="display:flex">
+                            <div style="flex:1">
+                                <img src="complicated.png" height="300px"/>
+                                <p>The Drori hard function </p>
+                            </div>
+                            <div style="flex:1">
+                                <img src="simple.gif" height="300px"/>
+                                <p>$f(x) = \frac{1}{2}x^2$</p>
+                            </div>
+                        </div>
+                        <p class="fragment">
+                        After 2 gradient queries, the minimizer of $f(x) = \frac{1}{2}x^2$ is uniquely determined.
+                        </p>
                     </section>
                     <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <p>
-                            The previous methods only considered the `current gradient' and previous inductive hypothesis; can we do better by increasing our memory?
+                        <h4> Momentum: Beyond Worst Case </h4>
+                        <p>The issue is that OGM only considers the current gradient when making its update; earlier gradient queries can be useful when the function is nonadversarially chosen.</p>
+                        <p class="fragment">What if we tried a more complicated induction of the form
+                        \[
+                            H_n = \sum_{i=0}^{n-1}\mu_i H_{i} + \sum_{i=0}^{n}\lambda_{* n}Q_{* n} +  \sum_{i=0}^{n-1}\lambda_{i n}Q_{i n}?
+                        \]
                         </p>
-                        <p class="fragment">
-                            Suppose that we keep track of $k$ previous gradients $g_{n-k}, \dots, g_{n-1}$ and the $k$ previous "momenta" $z_{n-k}, \dots, z_{n-1}$.
-                        </p>
-                        <p class="fragment">
-                            How do we adapt our analysis to this setting where we remember more information?
-                        </p>
+                        <p class="fragment">This leads to an algorithm we call the subgame perfect gradient method.</p>
                     </section>
                     <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <p style="font-size:0.75em"> <b> Want to find $\mu_i, \lambda_{ij} \ge 0$ so that </b>
+                        <h4> Momentum: Subgame Perfect Gradient Method </h4>
+                        <p> We found a first order method with the following <i>dynamic</i> guarantee: </p>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem (Grimmer, S, Wang) </h4>
+                            <p>
+                            The algorithm (SPGM) provides the following guarantee: if $\mathcal{H} = \{(x_i, f_i, g_i)\}_{i=0}^n$ were the first order information produced by $n$ iterations of SPGM, then there exists some $\hat{\tau}_N$ (depending on $\mathcal{H}$) so that for any function $f$ so that $f(x_i) = f_i$ and $\nabla f(x_i) = g_i$,
                             \[
-                                H_{n} = \sum_{i=n-k}^{n-1} \mu_i H_i + \sum_{n-k}^{n-1} \lambda_{*i} Q_{*i} +  \sum_{n-k}^{n-1} \lambda_{in} Q_{in}.
+                                f(x_N) - f(x_*) \le \frac{L}{2\hat{\tau}_N} \|x_0-x_*\|^2.
                             \]
-                        </p>
-                        <b class="fragment">
-                            Observations:
-                        </b>
-                        <p class="fragment">
-                            We still only care about this equality as polynomials in $f_*, f_n, g_n, x_*$, so the number of equations stays the same!
-                        </p>
-                        <p class="fragment">
-                            We also have the same number of "vector" degrees of freedom, so $x_n$ and $z_n$ are still uniquely determined by the $\mu_i$ and $\lambda_{in}$.
-                        </p>
-                        <p class="fragment">
-                            We now have $3k$ coefficients we get to choose, so there is no longer a unique solution; we want to choose the one that maximizes $\tau_n$!
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        We wind up with the following optimization problem:
-                        <div style="background-color:white; padding-right:1050px">
-                        <table style="color:black">
-                            <tr>
-                                <td>Maximize</td>
-                                <td>$\tau_n$</td>
-                            </tr>
-                            <tr>
-                                <td>s.t.
-                                </td>
-                                <td>
-                                    \[
-                                        H_{n} = \sum_{i=n-k}^{n-1} \mu_i H_i + \sum_{n-k}^{n-1} \lambda_{*i} Q_{*i} +  \sum_{n-k}^{n-1} \lambda_{in} Q_{in}
-                                    \]
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    \[
-                                        \mu_i, \lambda_{ij} \ge 0.
-                                    \]
-                                </td>
-                            </tr>
-                        </table>
+                            </p>
                         </div>
                     </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        If we expand out these terms as polynomials, we wind up with the following <i>nonnegative second order cone program</i>
-                        <div style="background-color:white; padding-right:1050px">
-                        <table style="color:black">
-                            <tr>
-                                <td>Maximize</td>
-                                <td>$\langle\tau,\mu\rangle + \langle 1,\lambda_\star\rangle$</td>
-                            </tr>
-                            <tr>
-                                <td>s.t.
-                                </td>
-                                <td>
-                                    \[
-                                        \frac{L}{2}\|Z\mu - G\lambda_\star\|^2\leq 
-                                        \langle v, \mu\rangle + \langle q, \lambda_\star\rangle
-                                    \]
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    \[
-                                        \mu \in \R^k_+, \lambda_{*} \in \R^k_+
-                                    \]
-                                </td>
-                            </tr>
-                        </table>
+                    <section  data-auto-animate>
+                        <h4> Momentum: Subgame Perfect Gradient Method </h4>
+                        <p> We found a first order method with the following <i>dynamic</i> guarantee: </p>
+                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
+                            <h4> Theorem (Cont) </h4>
+                            <p>
+                            On the other hand, there exists a function $f_{\mathcal{H}}$ agreeing with the history $\mathcal{H}$ and so that any sequence $x_{n+1}, \dots, x_{N}$ satisfying
+                            \[
+                            x_i \in x_0 + \text{span} \{\nabla f(x_0), \dots, \nabla f(x_{i-1})\},
+                            \]
+                            \[
+                                f_{\mathcal{H}}(x_N) - f_{\mathcal{H}}(x_*) \ge \frac{L}{2\hat{\tau}_N} \|x_0-x_*\|^2.
+                            \]
+                            </p>
                         </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <p>If we let $\phi_n$ denote the optimal value of the previous optimization problem, then</p>
-                        <p>
-                        \[
-                            \psi_n = \begin{cases}
-                                1 +\sqrt{1 + 2\phi_n} &\text{if }n\leq N-1\\
-                                \frac{1+\sqrt{1+4\phi_n}}{2} &\text{else}
-                            \end{cases},\qquad\qquad
-                        \]
-                        \[
-                            \tau_n = \phi_n +\psi_n,\\
-                        \]
-                        \[
-                            x_n = \frac{\phi_n}{\tau_n}\left(x_{i}-\frac{1}{L}g_{i}\right) + \frac{\psi_n}{\tau_n}  (x_0 + Z\mu - G\lambda_\star)
-                        \]
-                        \[
-                            z_n =  (x_0 + Z\mu - G\lambda_\star) - \frac{\psi_n}{L} g_n.
-                        \]
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <h5>Numerical Performance</h5>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img src="logSumExp.png"/>
-                            </div>
-                            <div style="flex:1">
-                                <img src="Ionosphere.png"/>
-                            </div>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <h5>Numerical Performance</h5>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img src="lowAccur_rand.png"/>
-                            </div>
-                            <div style="flex:1">
-                                <img src="medAccur_rand.png"/>
-                            </div>
-                            <div style="flex:1">
-                                <img src="highAccur_rand.png"/>
-                            </div>
-                        </div>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img src="lowAccur_real.png"/>
-                            </div>
-                            <div style="flex:1">
-                                <img src="medAccur_real.png"/>
-                            </div>
-                            <div style="flex:1">
-                                <img src="highAccur_real.png"/>
-                            </div>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h4>SPGM</h4>
-                        <h5>Lower Bounds</h5>
-                        <p>We can find a function which is hard for an arbitrary gradient span method by taking the dual to our inner optimization problem and using its parameters to define a set of triples $\{(x_i, f_i, g_i)\}_{i=0}^N$ together with $f_*$ and $x_*$ and then interpolate a convex function through these triples.</p>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <h1> Gradient Descent </h1>
                     </section>
                     <section data-auto-animate>
                         <h3> Acceleration with Gradient Descent </h3>
-                        <p><b> Why is acceleration possible if we restrict to methods of the form
+                        <p><b> Can we get acceleration with methods of the form
                         \[
-                            x_{i+1} = x_i - \alpha_i \nabla f(x_i)?
+                            x_{i+1} = x_i - h_i \nabla f(x_i)?
                         \]
                         </b>
-
-                        <p> Two extreme functions: </p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img  height=200px src="quadratic.png"/>
-                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
-                            </div>
-                            <div style="flex:1">
-                                <img height=200px src="linear.png"/>
-                                <p style="font-size:0.5em">$f(x) = x$</p>
-                            </div>
-                        </div>
+                        </p>
                     </section>
                     <section data-auto-animate>
                         <h3> Acceleration with Gradient Descent </h3>
-                        <p><b> Why is acceleration possible in this setting? </b>
-
-                        <p> Two extreme functions: </p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img  height=200px src="quadratic.png"/>
-                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
-                            </div>
-                            <div style="flex:1">
-                                <img height=200px src="huber.png"/>
-                                <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
-                            </div>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Acceleration with Gradient Descent </h3>
-                        <p><b> Why is acceleration possible in this setting? </b>
-
-                        <p> Two extreme functions: </p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img  height=200px src="ezgif-2-cd40e6ea8b.gif"/>
-                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
-                                <p class=fragment style="font-size:0.5em">Large steps lead to divergence.</p>
-                            </div>
-                            <div style="flex:1">
-                                <img height=200px src="huber.gif"/>
-                                <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
-                                <p  class=fragment style="font-size:0.5em">Small steps converge slowly.</p>
-                            </div>
-                        </div>
-                        <p class=fragment style="margin-top:-20px"> <b> Alternating big and small steps leads to faster convergence for both. </b> </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Acceleration with Gradient Descent </h3>
-                        <p> These two functions (quadratic and Huber) appear to be more than just illustrative: </p>
+                        <h4> History </h4>
                         <ul>
-                            <li>They are both worst case functions for the optimized gradient method. </li>
-                            <li>They are (conjectured to be) worst case for the best constant step size gradient descent method. </li>
-                            <li>We will be designing gradient descent steps for which the worst case rate is obtained by both of these functions. </li>
-                        </ul>
+                            <li> Vanilla gradient descent ($x_{i+1} = x_i - \frac{1}{L}\nabla f(x_i)$): converges at a rate of $\frac{1}{2n}$ </li>
+                            <li> Vanilla gradient descent: analysis improved to $\frac{1}{4n}$ in Drori and Teboulle 2012, also showing that any constant step size between $0$ and $2$ yield similar convergence. </li>
+                            <li> Existence of step size choices leading to convergence at a rate of $O(\frac{1}{n^{1+\epsilon}})$ was shown simultaneously by (Altschuler and Parrilo) and (Grimmer, S, Wang) in 2023. </li>
+                        <ul>
                     </section>
                     <section data-auto-animate>
-                        <h3> Recursive Construction of Step Sizes </h3>
-                        <p> The step sizes we construct are <b> recursively </b> designed to <b> have Huber and quadratic functions as their worst case.</b></p>
-                        <p class=fragment>
-                        Roughly, we will define a class of sequences that are `composable' so that if $h$ and $\ell$ are composable, then there is some $\mu \in \R$ so that
-                        \[
-                            [h, \mu, \ell]
-                        \]
-                        is still composable, and have an improved rate of convergence over either of the constituents.
-                        </p>
-                        <p class=fragment> <b> Slight complication: </b> We will actually need multiple `flavors' of composable sequences, that need to be composed slightly differently. </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $f$-Composable Sequences</h3>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
-                        <h4> Definition </h4>
-                            <p>
-                            We will say that a sequence $h \in \R^n$ is <i>$f$-composable</i> with rate $r$ if for any smooth convex function $f$, if $x_0, \dots, x_n$ are the iterates of gradient descent with step sizes $h$,
+                        <h3> Acceleration with Gradient Descent </h3>
+                        <h4> History </h4>
+                        <img src="silver.png" />
+                        <p>
                             \[
-                                f(x_n) - f(x_*) \le \frac{r}{2}\|x_0 - x_*\|^2,
+                            h_i = 1+\rho^{\nu(i) - 1},
                             \]
-                            and that this inequality is met with equality when $f$ is either the Huber function or the 1-d quadratic function $\frac{1}{2}x^2$.
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $f$-Composable Sequences</h3>
-                        <p><b>How do we construct such $f$-composable sequences?</b></p>
-                        <p class=fragment> If $h_1, h_2$ are two sequences, there is a unique value of $\mu&gt;1$ so that the concatenation
-                        \[
-                            [h_1, \mu, h_2]
-                        \]
-                        performs equally on the Huber and quadratic functions.
+                            where $\rho = 1+\sqrt{2}$ and $\nu(i)$ is the largest power of 2 dividing $i$.
                         </p>
-                        <p class=fragment> <b>Composition of two $f$-composable sequences is not necessarily $f$-composable.</b></p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p>There is another of composable sequence that we consider. The definition is slightly more complicated than $f$-composable, so we will only mention the important theorem:</p>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                            <h4> Theorem </h4>
-                            <p>
-                            If $h$ and $\ell$ are $s$-composable sequences with rates $r_1$ and $r_2$ respectively, then there is a unique constant $\mu &gt; 1$ so that 
-                                \[
-                                    [h, \mu, \ell]
-                                \]
-                                is $s$-composable with rate $\frac{2r_1r_2}{r_1 + r_2 + \sqrt{r_1^2 + 6r_1r_2 + r_2^2}}$. Denote this by $h \Join \ell$.
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $s$-Composable Sequences</h3>
-                        <p> If we start with the $s$ composable sequence with no entries (which has rate 1), and repeatedly compose with itself, we get the sequence
-                        \[
-                        \sigma^1 = [] \Join [] = [\sqrt{2}]
-                        \]
-                        \[
-                            \sigma^2 = (\sigma^1)\Join(\sigma^1)  = 
-                            [\sqrt{2}, 2 ,\sqrt{2}]
-                        \]
-                        \[
-                            \sigma^3 = (\sigma^2)\Join(\sigma^2) = [\sqrt{2}, 2 ,\sqrt{2}, 2+\sqrt{2}, \sqrt{2}, 2 ,\sqrt{2}, ]
-                        \]
-                        $\dots$
-                        </p>
-                        <p> This is the silver step size sequence defined by Altschuler and Parrilo.  We also get sequences like
-                        \[
-                            \sigma^1 \Join \sigma^2 = [\sqrt{2}, \frac{2 \left(\sqrt{2}-1\right)}{\left(\sqrt{2}+2\right) \left(\sqrt{2 \sqrt{2}-1}+1\right)}, \sqrt{2}, 2, \sqrt{2}].
-                        \]
+                        <p class="fragment">
+                            This leads to a convergence rate of $O(\frac{1}{n^{\log_2(\rho)}}$.
                         </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> $f$-Composable Sequences</h3>
-                        <p>We can also compose $s$-composable sequences with $f$-composable sequences.</p>
-                        <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                        <h4> Theorem </h4>
-                            <p>
-                                If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
-                                \[
-                                    [h, \mu, \ell]
-                                \]
-                                is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
-                            </p>
-                        </div>
+                        <h3> Acceleration with Gradient Descent </h3>
+                        <p> In fact, the silver step sizes are one of a large family of step size patterns that are obtainable via a recursive procedure, which were discovered simultaneously in (Grimmer, S, Wang 2024) and (Jiang, Zhang 2024). </p>
+                        <p> Loosely, we find that there are `composable' step size sequences, so that if $\alpha$ and $\beta$ are composable step size sequences, then there exists a $\mu \in \R$ so that the composition
+                        \[
+                            \alpha \join \beta = [\alpha, \mu, \beta]
+                        \]
+                        is composable with an improved rate of convergence.
+                        </p>
+                        <p class="fragment">
+                             Here, $\mu$ solves some degree $2$ polynomial equation in order to make the composition $\alpha \join \beta$ have the same performance on the quadratic function $f(x) = \frac{1}{2}x^2$ and the Huber function $f(x) = \begin{cases}|x|+\frac{1}{2} \text{ if x > \frac{1}{2}}\\x^2$.
+                        </p>
                     </section>
                     <section data-auto-animate>
-                        <h3> $f$-Composable Sequences</h3>
+                        <h3> Acceleration with Gradient Descent </h3>
                         <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
                         <h4> Theorem </h4>
                             <p>
-                            There are $f$-composable sequences with rate $r \le \frac{0.42311}{(n+1)^{1.27\dots}},$ where
+                            There are composable sequences with rate $r \le \frac{0.42311}{(n+1)^{1.27\dots}},$ where
                             $1.27\dots = \log_2(1+\sqrt{2})$.
                             </p>
                         </div>
                         <ul class=fragment>
                             <li> Best known constant factor for gradient descent methods.</li>
                             <li> We find sequences that match or exceed the performance of the step size sequences found by branch-and-bound search in Das Gupta et al. for each $n$ that they considered.</li>
-                        </ul>
-                    </section>
-
-                    <section data-auto-animate>
-                        <h3> $g$-Composable Sequences</h3>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEEE">
-                        <h4> Definition </h4>
-                            <p>
-                                We will say that a sequence $h \in \R^n$ is <i>$g$-composable</i> with rate $r$ if for any smooth convex function $f$, if $x_0, \dots, x_n$ are the iterates of gradient descent with step sizes $h$,
-                                \[
-                                    \|\nabla f(x_n)\|^2 \le \frac{r}{2}(f(x_0) - f(x_*))
-                                \]
-                                and that this inequality is met with equality when $f$ is either the Huber function or the 1-d quadratic function $\frac{1}{2}x^2$.
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> $g$-Composable Sequences</h3>
-                        <div style="text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                        <h4> Theorem </h4>
-                            <p>
-                            There are $g$-composable sequences with rate $r \le \frac{0.42311}{(n+1)^{1.27\dots}},$ where
-                            $1.27\dots = \log_2(1+\sqrt{2})$.
-                            </p>
-                        </div>
-                        <ul class=fragment>
-                            <li> First work showing acceleration for gradient descent with respect to gradient norm metric.</li>
-                            <li> We find sequences in the short step size regime which recover those recently found in Rotaru et al.</li>
+                            <li> These sequences can be obtained by repeated composing the empty sequence with itself.</li>
                         </ul>
                     </section>
                     <section data-auto-animate>
-                        <h3> Basic Sequences</h3>
-                        <p> A <b>basic</b> $s$-composable sequence is either the empty sequence or a sequence that can be expressed as the composition of two smaller basic $s$-composable sequences. </p>
-                        <p> A <b>basic</b> $f$-composable sequence is one that can be constructed by repeatedly composing the empty sequence with basic $s$ composable sequences. </p>
-                        <p> We can enumerate such basic sequences and ask what the best possible rate is for a length $n$ basic sequence. This can be computed by dynamic program </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Basic Sequences</h3>
-                        <p><b> Examples </b><p>
-                        <table>
-                            <tr>
-                                <td> <img src="3_02.png" width=300px/></td>
-                                <td> <img src="4_08.png" width=300px/></td>
-                            </tr>
-                            <tr>
-                                <td> <img src="5_25.png"  width=300px/></td>
-                                <td> <img src="best_20.png" width=300px/></td>
-                            </tr>
-                        </table>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Basic Sequences</h3>
-                        <p><b> Rate </b><p>
-                        <img src="rates.png"/>
-                    </section>
-                    <section data-auto-animate>
-                        <h2> Certificates </h2>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Recursive Certificates </h3>
-                        <div style="flex:1;margin:0.25in;text-align:left; padding:0.35in; font-size:0.75em; background:#EEEEFF">
-                        <h4> Theorem </h4>
-                            <p style="font-size:0.75em">
-                                If $h$ is $s$-composable with rate $r_1$ and $\ell$ is $f$-composable with rate $r_2$, then there is a constant $\mu$ so that
-                                \[
-                                    [h, \mu, \ell]
-                                \]
-                                is $f$-composable with rate $\frac{2r_1r_2}{r_1 + 4r_2 + \sqrt{r_1^2+8r_1r_2}}$.
-                            </p>
-                        </div>
-                        <p>
-                            To prove the rate for $[h, \mu, \ell]$, we use PEP certificates for the appropriate inequalities for both $h$ and $\ell$ and combine them together.
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Recursive Certificates </h3>
-                        <p>
-                            Assume $\ell$ is $f$-composable with rate $r$,
-                            \[
-                                f(x_n) - f(x_*) \le \frac{r}{2}\|x_0 - x_*\|^2,
-                            \]
-                            we can extract a PEP proof of this fact.
-                        </p>
-                        <div class=fragment>
-                            <p>
-                            By examining that proof, we can show that there exists some sequence $\nu \in \R^{n+1}$ so that we get the (equivalent) inequality
-                        </p>
-                            <p style="color:blue">
-                            If $x_0, \dots, x_n$ are obtained by applying the step size sequence $\ell$, then
-                            \[
-                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
-                            \]
-                            </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Recursive Certificates </h3>
-                        <p style="color:blue">
-                            If $x_0, \dots, x_n$ are obtained by applying the step size sequence $\ell$, then
-                            \[
-                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
-                            \]
-                        </p>
-                        <p><b> Advantages </b></p>
+                        <h3> Questions for Algebraists </h3>
                         <ul>
-                            <li>
-                                This new inequality still holds even if we shift the index of $x_i$, so we can apply this inequality to the sequence $[h, \mu, \ell]$ (where $\ell$ is only applied starting after some number of steps have already been taken).
-                            </li>
-                            <li>
-                                It is also close to `separable', so that it is a sum of terms, each of which only depends on a single iterate $x_i$.
-                            </li>
+                            <li>Why do these problems have such nice solutions (solvable by radicals, large degeneracy, Grobner bases generated by quadrics, etc)? </li>
+                            <li>Why are worst case functions often 1 dimensional (why do the dual SDPs to these performance estimation problems have rank 1 solutions)? </li>
+                            <li>Can we show lower bounds that there are no solutions to these problems with rates beating the $O(\frac{1}{n^{\log_2(\rho)}})$ convergence rates? </li>
                         </ul>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Recursive Certificates </h3>
-                        <p style="color:blue">
-                            \[
-                                \sum_{i=0}^n \nu_i (2(f_i-f_n)+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_0 - x_i\rangle)-\|\sum_{i=0}^n \nu_i\nabla f(x_i)\|^2 \ge 0.
-                            \]
-                        </p>
-                        <p>Take this inequality and shift the indices:</p>
-                        <p style="color:red;margin-left:-10px">
-                            \[
-                            \sum_{i=n+1}^{n'} \nu_i' (2(f_i-f_{n'})+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_{n+1} - x_i\rangle)-\|\sum_{i=n+1}^{n'} \nu_i'\nabla f(x_i)\|^2 \ge 0.
-                            \]
-                        </p>
-                        <div  class = fragment>
-                        <p>Compare this to the following (desired) inequality:</p>
-                        <p style="color:green;margin-left:-10px">
-                            \[
-                            \sum_{i=0}^{n'} \nu_i' (2(f_i-f_{n'})+\|\nabla f(x_i)\|^2+2\langle \nabla f(x_i), x_{0} - x_i\rangle)-\|\sum_{i=0}^{n'} \nu_i'\nabla f(x_i)\|^2 \ge 0.
-                            \]
-                        </p>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h3> Recursive Certificates </h3>
-                        <p> The $s$-composability definition is exactly the one that is needed so that when we linearly combine the inequality guaranteed by $s$-composability to the one guaranteed by $f$-composability, we get the desired extended $f$-composability inequality (up to a small correction from the middle step). </p>
-                        <p class=fragment> The fact that Huber and quadratic are tight for $f$-composable sequences furnishes additional algebraic identities needed to combine cleanly. </p>
-                        <p class=fragment> $g$ composable sequences have a similar recursive structure in their certificates . </p>
-                    </section>
-                    <section>
-                        <h2> Watch out for the paper on the arxiv tonight! </h2>
-                        <p> Grimmer, Benjamin, Kevin Shu, and Alex Wang. "Accelerated Objective Gap and Gradient Norm Convergence for Gradient Descent via Long Steps." arXiv preprint arXiv:2403.14045 (2024).</p>
                     </section>
             </section> </div>
 
