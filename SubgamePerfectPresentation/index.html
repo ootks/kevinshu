@@ -70,25 +70,23 @@
                 <section>
                     <section data-auto-animate>
                         <h3>Introduction and History</h3>
-                        <div style="text-align:left; padding:0.35in; background:#EEEEEE">
-                        <h5> Definition </h5>
-                        <p style="font-size:0.75em">We say that $f:\R^d \rightarrow \R$ is convex if whenever $x, y \in \R^d$ and $t \in [0,1]$,
-                        \[f(t x + (1-t) y) \le t f(x) + (1-t)f(y).\]
-                        </p>
-                        <p style="font-size:0.75em">We say that $f$ is $L$<i>-smooth</i> if it is differentiable everywhere and its gradient is $L$-Lipschitz, i.e.
-                        \[\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|.\]
-                        </p>
+                        <p> We want to <b>minimize smooth convex </b> functions $f$.</p>
+                        <div style="text-align:left; padding:0.35in; background:#EEEEEE" class="fragment">
+                            <ul>
+                                <li> <b> Convex </b> - $f(t x + (1-t) y) \le t f(x) + (1-t)f(y)$ whenever $t \in [0,1]$.</li>
+                                <li> <b> Smooth </b> - $\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|.$</li>
+                            </ul>
                         </div>
-                        <p class="fragment"><b>Given an oracle for evaluating and differentiating an $L$-smooth convex $f$, we want to find an approximate minimum of $f$.</b></p>
+                        <img class="fragment" src="convex_function.png" height="300px">
                     </section>
                     <section data-auto-animate>
                         <h3>Introduction and History</h3>
                         <h4> History </h4>
                         <div style="text-align:left; font-size:0.25em ">
                         <ul>
-                            <li class="fragment" style="font-size:2em"> <b>Standard: </b> Gradient descent yields \[f(x_n) - f(x_*) \le \frac{L}{2n} \|x_0 - x_*\|^2.\]</li>
+                            <li class="fragment" style="font-size:2em"> <b>Standard: </b> Gradient descent with step size $\frac{1}{L}$ yields \[f(x_n) - f(x_*) \le \frac{L}{2n} \|x_0 - x_*\|^2.\]</li>
                             <li class="fragment" style="font-size:2em"> <b>Fast Gradient Method (Nesterov 1983):</b> There is a gradient method (using momentum) so that \[f(x_n) - f(x_*) \le \frac{2L}{(n+1)^2} \|x_0 - x_*\|^2.\]</li>
-                            <li class="fragment" style="font-size:2em"> <b>Performance estimation (Drori and Teboulle 2014):</b> If each $h_i = h$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
+                            <li class="fragment" style="font-size:2em"> <b>Performance estimation (Drori and Teboulle 2014):</b> If each step size is $\frac{h}{L}$ with $0 &lt; h \le 1$ in gradient descent, \[f(x_n) - f(x_*) \le \frac{L}{4 n h + 2} \|x_0 - x_*\|^2.\]</li>
                             <li class="fragment" style="font-size:2em"> <b>Optimized Gradient Method (Kim and Fessler 2016):</b> Gives an explicit gradient method that achieves the minimax optimal convergence rate (even up to constants).
                         </ul>
                         </div>
@@ -291,7 +289,7 @@
                             <p>
                             $\mathcal{T}$ is interpolable if and only if for each $i, j \in \{0, \dots, n\}$,
                             \[
-                                Q_{ij} = f_i - f_j - \langle g_j, x_i - x_j \rangle - \frac{1}{2L}\|g_i-g_j\|^2
+                                Q_{ij} = f_i - f_j - \langle g_j, x_i - x_j \rangle - \frac{1}{2L}\|g_i-g_j\|^2 \ge 0.
                             \]
                             </p>
                         </div>
@@ -412,24 +410,6 @@
                         </p>
                         <p class="fragment">
                         Specifically, can we <b> choose </b> <span style="color:red">$x_n$</span>, <span style="color:red">$z_n$</span>, and <span style="color:blue">$\tau_n$</span> so that $H_n$ is a weighted sum of $H_{n-1}$ and the $Q_{ij}$'s?
-                        </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Momentum: a first taste </h4>
-                        <p><b> A key simplification: </b></p>
-                        <p> Not all of the $Q_{ij}'s$ are useful.</p>
-                        <p class="fragment"> 
-                            At iteration $n-1$, all of the quantities $f_0, \dots, f_{n-1}$ and $g_0, \dots, g_{n-1}$ are known and fixed. Thus, we can treat these things as constants. In particular, this implies that $Q_{ij}$ for $i, j \le n-1$ are also constants.
-                        </p>
-                        <p class="fragment">
-                            Also, the inequalities
-                            \[
-                                Q_{i*} = f_i - f_* - \frac{1}{2L}\|g_i\|^2 \ge 0
-                            \]
-                            \[
-                                Q_{ni} = f_n - f_i \dots \ge 0
-                            \]
-                            `go the wrong way: they are either upper bounds on $f_*$ or lower bounds on $f_n$.
                         </p>
                     </section>
                     <section data-auto-animate>
