@@ -524,32 +524,10 @@
                     </section>
                 </section>
                 <section>
-                    <section>
-                        <h4> Relationship with Homotopy Continuation </h4>
-                        <p><i>Can we use continuous maximization to solve these constrained optimization problems? </i></p>
-                        <p class="fragment alignLeft">An oracle for minimizing the Lagrangian $\mathcal{L}(x,t)$ can be used to produce a separation oracle for the convex hull of $f(X)$, so convex optimization techniques can be used to do constrained optimization if we can minimize the Lagrangian efficiently.</p>
+                    <section data-auto-animate>
+                        <h4> Unbalanced Procrustes Problems</h4>
                     </section>
-                    <section>
-                        <h4> Relationship with Homotopy Continuation </h4>
-                        <p><i>Can we use continuous maximization to minimize $\ell_t(x) = \mathcal{L}(x,t)$? </i></p>
-                        <p class="fragment alignLeft">Suppose for now that $X$ is a manifold, and we want an algorithm that is analogous in performance to a first order method, but which uses the fact that the maximizer of $\ell_t(x)$ is a continuous function of $t$.</p>
-                        <p class="fragment alignLeft">Homotopy continuation is a method, usually used to solve polynomial systems, that at a high level starts with some initial system and then varying the parameters of that system slowly while tracking the solutions to the system over time.</p>
-                    </section>
-                    <section>
-                        <h4> Relationship with Homotopy Continuation </h4>
-                        <p><i>Can we use continuous maximization to minimize $\ell_t(x) = \mathcal{L}(x,t)$? </i></p>
-                        <p>Along the lines of homotopy continuation, we can think about the following algorithm:
-                        <div style="background:#F3F3F3">
-                        <ol>
-                            <li> <i> Input</i> A Lagrangian $\mathcal{L}(x,t)$, an initial $t_0$, a maximizer $x_0$ of $\ell_{t_0}(x)$, and a target $t_1$.</li>
-                            <li> Choose time steps $t_{1/N}$, $t_{2/N}$, \dots, $t_{N-1 / N}$.</li>
-                            <li> For $i = 1, \dots, N$, starting at $x_{i-1/N}$, apply gradient descent until we arrive at an estimate $x_{i/N}$.</li>
-                        </ol>
-                        </div>
-                        <p> If the maximizer is Lipschitz as a function of $t$, and also, the local minima of $\ell_{t_i}$ are well separated, we expect this to converge. </p>
-                        <p class=fragment> Let's try this on a new problem!</p>
-                    </section>
-                    <section>
+                    <section data-auto-animate>
                         <h4> Unbalanced Procrustes Problems</h4>
                         <div style="display:flex">
                         <p>Given a pair $U \in \R^{n \times d}$, and $V \in \R^{m \times d}$ with $n &gt; m$, we want to minimize
@@ -562,7 +540,7 @@
                         </div>
                         <p> Both the natural SDP relaxations for this problem and Riemannian gradient descent with random initialization fail to find the global minimum for this problem. </p>
                     </section>
-                    <section>
+                    <section data-auto-animate>
                         <h4> Unbalanced Procrustes Problems</h4>
                         <p> We can rename $A = -VV^{\intercal} \in \R^{n\times n}_{sym}$ and $B = 2 V^{\intercal}W \in \R^{n \times m}$, and rewrite the problem as
                         \[
@@ -628,25 +606,50 @@
                         </div>
                         <p> Showing only top half for space. </p>
                     </section>
+                    <section data-auto-animate>
+                        <h4> Relationship with Homotopy Continuation </h4>
+                        <p><i>Can we minimize $\ell_t(x) = \mathcal{L}(x,t)$ assuming that $f$ is continuously maximized? </i></p>
+                        <p class="alignLeft">Homotopy continuation is a method, usually used to solve polynomial systems, that at a high level starts with some initial system and then varying the parameters of that system slowly while tracking the solutions to the system over time.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Relationship with Homotopy Continuation </h4>
+                        <p><i>Can we minimize $\ell_t(x) = \mathcal{L}(x,t)$ assuming that $f$ is continuously maximized? </i></p>
+
+                        <p>Along the lines of homotopy continuation, we can think about the following algorithm:</p>
+                        <div style="background:#F3F3F3;font-size:20px">
+                        <ol>
+                            <li> <i> Input</i> A Lagrangian $\mathcal{L}(x,t)$, an initial $t_0$, a maximizer $x_0$ of $\ell_{t_0}(x)$, and a target $t_1$.</li>
+                            <li> Choose time steps $t_{1/N}$, $t_{2/N}$, \dots, $t_{N-1 / N}$.</li>
+                            <li> For $i = 1, \dots, N$, starting at $x_{i-1/N}$, apply gradient descent until we arrive at an estimate $x_{i/N}$.</li>
+                        </ol>
+                        </div>
+                        <p> If the maximizer is Lipschitz as a function of $t$, and also, the local minima of $\ell_{t_i}$ are well separated, we expect this to track the optimum correctly. </p>
+                        <p class=fragment> Let's try this on a new problem!</p>
+                    </section>
                     <section>
-                        <h3> Results of Numerical Algorithms </h3>
+                        <h3> Results of Numerical Experiments </h3>
                         <p style="font-size:20px" class=alignLeft> We generated 1000 random pairs $(A, B)$ (with iid Gaussian entries) for different values of $(n,m)$, and then ran the homotopy continuation algorithm (HC), compared it to the result of a natural SDP relaxation and gradient descent with random initialization (GD). </p>
                         <table style="font-size:20px">
                           <tr>
                             <td>$(n,m)$</td>
                             <td>Average $\frac{\text{HC}}{\text{SDP}}$</td>
                             <td>Average $\frac{\text{GD}}{\text{SDP}}$</td>
-                            <td>Minimum $\frac{\text{HC}}{\text{SDP}^*}$</td>
-                            <td>Minimum $\frac{\text{HC}}{\text{GD}}$</td>
+                            <td>Fraction $\text{HC} \ge \text{SDP}^*$</td>
+                            <td>Fraction $\text{HC} \ge \text{GD}$</td>
                           </tr>
-                          <tr>
-                            <td>Eating Habits</td>
-                            <td>Eats everyone's leftovers</td>
-                            <td>Nibbles at food</td>
-                            <td>Hearty eater</td>
-                            <td>Will eat till he explodes</td>
-                          </tr>
+                          <tr><td>$(100,20)$</td><td>1.00</td><td>1.00</td><td>0.00</td><td>0.959</td></tr>
+                          <tr><td>$(100,30)$</td><td>1.00</td><td>1.00</td><td>0.00</td><td>0.950</td></tr>
+                          <tr><td>$(100,40)$</td><td>1.00</td><td>1.00</td><td>0.00</td><td>0.931</td></tr>
+                          <tr><td>$(10,2)$</td><td>1.00</td><td>0.99</td><td>1.00</td><td>1.000</td></tr>
+                          <tr><td>$(15,7)$</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.976</td></tr>
+                          <tr><td>$(20,10)$</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.958</td></tr>
+                          <tr><td>$(20,4)$</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.986</td></tr>
+                          <tr><td>$(30,2)$</td><td>1.00</td><td>1.00</td><td>1.00</td><td>1.000</td></tr>
+                          <tr><td>$(30,3)$</td><td>1.00</td><td>1.00</td><td>1.00</td><td>0.992</td></tr>
+                          <tr><td>$(4,2)$</td><td>1.00</td><td>0.95</td><td>1.00</td><td>0.997</td></tr>
+
                         </table>
+                        <p style="font-size:10px" class=alignLeft>$\text{SDP}^*$ refers to instances where the SDP returns an element of the Stiefel manifold. We accepted inequalities to hold if they hold with an error of at most $10^{-6}$.</p>
 
                     </section>
                 </section>
