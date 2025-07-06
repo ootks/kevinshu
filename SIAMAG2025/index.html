@@ -27,7 +27,13 @@
                     <section>
                         <h3> Hidden Convexity and the Rotation Group </h3>
                         <div>
-                            <img src="sphere_proj.png" height="500" width="400" />
+                            <img src="sphere_proj.png" height="300" width="400" />
+                        </div>
+                        <div style="display:flex">
+                            <p style="font-size:30px;flex:50%;padding-top:25px"> Kevin Shu </p> 
+                            <div  style="flex:50%">
+                            <img src="caltech.png" width=200px />
+                            </div>
                         </div>
                     </section>
                     <section data-auto-animate>
@@ -158,12 +164,12 @@
                         <div style="display:flex">
                             <div style="flex:10%;padding-top:50px">
                                 \[
-                                \max \bigg\{\langle A_0, X \rangle : 
+                                \max \bigg\{\tr( A_0^{\intercal} X) : 
                                 \]
                             </div>
                             <div style="flex:10%">
                                 \[
-                                \langle A_1, X\rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \tr( A_1^{\intercal} X) = c_1,\dots, \tr( A_k^{\intercal} X) = c_k
                                 \]
                                 \[x\in \St^{n,m}\]
                             </div>
@@ -181,12 +187,12 @@
                         <div style="display:flex">
                             <div style="flex:10%;padding-top:50px">
                                 \[
-                                \max \bigg\{\langle A_0, X \rangle : 
+                                \max \bigg\{\tr( A_0^{\intercal} X) : 
                                 \]
                             </div>
                             <div style="flex:10%">
                                 \[
-                                \langle A_1, X\rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \tr(A_1^{\intercal} X) = c_1,\dots, \tr( A_k^{\intercal} X) = c_k
                                 \]
                                 \[x\in M_{\sigma}^{n,m}\]
                             </div>
@@ -202,20 +208,23 @@
                         <h4> Optimization </h4>
                         <p> Convex Relaxations </p>
                         <div>
-                            <p class=alignLeft>A standard approach to tackle these types of problems is to find a convex set of constraints for this problem.</p>
+                            <p class=alignLeft>A standard approach to tackle these types of problems is to find a convex optimization problem which is related to the problem of interest.</p>
                         </div>
-                        <p><b>Example (QCQPs):</b></p>
+                        <p><b>Example (Linear Inverse Eigenvalue):</b></p>
                         <div style="display:flex">
                             <div style="flex:10%;padding-top:50px">
                                 \[
-                                \max \bigg\{\langle A_0, X \rangle :
+                                \max \bigg\{\tr( A_0 X ) :
                                 \]
                             </div>
                             <div style="flex:10%">
                                 \[
-                                \langle A_1, X \rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \tr( A_1 X) = c_1,\dots, \tr( A_k X)  = c_k
                                 \]
-                                \[\tr(X) = 1, X \succeq 0\]
+                                <div class="r-stack">
+                                    <div class="fragment fade-out">\[ X \in M_{\lambda}\]</div>
+                                    <div class="fragment" style="color:red">\[ X \in \text{conv}(M_{\lambda})\]</div>
+                                </div>
                             </div>
                             <div style="flex:10%;padding-top:50px">
                                  \[
@@ -290,7 +299,7 @@
                             <p class="alignLeft">
                                 Given a function $f : X \rightarrow \R^{k+1}$, we can define a (generalized) Lagrangian as a function of $x \in X$ and $t \in \R^{k+1}$:
                                 \[
-                                \mathcal{L}_f(x,t) := \langle t, f(x)\rangle.
+                                \mathcal{L}_f(x,t) := \langle t, f(x)\rangle = \sum_{i=0}^{k} t_i f_i(x).
                                 \]
                             </p>
                             <p class="fragment">
@@ -429,7 +438,7 @@
                                  \]
                             </div>
                         </div>
-                        <div class="fragment"><p>The Lagrangian in this case is $x^{\intercal} (t_0 A_0 + t_1 A_1) x$: the maximum of the Lagrangian on the sphere is the eigenvector of $t_0 A_0 + t_1 A_1$ associated to the largest eigenvalue.</p></div>
+                        <div class="fragment"><p>The Lagrangian in this case is $x^{\intercal} (t_0 A_0 + t_1 A_1) x$: a maximizer of the Lagrangian on the sphere is an eigenvector of $t_0 A_0 + t_1 A_1$ associated to the largest eigenvalue.</p></div>
                         <div class="fragment"><p>When is this continuous?</p></div>
                     </section>
                     <section data-auto-animate>
@@ -652,6 +661,9 @@
                         <p style="font-size:10px" class=alignLeft>$\text{SDP}^*$ refers to instances where the SDP returns an element of the Stiefel manifold. We accepted inequalities to hold if they hold with an error of at most $10^{-6}$.</p>
 
                     </section>
+                </section>
+                <section>
+                    <h1> Thanks for Listening! </h1>
                 </section>
             </div>
 
