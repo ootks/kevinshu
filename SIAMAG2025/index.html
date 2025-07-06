@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title> Hidden Convexity and the Rotation Group </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.css">
+		<link rel="stylesheet" href="solarized.css" id="theme">
+        <style>
+            p {font-size: 30px}
+            li {font-size: 30px}
+            .alignLeft {text-align:left;}
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+                <section>
+                    <section>
+                        <h3> Hidden Convexity and the Rotation Group </h3>
+                        <div>
+                            <img src="sphere_proj.png" height="500" width="400" />
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <div>
+                            <svg width="500" height="150" xmlns="http://www.w3.org/2000/svg">
+                              <defs>
+                                <marker
+                                  id='head'
+                                  orient="auto"
+                                  markerWidth='3'
+                                  markerHeight='4'
+                                  refX='0.1'
+                                  refY='2'
+                                >
+                                  <path d='M0,0 V4 L2,2 Z' fill="black" />
+                                </marker>
+                              </defs>
+
+                              <path
+                                id='arrow-line'
+                                marker-end='url(#head)'
+                                stroke-width='4'
+                                fill='none' stroke='black'
+                                d='M240 60 C 262 40, 262 40, 285 60'
+                              />
+
+                              <path
+                                id='arrow-line'
+                                marker-end='url(#head)'
+                                stroke-width='4'
+                                fill='none' stroke='black'
+                                d='M285 112 C 262 132, 262 132, 240 112'
+                                class="fragment"
+                              />
+
+                              <text x="0" y="100" fill="red">Optimization</text>
+                              <text x="300" y="100" fill="red">Geometry</text>
+                            </svg>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> Optimization </h3>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> For a topological space $X$ and a continuous function $f : X \rightarrow \R^{k+1}$,
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                V_f(c) := \max \bigg\{f_0(x) : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                f_1(x) = c_1,\dots,f_k(x) = c_k
+                                \]
+                                \[x\in X\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> <b>Example:</b> Quadratically Constrained Quadratic Optimization</p>
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                \max \bigg\{x^{\intercal} A_0 x : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                x^{\intercal} A_1x = c_1,\dots, x^{\intercal} A_k x = c_k
+                                \]
+                                \[x\in S^{n-1}\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+
+                        </div>
+                        <div style="display:flex">
+                            <p style="flex:30%"> Here, each $A_i$ is a symmetric matrix, and $S^{n-1}$ denotes the unit sphere in $\R^n$.</p>
+                            <div style="flex:30%" class="r-stack">
+                               <img class="fragment fade-out" src="sphere_hyperbola.png" height=200px>
+                              <img class="fragment" src="sphere_hyperbola_intersection.png" height=200px>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> <b>Example:</b> Linear Inverse Eigenvalue Problems</p>
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                \max \bigg\{\tr(A_0 X) : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \tr(A_1 X) = c_1,\dots, \tr(A_k X) = c_k
+                                \]
+                                \[X\in M_{\lambda}\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+
+                        </div>
+                        <div>
+                            <p class="alignLeft"> For $\lambda \in \R^n$, $M_{\lambda}$ is the set of symmetric matrices with eigenvalues $\lambda_1, \dots, \lambda_n$. </p>
+                            <p class="fragment"><b> QCQPs over the sphere are the special case of $\lambda= (1,0,\dots,0)$. </b></p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> <b>Example:</b> Linear Optimization over the Stiefel Manifold</p>
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \langle A_1, X\rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \]
+                                \[x\in \St^{n,m}\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <p> Here, each $A_i$ is an $n\times m$ matrix, and $\St^{n,m} = \{X \in \R^{n \times m} : X^{\intercal}X = I\}$.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> <b>Example:</b> Inverse Singular Value Problems</p>
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \langle A_1, X\rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \]
+                                \[x\in M_{\sigma}^{n,m}\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <p class=alignLeft> Here, each $A_i$ is an $n\times m$ matrix, and $M_{\sigma}^{(n,m)}$ is the set of $n\times m$ matrices with singular values $\sigma_1, \dots, \sigma_m$.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> Convex Relaxations </p>
+                        <div>
+                            <p class=alignLeft>A standard approach to tackle these types of problems is to find a convex set of constraints for this problem.</p>
+                        </div>
+                        <p><b>Example (QCQPs):</b></p>
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle :
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \langle A_1, X \rangle = c_1,\dots, \langle A_k, X\rangle = c_k
+                                \]
+                                \[\tr(X) = 1, X \succeq 0\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> Convex Relaxations </p>
+                        <div>
+                            <p class=alignLeft>Convex relaxations can usually be tractably solved, and they can prove <b>upper bounds</b> showing that no solution can achieve a certain objective value. </p>
+                        </div>
+                        <div class="fragment">
+                            <p class=alignLeft>In general, these convex relaxations give upper bounds which are loose. </p>
+                        </div>
+                        <div class="fragment">
+                            <p><b>Question: </b><i>When can we find a tight convex relaxation for these types of problems?</i></p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Optimization </h4>
+                        <p> <b>Example:</b> Brickman's Theorem</p>
+                        <div>
+                            <p>If we have one constraint in a QCQP over the sphere, the natural convex relaxation is tight. </p>
+                        </div>
+                        <div style="font-size:20px;display:flex">
+                            <div>
+                                \[
+                                \max \bigg\{x^{\intercal} A_0 x :
+                                \]
+                            </div>
+                            <div>
+                                \[
+                                x^{\intercal}A_1x = c_1
+                                \]
+                                <div style="color:blue"> \[x \in S^{n-1}\]   </div>
+                            </div>
+                            <div>
+                                 \[
+                                    \bigg\}=
+                                 \]
+                            </div>
+                            <div>
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle :
+                                \]
+                            </div>
+                            <div>
+                                \[
+                                \langle A_1, X \rangle = c_1
+                                \]
+                                <div style="color:red">\[\tr(X) = 1, X \succeq 0\]</div>
+                            </div>
+                            <div>
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <div class="fragment"><p>One way to see this is to use Brickman's theorem that $\{(x^{\intercal}A_0x,x^{\intercal}A_1x) : x \in S^{n-1} \} \subseteq \R^2$ is convex. </p></div>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <p class="alignLeft">
+                                Given a function $f : X \rightarrow \R^{k+1}$, we can define a (generalized) Lagrangian as a function of $x \in X$ and $t \in \R^{k+1}$:
+                                \[
+                                \mathcal{L}_f(x,t) := \langle t, f(x)\rangle.
+                                \]
+                            </p>
+                            <p class="fragment">
+                                We can think of $t$ as parameterizing a family of objective functions on $X$: 
+                                \[
+                                    \ell_t(x) = \mathcal{L}_f(x,t).
+                                \]
+                            </p>
+                        </div>
+                        <div class="fragment">
+                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in X\}$. </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in X\}$, where</p>
+                            \[
+                                \ell_t(x) = \mathcal{L}_f(x,t).
+                            \]
+
+                        </div>
+                        <div class="fragment">
+                            <img  src="maximizer.gif" width=300px />
+                            <p style="font-size:20px; margin-top:-10px"> Plot of $x^{\intercal}A_0^{\intercal}x + t x^{\intercal}A_1 x$ on stereographic projection of sphere </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <img  src="maximizer.gif" width=300px />
+                            <p style="font-size:20px; margin-top:-10px"> Plot of $x^{\intercal}A_0^{\intercal}x + t x^{\intercal}A_1 x$ on stereographic projection of sphere </p>
+                        </div>
+                        <div>
+                            <p class=alignLeft> In this example, it can be seen that this maximizer is continuous as a function of $t$. </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <img  src="maximizer.gif" width=300px />
+                            <p style="font-size:20px; margin-top:-10px"> Plot of $x^{\intercal}A_0^{\intercal}x + t x^{\intercal}A_1 x$ on stereographic projection of sphere </p>
+                        </div>
+                        <div>
+                            <p class=alignLeft> In this example, it can be seen that this maximizer is continuous as a function of $t$. </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <p> For simplicity, let $X = [-1,1]$ and let $f : X\rightarrow \R^2$ be $f(x) = ((1-x^2)^{1/4}, x)$.</p>
+                            <p> The Lagrangian is then $\mathcal{L}(x,t) = t_0(1-x^2)^{1/4}+t_1x$.</p>
+                            <div class="r-stack">
+                            <img  src="cont_opt_ex.png" width=500px />
+                            <div class=fragment>
+                            <img src="cont_opt_ex.gif" width=600px />
+                            </div>
+                            </div>
+                            <p class=fragment style="font-size:20px"> Plot of the maximizer as $t$ varies. </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <div>
+                            <p> Consider an alternative embedding of the interval into $\R^2$: $f(x) = (\sin(x)(1-\cos(x)), \cos(x)(1-\cos(x))$.</p>
+                            <p> The Lagrangian is then $\mathcal{L}(x,t) = (t_0\sin(x)+t_1 \cos(x))(1-\cos(x))$.</p>
+                            <div class="r-stack">
+                            <img  src="cont_opt_nonex.png" width=500px />
+                            <div class=fragment>
+                            <img src="cont_opt_nonex.gif" width=600px />
+                            </div>
+                            </div>
+                            <p class=fragment style="font-size:20px"> Plot of the maximizer as $t$ varies. Note that the nonconvexity occurs precisely when the maximizer becomes discontinuous </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> (Generalized) Lagrangians </h4>
+                        <h5> Definitions </h5>
+                        <div>
+                            <p class=alignLeft> A <b> maximizing section</b> associated to a function $f : X \rightarrow \R^{k+1}$ is a function $D : \R_{\ge 0}\times \R^{k} \rightarrow X$ so that for every $t \in  \R_{\ge 0}\times \R^{k}$, $D(t)$ is a maximizer of the function $\ell_t(x) = \mathcal{L}(x,t)$. </p>
+                        </div>
+                        <div class=fragment>
+                            <p class=alignLeft> A function $f : X\rightarrow \R^{k+1}$ is <b> continuously maximized </b> if there is a maximizing section which is continuous as a function of $t$. </p>
+                        </div>
+                    </section>
+                    <section>
+                        <div style="background:#E1E1E1; padding:10px">
+                            <b> Theorem </b>
+                            <p class=alignLeft> If $X$ is a compact metric space, and $f : X\rightarrow \R^{k+1}$ is <b> continuously maximized </b>, then the function $V_f(c)$ is concave. </p>
+                        </div>
+
+                        <div style="display:flex">
+                            <div style="flex:10%;padding-top:50px">
+                                \[
+                                V_f(c) := \max \bigg\{f_0(x) : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                f_1(x) = c_1,\dots,f_k(x) = c_k
+                                \]
+                                \[x\in X\]
+                            </div>
+                            <div style="flex:10%;padding-top:50px">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <p> <b>Example:</b> Brickman's Theorem</p>
+                        <div>
+                            <p>Consider once again the one constraint case of the QCQP: </p>
+                        </div>
+                        <div style="font-size:30px;display:flex">
+                            <div style="flex:30%;padding-top:30px">
+                                \[
+                                    V_f(c)=
+                                \]
+                            </div>
+                            <div style="flex:30%">
+                                \[
+                                \max \bigg\{x^{\intercal} A_0 x :
+                                \]
+                            </div>
+                            <div style="flex:30%">
+                                \[
+                                x^{\intercal}A_1x = c_1
+                                \]
+                                \[x \in S^{n-1}\]
+                            </div>
+                            <div style="flex:30%">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <div class="fragment"><p>The Lagrangian in this case is $x^{\intercal} (t_0 A_0 + t_1 A_1) x$: the maximum of the Lagrangian on the sphere is the eigenvector of $t_0 A_0 + t_1 A_1$ associated to the largest eigenvalue.</p></div>
+                        <div class="fragment"><p>When is this continuous?</p></div>
+                    </section>
+                    <section data-auto-animate>
+                        <p> <b>Example:</b> Brickman's Theorem</p>
+                        <p class=alignLeft>The <b>Von Neumann-Wigner noncrossing theorem</b> states that for almost all pairs of symmetric matrices $(A_0, A_1)$, every nonzero matrix in their span contains no eigenvalues with multiplicity greater than 1. </p>
+                        <p class="fragment alignLeft"> The eigenvectors of a matrix are continuous outside of the set of matrices with repeated eigenvalues. </p>
+                        <p class="fragment alignLeft"> So <b>for almost all pairs $(A_0, A_1)$</b> the function $f(x) = (x^{\intercal} A_0 x, x^{\intercal} A_1 x)$ is continuously maximized. </p>
+                        <p class="fragment alignLeft"> Combining this with some elementary homotopy theory gives Brickman's theorem that the image of the sphere under any such pair of quadratic functions is a convex set. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <p> Other examples</p>
+                        <p class=alignLeft><b>The same proof works for the 1-constraint case of each of the aforementioned optimization problems </b></p>
+                        <div style="display:flex; font-size:20px">
+                            <div style="flex:10%">
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \langle A_1, X\rangle = c_1
+                                \]
+                                \[x\in M_{\lambda}\]
+                            </div>
+                            <div style="flex:10%">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <div style="display:flex; font-size:20px">
+                            <div style="flex:10%">
+                                \[
+                                \max \bigg\{\langle A_0, X \rangle : 
+                                \]
+                            </div>
+                            <div style="flex:10%">
+                                \[
+                                \langle A_1, X\rangle = c_1
+                                \]
+                                \[x\in M_{\sigma}^{n,m}\]
+                            </div>
+                            <div style="flex:10%">
+                                 \[
+                                    \bigg\}
+                                 \]
+                            </div>
+                        </div>
+                        <p> Convexity was also shown in (Li-Tam 2000) </p>
+                    </section>
+                    <section data-auto-animate>
+                        <p><b> Higher Dimensional Examples</b></p>
+                        <p class=alignLeft>Concavity does not hold in general for larger numbers of constraints (for good reason!)</p>
+                        <p><i>Are there any higher dimensional examples? </i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <p><b> Higher Dimensional Examples</b></p>
+                        <p class=alignLeft>A vector subspace of the vector space of $n\times n$ symmetric matrices is said to be <b>$n-w$-weakly noncrossing</b> if the $w$ largest eigenvalues of every nonzero matrix in that subspace are nondegenerate (i.e. have one dimensional eigenspaces). </p>
+                        <p class=alignLeft>A 0-weakly noncrossing subspace is simply called noncrossing.</p>
+                        <p class=alignLeft>Almost every 2 dimensional subspace is noncrossing by Von Neumann-Wigner.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <p><b> Higher Dimensional Examples</b></p>
+                        <div style="background:#E1E1E1; padding:10px">
+                            <b> Theorem (Friedland, Robbin, Sylvester 1984) </b>
+                            <p class=alignLeft> A $d$ dimensional noncrossing subspace of the space of $n\times n$ symmetric matrices exists if and only if $d$ is at most $\sigma(n)$ where
+                            \[
+                            \sigma(n) = \begin{cases} 2 \text{ if }n \not \in \{-1,0,1\} \mod 8\\
+                                            \rho(4n) \text{ otherwise}
+                                            \end{cases},
+                            \]
+                            where $\rho(n)$ is the Radon-Hurwitz number: if $n = 2^{4a + b}c$, where $a,b,c$ are integers with $c$ odd and $0 \le b \le 3$, then $\rho(n) = 8a + 2^b$.
+                            </p>
+                        </div>
+                        <p> $n-1$-weakly noncrossing subspaces of dimension $d$ exist whenever $d$ is at most $n$ (Friedland-Loewy 1976).</p>
+                    </section>
+                    <section data-auto-animate>
+                        <p><b> Higher Dimensional Examples</b></p>
+                        <div style="background:#E1E1E1; padding:10px">
+                            <b> Theorem </b>
+                            <p class=alignLeft> 
+                            If $A_0, \dots, A_k$ span a $w$-weakly noncrossing subspace, and $\lambda_i = 0$ for $i \ge n-w$, then $f(X) = (\tr(A_0X), \dots, \tr(A_kX)) $ is continuously maximized on $M_{\lambda}$.
+                            </p>
+                        </div>
+                        <p>Convexity in the case of QCQPs over the sphere was proven in (Gutkin-Jonckheere-Karow 2004)</p>
+                        <p>Analogous results hold for the singular value analogues. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <p><b> Higher Dimensional Examples</b></p>
+                        <p> <b>Question:</b> What is the probability that a random $d$-dimensional subspace is $n-1$-weakly noncrossing for fixed $d \le n$? </p>
+                        <p> <b>Question:</b> If a subspace is `close' to being weakly noncrossing, what does that imply about convexity? </p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h4> Relationship with Homotopy Continuation </h4>
+                        <p><i>Can we use continuous maximization to solve these constrained optimization problems? </i></p>
+                        <p class="fragment alignLeft">An oracle for minimizing the Lagrangian $\mathcal{L}(x,t)$ can be used to produce a separation oracle for the convex hull of $f(X)$, so convex optimization techniques can be used to do constrained optimization if we can minimize the Lagrangian efficiently.</p>
+                    </section>
+                    <section>
+                        <h4> Relationship with Homotopy Continuation </h4>
+                        <p><i>Can we use continuous maximization to minimize $\ell_t(x) = \mathcal{L}(x,t)$? </i></p>
+                        <p class="fragment alignLeft">Suppose for now that $X$ is a manifold, and we want an algorithm that is analogous in performance to a first order method, but which uses the fact that the maximizer of $\ell_t(x)$ is a continuous function of $t$.</p>
+                        <p class="fragment alignLeft">Homotopy continuation is a method, usually used to solve polynomial systems, that at a high level starts with some initial system and then varying the parameters of that system slowly while tracking the solutions to the system over time.</p>
+                    </section>
+                    <section>
+                        <h4> Relationship with Homotopy Continuation </h4>
+                        <p><i>Can we use continuous maximization to minimize $\ell_t(x) = \mathcal{L}(x,t)$? </i></p>
+                        <p>Along the lines of homotopy continuation, we can think about the following algorithm:
+                        <div style="background:#F3F3F3">
+                        <ol>
+                            <li> <i> Input</i> A Lagrangian $\mathcal{L}(x,t)$, an initial $t_0$, a maximizer $x_0$ of $\ell_{t_0}(x)$, and a target $t_1$.</li>
+                            <li> Choose time steps $t_{1/N}$, $t_{2/N}$, \dots, $t_{N-1 / N}$.</li>
+                            <li> For $i = 1, \dots, N$, starting at $x_{i-1/N}$, apply gradient descent until we arrive at an estimate $x_{i/N}$.</li>
+                        </ol>
+                        </div>
+                        <p> If the maximizer is Lipschitz as a function of $t$, and also, the local minima of $\ell_{t_i}$ are well separated, we expect this to converge. </p>
+                        <p class=fragment> Let's try this on a new problem!</p>
+                    </section>
+                    <section>
+                        <h4> Unbalanced Procrustes Problems</h4>
+                        <div style="display:flex">
+                        <p>Given a pair $U \in \R^{n \times d}$, and $V \in \R^{m \times d}$ with $n &gt; m$, we want to minimize
+                        \[
+                        \|U X - V\|^2_2
+                        \]
+                        over $X \in \St^{n,m}$ satisfies $X^{\intercal}X = I$.
+                        </p>
+                        <img width=400px src="UPP_ex.gif"/>
+                        </div>
+                        <p> Both the natural SDP relaxations for this problem and Riemannian gradient descent with random initialization fail to find the global minimum for this problem. </p>
+                    </section>
+                    <section>
+                        <h4> Unbalanced Procrustes Problems</h4>
+                        <p> We can rename $A = -VV^{\intercal} \in \R^{n\times n}_{sym}$ and $B = 2 V^{\intercal}W \in \R^{n \times m}$, and rewrite the problem as
+                        \[
+                        \max \{\tr(A XX^{\intercal}) + \tr(B^{\intercal}X) : X \in \St^{n,m}\}.
+                        \]
+                        </p>
+                        <div style="background:#E1E1E1; padding:10px">
+                            <b> Conjecture </b>
+                            <p class=alignLeft> 
+                            For all $n, m$ and all  but a set of measure zero of pairs $A \in \R^{n\times n}_{sym}$ and $B \in \R^{n \times m}$, the function 
+                            \[
+                                f(X) = (\tr(A XX^{\intercal}), \tr(B^{\intercal}X))
+                            \]
+                            is continuously maximized on $\St^{n,m}$.
+                            </p>
+                        </div>
+                        <p>We can show this when $(n, m) = (3,2)$ or when $m =2$, but not in general.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>The Projection Profile</h3>
+                        <p>
+                        We can think of the two terms in the objective as separate entities: i.e. look at the set of possible pairs
+                        \[
+                            P_{A,B} = \{(\langle A, XX^{\intercal} \rangle, \langle B, X\rangle) : X \in \St^{n,m}\} \subseteq \R^2.
+                        \]
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>The Projection Profile for $(3,2)$</h3>
+                        <div style="display:flex; flex-wrap: wrap;">
+                            <img src="profile_32_1.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_32_2.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_32_3.png" style="flex:30%; margin=10px" width="300px"/>
+                            <br/>
+                            <img src="profile_32_4.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_32_5.png" style="flex:30%; margin=10px" width="300px"/>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>The Projection Profile for $(4,2)$</h3>
+                        <div style="display:flex">
+                            <img src="profile_42_1.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_42_2.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_42_3.png" style="flex:30%; margin=10px" width="300px"/>
+                        </div>
+                        <p> Showing only top half for space. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>The Projection Profile for $(4,3)$</h3>
+                        <div style="display:flex">
+                            <img src="profile_43_1.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_43_2.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_43_3.png" style="flex:30%; margin=10px" width="300px"/>
+                        </div>
+                        <p> Showing only top half for space. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3>The Projection Profile for $(4,3)$</h3>
+                        <div style="display:flex">
+                            <img src="profile_43_1.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_43_2.png" style="flex:30%; margin=10px" width="300px"/>
+                            <img src="profile_43_3.png" style="flex:30%; margin=10px" width="300px"/>
+                        </div>
+                        <p> Showing only top half for space. </p>
+                    </section>
+                    <section>
+                        <h3> Results of Numerical Algorithms </h3>
+                        <p style="font-size:20px" class=alignLeft> We generated 1000 random pairs $(A, B)$ (with iid Gaussian entries) for different values of $(n,m)$, and then ran the homotopy continuation algorithm (HC), compared it to the result of a natural SDP relaxation and gradient descent with random initialization (GD). </p>
+                        <table style="font-size:20px">
+                          <tr>
+                            <td>$(n,m)$</td>
+                            <td>Average $\frac{\text{HC}}{\text{SDP}}$</td>
+                            <td>Average $\frac{\text{GD}}{\text{SDP}}$</td>
+                            <td>Minimum $\frac{\text{HC}}{\text{SDP}^*}$</td>
+                            <td>Minimum $\frac{\text{HC}}{\text{GD}}$</td>
+                          </tr>
+                          <tr>
+                            <td>Eating Habits</td>
+                            <td>Eats everyone's leftovers</td>
+                            <td>Nibbles at food</td>
+                            <td>Hearty eater</td>
+                            <td>Will eat till he explodes</td>
+                          </tr>
+                        </table>
+
+                    </section>
+                </section>
+            </div>
+
+		</div>
+
+		<script src="reveal.js"></script>
+		<script src="math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							St: '\\text{St}',
+							tr: '\\text{tr}',
+							E: '\\mathbb{E}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+            Reveal.addEventListener( 'drawCurve', function() {
+                element = document.getElementById("curveDrawing");
+                element.classList.add("path");
+            } );
+		</script>
+
+	</body>
+</html>
