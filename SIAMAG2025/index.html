@@ -81,7 +81,7 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Optimization </h4>
-                        <p class=alignLeft> For a topological space $X$ and a continuous function $f : X \rightarrow \R^{k+1}$, and $c \in \R^{k}$,
+                        <p class=alignLeft> For a topological space $\mathcal{X}$ and a continuous function $f : \mathcal{X} \rightarrow \R^{k+1}$, and $c \in \R^{k}$,
                         <div style="display:flex">
                             <div style="flex:10%;padding-top:50px">
                                 \[
@@ -92,7 +92,7 @@
                                 \[
                                 f_1(x) = c_1,\dots,f_k(x) = c_k
                                 \]
-                                \[x\in X\]
+                                \[x\in \mathcal{X}\]
                             </div>
                             <div style="flex:10%;padding-top:50px">
                                  \[
@@ -297,26 +297,26 @@
                         <h4> (Generalized) Lagrangians </h4>
                         <div>
                             <p class="alignLeft">
-                                Given a function $f : X \rightarrow \R^{k+1}$, we can define a (generalized) Lagrangian as a function of $x \in X$ and $t \in \R^{k+1}$:
+                            Given a function $f : \mathcal{X} \rightarrow \R^{k+1}$, we can define a (generalized) Lagrangian as a function of $x \in \mathcal{X}$ and $t \in \R^{k+1}$:
                                 \[
                                 \mathcal{L}_f(x,t) := \langle t, f(x)\rangle = \sum_{i=0}^{k} t_i f_i(x).
                                 \]
                             </p>
                             <p class="fragment">
-                                We can think of $t$ as parameterizing a family of objective functions on $X$: 
+                            We can think of $t$ as parameterizing a family of objective functions on $\mathcal{X}$: 
                                 \[
                                     \ell_t(x) = \mathcal{L}_f(x,t).
                                 \]
                             </p>
                         </div>
                         <div class="fragment">
-                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in X\}$. </p>
+                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in \mathcal{X}\}$. </p>
                         </div>
                     </section>
                     <section data-auto-animate>
                         <h4> (Generalized) Lagrangians </h4>
                         <div>
-                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in X\}$, where</p>
+                            <p> For each value of $t \in \R^{k+1}$, we get a different maximization problem, $\max \{\ell_t(x) : x\in \mathcal{X}\}$, where</p>
                             \[
                                 \ell_t(x) = \mathcal{L}_f(x,t).
                             \]
@@ -350,7 +350,7 @@
                     <section data-auto-animate>
                         <h4> (Generalized) Lagrangians </h4>
                         <div>
-                            <p> For simplicity, let $X = [-1,1]$ and let $f : X\rightarrow \R^2$ be $f(x) = ((1-x^2)^{1/4}, x)$.</p>
+                            <p> For simplicity, let $\mathcal{X} = [-1,1]$ and let $f : \mathcal{X}\rightarrow \R^2$ be $f(x) = ((1-x^2)^{1/4}, x)$.</p>
                             <p> The Lagrangian is then $\mathcal{L}(x,t) = t_0(1-x^2)^{1/4}+t_1x$.</p>
                             <div class="r-stack">
                             <img  src="cont_opt_ex.png" width=500px />
@@ -379,16 +379,16 @@
                         <h4> (Generalized) Lagrangians </h4>
                         <h5> Definitions </h5>
                         <div>
-                            <p class=alignLeft> A <b> maximizing section</b> associated to a function $f : X \rightarrow \R^{k+1}$ is a function $D : \R_{\ge 0}\times \R^{k} \rightarrow X$ so that for every $t \in  \R_{\ge 0}\times \R^{k}$, $D(t)$ is a maximizer of the function $\ell_t(x) = \mathcal{L}(x,t)$. </p>
+                            <p class=alignLeft> A <b> maximizing section</b> associated to a function $f : \mathcal{X} \rightarrow \R^{k+1}$ is a function $D : \R_{\ge 0}\times \R^{k} \rightarrow \mathcal{X}$ so that for every $t \in  \R_{\ge 0}\times \R^{k}$, $D(t)$ is a maximizer of the function $\ell_t(x) = \mathcal{L}(x,t)$. </p>
                         </div>
                         <div class=fragment>
-                            <p class=alignLeft> A function $f : X\rightarrow \R^{k+1}$ is <b> continuously maximized </b> if there is a maximizing section which is continuous as a function of $t$. </p>
+                            <p class=alignLeft> A function $f : \mathcal{X}\rightarrow \R^{k+1}$ is <b> continuously maximized </b> if there is a maximizing section which is continuous as a function of $t$. </p>
                         </div>
                     </section>
                     <section>
                         <div style="background:#E1E1E1; padding:10px">
                             <b> Theorem </b>
-                            <p class=alignLeft> If $X$ is a compact metric space, and $f : X\rightarrow \R^{k+1}$ is <b> continuously maximized </b>, then the function $V_f(c)$ is concave. </p>
+                            <p class=alignLeft> If $\mathcal{X}$ is a compact metric space, and $f : \mathcal{X}\rightarrow \R^{k+1}$ is <b> continuously maximized </b>, then the function $V_f(c)$ is concave. </p>
                         </div>
 
                         <div style="display:flex">
@@ -401,7 +401,7 @@
                                 \[
                                 f_1(x) = c_1,\dots,f_k(x) = c_k
                                 \]
-                                \[x\in X\]
+                                \[x\in \mathcal{X}\]
                             </div>
                             <div style="flex:10%;padding-top:50px">
                                  \[
