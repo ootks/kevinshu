@@ -1,0 +1,333 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={John Doe's CV},
+    pdfauthor={John Doe},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in September 2024}\hspace{\widthof{Last updated in September 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\setlist[description]{font=\normalfont}
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont Kevin Shu\\
+        \vspace{5 pt}
+        \normalsize
+        \mbox{kshu@caltech.edu} \hspace{5 pt}%
+        \mbox{\hrefWithoutArrow{https://kevinshu.me}{kevinshu.me}}%
+    \end{header}
+\section{Work}
+\begin{description}
+    \item[2024-\qquad] {\bf Postdoctoral Researcher} (Computing and Mathematical Sciences),\\ {\hspace{0.35in} \bf California Institute of Technology}, Pasadena, CA
+\end{description}
+\section{Education} 
+\begin{description}
+    \item[2019-2024] {\bf PhD.,} Algorithms Combinatorics and Optimization,\\
+        \hspace{0.35in} {\bf Georgia Institute of Technology,} Atlanta, GA
+ 
+ \begin{itemize} \itemsep -2pt  % reduce space between items
+ \item Advised by Grigoriy Blekherman in the Department of Mathematics.
+ \end{itemize}
+
+    \item[2014-2018] {\bf B.S.}, Mathematics, Computer Science,
+\\ \hspace{0.35in} {\bf California Institute of Technology}, Pasadena, CA
+\end{description}
+
+As is traditional in pure mathematics, authors of publications are listed alphabetically, and author ordering does not reflect the contributions of any coauthors.
+\section{Publications}
+\begin{description}
+    \item[\emph{Debiasing Polynomial and Fourier Regression}] (with Chris Camaño and Raphael A. Meyer), accepted at SOSA 2026.\\
+
+    \item[\emph{Composing Optimized Stepsize Schedules for Gradient Descent}] (with Ben Grimmer and Alex L. Wang), to appear in Mathematics of Operations Research in 2025.\\
+
+    \item[\emph{A Semidefinite Hierarchy for the Expected Independence Number of a Random Graph}] (with Diego Cifuentes, and Alejandro Toriello), Optimization Letters, 2025\\
+
+    \item[\emph{Accelerated Objective Gap and Gradient Norm Convergence for Gradient Descent via Long Steps}] (with Ben Grimmer and Alex L. Wang), Informs Journal on Optimization, 2025\\
+
+    \item[\emph{Symmetric Hyperbolic Polynomials}] (with Greg Blekherman and Julia Lindberg), Journal of Pure and Applied Algebra, 2025\\
+
+    \item[\emph{Hidden convexity, optimization, and algorithms on rotation matrices  }] (with Akshay Ramachandran and Alex L. Wang), Mathematics of Operations Research, 2024\\
+
+    \item[\emph{Linear Principal Minor Polynomials: Hyperbolic Determinantal Inequalities and Spectral Containment }] (with Greg Blekherman, Mario Kummer, Raman Sanyal and Shengding Sun), International Mathematics Research Notices, 2022\\
+
+    \item[\emph{Hyperbolic Relaxation of k-Locally Positive Semidefinite Matrices}] (with Grigoriy Blekherman, Santanu Dey and Shengding Sun), SIAM Journal on Optimization, 2022\\
+
+    \item[\emph{Sums of Squares and Sparse Semidefinite Programming}] (with Grigoriy Blekherman),
+SIAM Journal for Applied Algebra and Geometry, 2021\\
+
+    \item[\emph{Syntactic Structures and Code Parameters}] (with Matilde Marcolli), Mathematics in Computer Science, 2017
+\end{description}
+
+\section{Preprints}
+\begin{description}
+    \item[\emph{Lagrangian Dual Sections: A Topological Perspective on Hidden Convexity}] (with Venkat Chandrasekaran, Tim Duff, Jose Israel Rodriguez), \href{https://arxiv.org/abs/2510.06112}{arXiv:2510.06112}, in submission
+
+    \item[\emph{Beyond Minimax Optimality: A Subgame Perfect Gradient Method}] (with Ben Grimmer and Alex Wang), \href{https://arxiv.org/abs/2412.06731}{arXiv:2412.06731}, in revision at Mathematical Programming
+
+    \item[\emph{Accelerated Gradient Descent via Long Steps}] (with Ben Grimmer and Alex Wang), \href{https://arxiv.org/abs/2309.09961}{arXiv:2309.09961}, 2023
+
+    \item[\emph{Quadratic Programming with Sparsity Constraints via Polynomial Roots}], 
+\href{https://arxiv.org/abs/2208.11143}{arxiv:2208.11143}, 2022
+\end{description}
+
+\section{Talks and Presentations Given}
+{\bf  Hidden Convexity,} presented at ICCOPT, 2025
+
+{\bf  Hidden Convexity and the Rotation Group,} presented at the SIAM Conference on Applied Algebraic Geometry, 2025
+
+{\bf  Algebraic Methods in Convex Optimization,} presented at the UCLA Math Colloquium, 2025
+
+{\bf  Semialgebraic Methods in Convex Optimization,} presented at the Joint Mathematics Meetings, 2025 
+
+{\bf  Hidden convexity, optimization, and algorithms on rotation matrices  ,} presented at the Informs Optimization Society conference, 2024 
+
+{\bf  Symmetric Hyperbolic Polynomials,} presented at the SIAM Conference on Applied Algebraic Geometry, 2023 
+
+{\bf  Sparse Regression and PCA via Polynomial Roots,} presented at the SIAM Conference on Optimization, 2023 
+
+{\bf  Hyperbolicity Cones and Sparse Optimization,} presented at the MIT LIDS seminar, 2023 
+
+{\bf  Symmetrically Hyperbolic Polynomials,} presented at the \"Oberwolfach Meeting on New Directions in Algebraic Geometry, 2023 
+
+{\bf  Sparse Quadratic Programs via Polynomial Roots,} presented at the Carnegie Mellon University ACO seminar, 2023 
+
+{\bf  Sparse Quadratic Programs via Polynomial Roots,} presented at the Centrum Wiskunde and Informatica Networks and Optimization seminar, 2022 
+
+{\bf  Approximating Sparse Semidefinite Programs,} presented at the INFORMS conference, 2021 
+
+{\bf  Poster on Sparse Semidefinite Programs,} presented at the MIP and IPCO conferences, 2021 
+
+{\bf  Causal Inference and Optimization,} presented at the ACO Student Seminar, 2021
+
+{\bf  Lightning Talk on Hyperbolic Relaxations of Locally-PSD Matrices ,} presented at the ICERM - Symmetry, Randomness, and Computations in Real Algebraic Geometry.
+, 2020
+
+
+
+\section{Academic Honors} 
+2025 Best Thesis Award for the Georgia Tech Mathematics Department\\
+2022 ACO-ARC Fellowship\\
+2022 ARCS Foundation award\\
+2021 Honorable Mention at the MIP Conference Poster Competition\\
+2021 Honorable Mention at the IPCO Conference Poster Competition\\
+2021 David L. Brown Fellowship from the Georgia Tech Math Department\\
+2018 National Science Foundation Graduate Research Fellowship Recipient\\
+2018 Georgia Institute of Technology President's Fellowship Recipient
+
+\section{Conference Organization}
+{\bf Coorganizer for the Session on Algebraic Methods in Optimization,} ICCOPT    \\       July 2025
+
+{\bf Coorganizer for the Georgia Tech Student Algebra Seminar,} Georgia Tech, GA    \\       August 2022-December 2023
+
+{\bf Coorganizer for the Special Session on Convexity,} SIAM Conference on Applied Algebraic Geometry, Georgia Tech, GA    \\       July 2023
+
+{\bf Organizer for the AMS Special Session on Algebraic Methods in Algorithms,} Spring 2023 Southeastern Section Meeting of the AMS, Georgia Tech, GA    \\       March 2023
+
+\section{Research Experience}
+{\bf Visiting Scholar,} Max-Planck Institute for Mathematics in the Sciences, Leipzig, Germany \\ Summer 2022
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Working under the supervision of Rainer Sinn and Bernd Sturmfels.
+\end{itemize}
+{\bf Research Assistantship,} Georgia Tech, Atlanta, GA \\ Summer 2020
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Funded in part by NSF grant DMS-1901950 and the ACO department.
+\item Advised by Grigoriy Blekherman.
+\end{itemize}
+
+\section{Outreach and Community Service} 
+       {\bf Representative for the Diversity, Equity, and Inclusion committee,} Georgia Tech, GA    \\         2022-2023
+
+       {\bf First Year Mentor,} Georgia Tech, Atlanta, Georgia     \\         2020-2021 
+
+       {\bf Directed Reading Program Mentor,} Georgia Tech, Atlanta, Georgia     \\         2020-2021 
+
+       {\bf Senior Class President,} Caltech, Pasadena, CA    \\         2018-2019 
+
+		{\bf Board of Control Secretary,} Caltech \\   2017
+
+\section{Teaching Experience}
+{\bf Differential Equations Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Aug 2022-Dec 2022
+
+{\bf Differential Equations Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Aug 2021-Dec 2021
+
+{\bf Number Theory Lecture Assistant,} Georgia Tech, Atlanta, GA \\ Jan 2021-May 2021
+
+{\bf Differential Equations Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Jan 2020-May 2020
+
+{\bf Linear Algebra Teaching Assistant,} Georgia Tech, Atlanta, GA \\ Aug 2019-Dec 2019
+
+{\bf Advanced Algorithms Teaching Assistant,} Caltech, Pasadena, CA \\ Jan 2018-Mar 2018
+
+{\bf Linear Algebra Teaching Assistant,} Caltech, Pasadena, CA \\ Sep 2017-Dec 2017
+
+{\bf Introduction to Algorithms Teaching Assistant,} Caltech, Pasadena, CA \\ Jan 2017-Mar 2017
+
+ \section{Work\\ Experience}
+ {\bf Full-time Software Engineer,} Google, Mountain View, CA \\ August 2018-July 2019
+ \begin{itemize} \itemsep -2pt  % reduce space between items
+ \item Full stack web development for a data labelling service (Crowd-Compute)
+ \item Lead an initiative to update authentication/authorization to more modern technologies.
+ \item Added a major feature for tracking work in the system.
+ \item Managed production releases and infrastructure issues.
+ \item Worked with C++, Java.
+ \end{itemize}
+ 
+{\bf Software Engineering Intern,} Google, Mountain View, CA \\ Aug 2018-Jul 2019
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Gathered data from online sources by parsing Reddit pages.
+\item Built a machine learning model to provide movie recommendations.
+\item Worked with C++, Python.
+\end{itemize}
+
+\end{document}
