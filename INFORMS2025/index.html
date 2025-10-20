@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title> Hidden Convexity and the Rotation Group </title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.css">
+		<link rel="stylesheet" href="solarized.css" id="theme">
+        <style>
+            p {font-size: 30px}
+            li {font-size: 30px}
+            .alignLeft {text-align:left;}
+        </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+                <section>
+                    <h3> Modern Convex Optimization: Hidden Convexity</h3>
+                    <div>
+                        <img src="sphere_proj.png" height="300" width="400" />
+                    </div>
+                    <div style="display:flex">
+                        <p style="font-size:30px;flex:50%;padding-top:25px"> Kevin Shu </p> 
+                        <div  style="flex:50%">
+                        <img src="caltech.png" width=200px />
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> Why Convex Optimization? </h3>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Why Convex Optimization? </h3>
+                        <ul>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Global Optimality Guarantees </p></li>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Fast, Well Established Algorithms </p></li>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Robust Theory </p></li>
+                        </ul>
+                        <p class="fragment" style="color:red; font-size:40px"> But not all optimization problems are convex! </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> A Cartographic View of Optimization</h3>
+                        <p> We want to solve some problem in engineering or mathematics, and can formulate it as an optimization problem. </p>
+                        <img height=300px src="landscape.png"/>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> A Cartographic View of Optimization</h3>
+                        <p> We want to solve some problem in engineering or mathematics, and can formulate it as an optimization problem. </p>
+                        <img height=300px src="Aged Map on Weathered Surface.png"/>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> A Cartographic View of Optimization</h3>
+                        <p> There may be other formulations of the problem that result in better maps. </p>
+                        <img height=300px src="Aged Topographic Map on Earthy Surface.png"/>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h4> Manifestations of hidden convexity in my work </h4>
+                        <ul>
+                            <li> Design of first-order methods <br> <i>How can we automate finding good stepsizes for gradient descent?</i></li>
+                            <br>
+                            <li> Hyperbolic polynomials for fundamental linear algebra <br> <i>Debiasing polynomial regression with eigenvalues of random matrices</i> </li>
+                            <br>
+                            <li> Combinatorial optimization  <br> <i>SDP bounds for expected clique numbers of random graphs</i></li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> Projection Simplicity: Convexifying Manifold Optimization<sup>1</sup>  </h3>
+
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, S. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <p style="text-align:left"> Many basic optimization problems can be expressed as <i>constrained</i> optimization problems over manifolds. </p>
+                        <div class="fragment" style="display:flex">
+                            <div style="background-color:lightgray; padding:30px;">
+                                <h4 style="text-align:left"> Examples: </h4>
+                                <ul >
+                                    <li><p> Quadratically Constrained Quadratic Programming (QCQP) </p></li>
+                                    <li><p> Stiefel Manifold Optimization </p></li>
+                                    <li><p> Orthogonal Procrustes Problems </p></li>
+                                </ul>
+                            </div>
+                            <img width=300px src="rotating surface.gif"/>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <div class="fragment" style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                            <p>
+                                $$\max \{x^{\intercal}A_0x : x^{\intercal}A_1x = c_1, \dots,  x^{\intercal}A_kx = c_k\}$$
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                            <p>
+                            $$\max \{\tr(A_0X) : \tr(A_1X) = c_1, \dots,  \tr(A_kX) = c_k, X =xx^{\intercal}\}$$
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                            <p>
+                            $$\max \{\tr(A_0X) : \tr(A_1X) = c_1, \dots,  \tr(A_kX) = c_k, \color{red}{X \succeq 0}\}$$
+                            </p>
+                        </div>
+                        <p> Question: When are these relaxations tight?</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Example of Hidden Convexity</h4>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Brickman's Theorem </h4>
+                            <p>
+                            $\{(x^{\intercal}A_0x, x^{\intercal}A_1x) : \|x\|=1\} \subseteq \R^2$ is convex.
+                            </p>
+                        </div>
+                        <br>
+                        <!--<video controls><source src="QuadraticSphereMap2.mp4" type="video/mp4"></video>-->
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Example of Hidden Convexity</h4>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Brickman's Theorem </h4>
+                            <p>
+                            $\{(x^{\intercal}A_0x, x^{\intercal}A_1x) : \|x\|=1\} \subseteq \R^2$ is convex.
+                            </p>
+                        </div>
+                        <br>
+                        <div style="background-color:lightgray; padding:30px;" class=fragment>
+                            <h4 style="text-align:left;padding-left:50px"> Corollary</h4>
+                            <p>
+                                Any homogeneous QCQP with two constraints has a tight convex relaxation.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Convex Images of Maps</h4>
+                        <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^k$), and $f : M \rightarrow \R^k$ is a continuous function, when is $f(M)$ convex?</i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Convex Images of Maps</h4>
+                        <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^k$), and $f : M \rightarrow \R^k$ is a continuous function, when is $f(M)$ convex?</i></p>
+                        <p class=alignLeft>We can give this an answer in terms of the Lagrangian 
+                        $$ \mathcal{L}(t, x) = \langle t, f(x)\rangle.$$</p>
+                        <div style="background-color:lightgray; padding:30px;" class=fragment>
+                            <h4 style="text-align:left;padding-left:50px">Theorem (informal)</h4>
+                            <p>
+                                Suppose that there is a continuous function $D : \R^k \rightarrow M$ so that $D(t)$ maximizes the function $\mathcal{L}(t, x)$ for every $t \in \R^k \setminus 0$. Then $f(M)$ is convex.
+                            </p>
+                        </div>
+                        <p class="alignLeft fragment">We call such a $D$ a <i>Lagrangian Dual Section.</i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Convex Images of Maps</h4>
+                        <p class=alignLeft> Implications for </p>
+                        <ul>
+                            <li> Stiefel manifold optimization </li>
+                            <li> QCQPs</li>
+                            <li> Inverse eigenvalue problems</li>
+                        </ul>
+                        <p class=alignLeft> Also related to Kostant convexity theorem.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> An example from Steifel Manifold</h4>
+                        <p class=alignLeft> Stiefel manifold - orthogonal projection matrices</p>
+                        <p class=alignLeft> \[\St^{n,m} = \{X \in \R^{n\times m} : X^{\intercal}X = I\}\]</p>
+                        <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times m}$ containing no singular matrix (i.e. matrix of rank $< m$), then 
+                           \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \St^{n,m} \}=\] </p>
+                        <p>\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, \color{red}{\sigma_{max}(X) \le 1}\}.\] </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Projection Simplicity</h4>
+                        <p class=alignLeft><b> Optimization problems, even over complicated domains, often only depend on a few salient features of what you are optimizing. </b></p>
+                        <p class=alignLeft> Focusing on these features make it is possible to find simpler (convex) formulations of the problem. </p>
+                        <p class="alignLeft fragment"> How general is this phenomenon; can it be discovered and exploited automatically?</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Path-tracking Algorithms </h4>
+                        <div style="display:flex">
+                            <div>
+                                <p class=alignLeft> Continuity of optimal solutions suggests <i>path-tracking</i> approach to solve them. </p>
+                                <p class=fragment> <b>Start at a known solution to one of these problems, and then vary the Lagrange multipliers until we reach an optimal solution.</b> - CHORD algorithm </p>
+                                <p class="fragment alignLeft"> Analogous methods largely successful in convex optimization. </p>
+                            </div>
+                            <img src="path_trackinh.gif"/>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Unbalanced Procrustes Problems</h4>
+                        <p class=alignLeft> Given a high dimensional point cloud $U$, and a low dimensional point cloud $V$, find a rotation/projection that best maps $U$ to $V$. </p>
+                        <p>
+                        $$ \min_{X^{\intercal}X = I} \|UX - V\|^2.$$
+                        </p>
+                        <div style="display:flex">
+                            <div style="padding-right:50px">
+                            <video controls autoplay height=300px><source src="rotating_bunny.mp4" type="video/mp4"></video>
+                            <p>A 3D model with different rotations/projections </p>
+                            </div>
+                            <div>
+                            <img height=250px src="noisy_proj_background.png"/>
+                            <p> A fixed noisy projection </p>
+                            </div>
+                        </div>
+
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Unbalanced Procrustes Problems</h4>
+                        <p class=alignLeft> We can view this as a Lagrangian problem:
+                        $$\|UX - V\|^2 = \|AX\|^2 + \langle B, X\rangle +  C,$$
+                        where $A, B$ can be defined in terms of $A$ and $B$.
+                        </p>
+                        <p class="alignLeft">
+                        We want to solve
+                        $$\min \lambda \|AX\|^2 + \langle B, X\rangle,$$
+                        when $\lambda = 1$. When $\lambda = 0$, this is an ordinary Procrustes problem.
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Unbalanced Procrustes Problems</h4>
+                        <img src="bunny_example.png"/>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Summary</h4>
+                        <ul class=alignLeft>
+                            <li> Topological properties of the Lagrangian imply convexity </li>
+                            <li> Globally optimal path tracking algorithms </li>
+                        </ul>
+                        <div class=fragment style="padding:30px">
+                        <h4> Future Directions </h4>
+                        <ul class=alignLeft>
+                            <li> Finding hierarchies of relaxations <span style="padding-left:290px"></span> </li>
+                            <li> Approximate convexity analogues</li>
+                        </ul>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3> Other work</h3>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> Automatic Design of Algorithms<sup>1, 2, 3</sup>  </h3>
+
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i></p>
+                        <p style="font-size:30px; text-align:left">2. <i>Composing optimized stepsize schedules for gradient descent</i></p>
+                        <p style="font-size:30px; text-align:left">3. <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method</i></p>
+                        <p>All joint with A Wang and B Grimmer</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Long step size gradient methods</h4>
+                        <ul>
+                            <li> Can you make gradient descent asymptotically faster on convex functions just by tuning the step sizes longer? <span class="fragment" style="color:red">Yes! The required step sizes are interesting.</span> </li>
+                        </ul>
+                        <embed class="fragment" src="n50.pdf#toolbar=0&navpanes=0&scrollbar=0" width="500" height="375" type="application/pdf">
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Game theoretically motivated optimization </h4>
+                        <div style="display:flex;margin-left:-100px">
+                        <ul>
+                            <li> First order optimization is like a <b>game</b> being played between an optimizer and an adversarial first order oracle.  </li>
+                            <li> An algorithm is like a strategy for this game. </li>
+                            <li> A minimax optimal algorithm is part of a <b>Nash equillibrium</b> for the game. </li>
+                            <li class="fragment"> Stronger equillibrium notions exist, like <b>subgame perfect equillibrium</b>, which also require the algorithm to be optimal in every iteration of the game. </li>
+                        </ul>
+                        <img class=fragment height=300px src="medAccur_rand.png"/>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> First order methods  </h3>
+
+                        <p> <b>Problem:</b> minimize  a function $f$ using a <i>first order oracle</i>, which allows you to compute the gradients/values of $f$ at points of your choosing.</p>
+                        <div class="fragment" style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;"> Example </h4>
+                            <p class=alignLeft>Gradient descent sets
+                            $$x_{i+1} = x_i - h_i \nabla f(x_i)$$
+                            for stepsizes $h_i$.
+                            </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> First order methods  </h3>
+
+                        <p class=alignLeft> Even if $f$ is convex, it is not clear how to design the algorithm using convex optimization.</p>
+                        <p class=alignLeft> The <i>performance</i> of a particular algorithm can be determined using a convex program.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> First order methods  </h3>
+
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;"> Performance Estimation </h4>
+                            <p class=alignLeft>
+                                If we have a first order algorithm, then we can the following can be solved with a convex program:
+                                $$ \min_{\eta} \max_{f} f(x_{final}) - f_{min} \le \eta \|x_0-x_{min}\|^2, $$
+                                where the inner maximization problem is over $L$-smooth, convex functions.
+
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h3> First order methods  </h3>
+                        <p class=alignLeft> There has been much recent work on designing algorithms for convex optimization using computer search. In particular, a minimax optimal method for smooth convex optimization was found (OGM). </p>
+                        <p class=alignLeft> Our work explores the trade-off between the resources required by the algorithm and its performance.</p>
+                        <ul>
+                            <li class="fragment"><b> Can we accelerate without needing to store an extra momentum vector? </b></li>
+                            <li class="fragment"><b> Can we achieve stronger guarantees by storing extra gradient history?</b></li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Acceleration without Momentum</h3>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Acceleration without Momentum</h3>
+                        <p class=alignLeft> All known optimal methods for convex optimization requires an additional vector of memory to store a <i>momentum</i> vector. </p>
+                        <p class=alignLeft> <i>Can we accelerate convex optimization without using momentum, just by tuning our step sizes.</i> </p>
+                        <p class=alignLeft> For reference, gradient descent with constant step sizes achieves a rate of $O(1/T)$. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Our step sizes</h4>
+                        <div style="display:flex">
+                            <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px">
+                                <h5 style="color: white;">Theorem (Grimmer, S., Wang)</h5>
+                                <p>
+                                    There is a sequence of step sizes achieving a rate of convergence of $O(1/T^{1.01})$.
+                                </p>
+                            </div>
+                            <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px" class="fragment fade-in">
+                                <h5 style="color: white;">Theorem (Altschuler, Parrilo)</h5>
+                                <p>
+                                    There is a sequence of step sizes achieving a rate of convergence of $O(1/T^{1.27})$.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Our step sizes</h4>
+                        <div style="display:flex">
+                            <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px">
+                                <h5 style="color: white;">Theorem (Grimmer, S., Wang)</h5>
+                                <p style="color: #F2F2FF">
+                                    There is a sequence of step sizes achieving a rate of convergence of $O(1/T^{1.27})$ (with slightly better constants). The same rate of convergence can be obtained for the gradient norm.
+                                </p>
+                            </div>
+                            <div style="flex:1; background: grey; color: white; padding: 20px 20px 20px 20px">
+                                <h5 style="color: white;">Theorem (Altschuler, Parrilo)</h5>
+                                <p>
+                                    There is a sequence of step sizes achieving a rate of convergence of $O(1/T^{1.27})$.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Our step sizes</h4>
+                        <p> We actually found a nice algebraic theory of how to construct these step size patterns by concatenating smaller step size patterns of any length (earlier work only constructed these step sizes when $T = 2^{k}-1)$.</p>
+                        <embed src="n50.pdf#toolbar=0&navpanes=0&scrollbar=0" width="500" height="375" type="application/pdf">
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <p class=alignLeft> <i>What if we can remember more information than just one <i>momentum</i> vector?</i> </p>
+                        <p class=alignLeft> This cannot improve the a priori convergence rate, as that is already known to be minimax optimal. </p>
+                        <p class=alignLeft> <i> Can we analyze an algorithm's performance beyond its worst-case a priori guarantee? </i>  </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <p class=alignLeft> No algorithm can guarantee a better performance than OGM before it sees any gradients. </p>
+                        <p class=alignLeft> <i>After seeing a few gradients, the situation may change. It may be that OGM does not perform optimally on functions which agree with those first few gradients.</i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <p class=alignLeft> The function $\frac{L}{2}x^2$ is a worst case function for OGM; OGM runs as slowly on this function as it does on any function. </p>
+                        <p class=alignLeft> After seeing any 2 gradients of this function of opposite sign, it is already possible to conclude that the minimum is at 0. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <p class=alignLeft> A method is <b>subgame perfect</b> if it is not possible to improve the performance guarantee of the algorithm, <i> after seeing any number of gradients. </i> </p>
+                        <p class=alignLeft> <i>After seeing a few gradients, the situation may change. It may be that OGM does not perform optimally on functions which agree with those first few gradients.</i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <p>We can achieve this by solving a second order cone program in each iteration: </p>
+                        $$
+    \sup_{v}\set{ \langle{c,v}\rangle :\, \begin{array}{l}
+        \|A v\|^2 \leq \langle b, v\rangle\\
+    v\geq 0
+    \end{array}}.$$
+    <p>This optimization problem essentially tries to find an 'optimal' momentum vector in each iteration.</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Subgame Perfect Gradient Methods</h4>
+                        <img src="medAccur_rand.png"/>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> Hyperbolic polynomials for linear algebra<sup>1, 2, 3</sup>  </h3>
+
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Hyperbolic Relaxation of k-Locally Positive Semidefinite Matrices</i> - G Blekherman, S Dey, S Sun</p>
+                        <p style="font-size:30px; text-align:left">2. <i> Debiasing Polynomial and Fourier Regression</i> - C Camaño and R Meyer</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Hyperbolic polynomials </h4>
+                        <ul>
+                            <li> Polynomials with real rootedness properties </li>
+                            <li> Arise in convex optimization, sampling theory, combinatorics </li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Debiasing Polynomial and Fourier Regression </h4>
+                        <ul>
+                            <li> <b>Active sampling</b> - how do you find a polynomial approximation of a function $f$ <i>without knowing $f$ explicitly</i>?</li>
+                            <li class=fragment> Given an oracle for computing $f(x)$, how do you find the best polynomial approximation of $f$ in the $L_{\mu}$ norm using as few evaluations as possible? </li>
+                            <li class=fragment> A surprising algorithm: sample a random matrix $X$ from the $\mu$-unitary ensemble, compute its eigenvalues $\lambda_0, \dots, \lambda_d$, and interpolate a polynomial $\hat{p}$ so that $\hat{p}(\lambda_i) = f(\lambda_i)$ for each $i$. $\E[\hat{p}] = p^*$. </li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Approximate PSD checking </h4>
+                        <ul>
+                            <li> <b>Approximate PSD checking</b> - If you know that all $k\times k$ submatrices of an $n\times n$ matrix are PSD, how far is that matrix from being PSD?</li>
+                            <li class=fragment> We show that the worst case always has all equal diagonal entries and all equal off-diagonal entries for an arbitrary matrix norm distance metric using a convex relaxation from hyperbolic polynomials.</li>
+                        </ul>
+                    </section>
+                </section>
+            </div>
+
+		</div>
+
+		<script src="reveal.js"></script>
+		<script src="math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							St: '\\text{St}',
+							tr: '\\text{tr}',
+							E: '\\mathbb{E}',
+							set: [ '\\left\\{#1 \\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+            Reveal.addEventListener( 'drawCurve', function() {
+                element = document.getElementById("curveDrawing");
+                element.classList.add("path");
+            } );
+		</script>
+
+	</body>
+</html>
