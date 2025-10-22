@@ -24,7 +24,8 @@
 			<div class="slides">
 
                 <section>
-                    <h3> Modern Convex Optimization: Hidden Convexity</h3>
+                    <h3> Modern Convex Optimization</h4>
+                    <h4>Hidden Convexity and its Applications </h4>
                     <div>
                         <img src="sphere_proj.png" height="300" width="400" />
                     </div>
@@ -78,12 +79,12 @@
                 </section>
                 <section>
                     <section data-auto-animate>
-                        <h3> Projection Simplicity: Convexifying Manifold Optimization<sup>1</sup>  </h3>
+                        <h3> Projection Simplicity: Convexifying Optimization Problems<sup>1</sup>  </h3>
 
                         <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, S. </p>
                     </section>
                     <section data-auto-animate>
-                        <p style="text-align:left"> Many basic optimization problems can be expressed as <i>constrained</i> optimization problems over manifolds. </p>
+                        <p style="text-align:left"> Many basic optimization problems can be expressed as <i>constrained</i> optimization problems over nonconvex sets (e.g. manifolds, algebraic varieties). </p>
                         <div class="fragment" style="display:flex">
                             <div style="background-color:lightgray; padding:30px;">
                                 <h4 style="text-align:left"> Examples: </h4>
@@ -132,8 +133,7 @@
                             $\{(x^{\intercal}A_0x, x^{\intercal}A_1x) : \|x\|=1\} \subseteq \R^2$ is convex.
                             </p>
                         </div>
-                        <br>
-                        <!--<video controls><source src="QuadraticSphereMap2.mp4" type="video/mp4"></video>-->
+                        <video controls><source src="QuadraticSphere.mp4" type="video/mp4"></video>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Example of Hidden Convexity</h4>
@@ -147,7 +147,7 @@
                         <div style="background-color:lightgray; padding:30px;" class=fragment>
                             <h4 style="text-align:left;padding-left:50px"> Corollary</h4>
                             <p>
-                                Any homogeneous QCQP with two constraints has a tight convex relaxation.
+                                Any QCQP with two constraints has a tight convex relaxation.
                             </p>
                         </div>
                     </section>
@@ -160,6 +160,13 @@
                         <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^k$), and $f : M \rightarrow \R^k$ is a continuous function, when is $f(M)$ convex?</i></p>
                         <p class=alignLeft>We can give this an answer in terms of the Lagrangian 
                         $$ \mathcal{L}(t, x) = \langle t, f(x)\rangle.$$</p>
+                        <p class=alignLeft>Associate for each $t \in \R^k$ the optimization problem 
+                        $$ \max_{x\in M} \mathcal{L}(t, x)$$</p>
+                        <p class="alignLeft fragment"><i>How do the maximizers depend on the choice of Lagrange multiplier $t$?</i></p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Convex Images of Maps</h4>
+                        <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^k$), and $f : M \rightarrow \R^k$ is a continuous function, when is $f(M)$ convex?</i></p>
                         <div style="background-color:lightgray; padding:30px;" class=fragment>
                             <h4 style="text-align:left;padding-left:50px">Theorem (informal)</h4>
                             <p>
@@ -168,6 +175,7 @@
                         </div>
                         <p class="alignLeft fragment">We call such a $D$ a <i>Lagrangian Dual Section.</i></p>
                     </section>
+
                     <section data-auto-animate>
                         <h4 class=alignLeft> Convex Images of Maps</h4>
                         <p class=alignLeft> Implications for </p>
@@ -182,9 +190,12 @@
                         <h4 class=alignLeft> An example from Steifel Manifold</h4>
                         <p class=alignLeft> Stiefel manifold - orthogonal projection matrices</p>
                         <p class=alignLeft> \[\St^{n,m} = \{X \in \R^{n\times m} : X^{\intercal}X = I\}\]</p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Theorem </h4>
                         <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times m}$ containing no singular matrix (i.e. matrix of rank $< m$), then 
                            \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \St^{n,m} \}=\] </p>
                         <p>\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, \color{red}{\sigma_{max}(X) \le 1}\}.\] </p>
+                        </div>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Projection Simplicity</h4>
