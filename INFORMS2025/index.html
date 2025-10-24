@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title> Hidden Convexity and the Rotation Group </title>
+		<title> Hidden Convexity and its Applications </title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -44,7 +44,7 @@
                         <h3> Why Convex Optimization? </h3>
                         <ul>
                             <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Global Optimality Guarantees </p></li>
-                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Fast, Well Established Algorithms </p></li>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Fast, Well-Established Algorithms </p></li>
                             <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Robust Theory </p></li>
                         </ul>
                         <p class="fragment" style="color:red; font-size:40px"> But not all optimization problems are convex! </p>
@@ -68,23 +68,17 @@
                 <section>
                     <section data-auto-animate>
                         <h4> Manifestations of hidden convexity in my work </h4>
-                        <ul>
-                            <li> Design of first-order methods <br> <i>How can we automate finding good stepsizes for gradient descent?</i></li>
-                            <br>
-                            <li> Hyperbolic polynomials for fundamental linear algebra <br> <i>Debiasing polynomial regression with eigenvalues of random matrices</i> </li>
-                            <br>
-                            <li> Combinatorial optimization  <br> <i>SDP bounds for expected clique numbers of random graphs</i></li>
-                        </ul>
+                        <img src="spoke_and_hub.png"/>
                     </section>
                 </section>
                 <section>
                     <section data-auto-animate>
-                        <h3> Projection Simplicity: Convexifying Optimization Problems<sup>1</sup>  </h3>
+                        <h3> Convexifying Optimization Problems with Topology<sup>1</sup>  </h3>
 
                         <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, S. </p>
                     </section>
                     <section data-auto-animate>
-                        <p style="text-align:left"> Many basic optimization problems can be expressed as <i>constrained</i> optimization problems over nonconvex sets (e.g. manifolds, algebraic varieties). </p>
+                        <p style="text-align:left"> Many fundamental optimization problems can be expressed as <i>constrained</i> optimization problems over nonconvex sets (e.g. manifolds, algebraic varieties). </p>
                         <div class="fragment" style="display:flex">
                             <div style="background-color:lightgray; padding:30px;">
                                 <h4 style="text-align:left"> Examples: </h4>
@@ -98,32 +92,85 @@
                         </div>
                     </section>
                     <section data-auto-animate>
+                        <p style="text-align:left"> Many fundamental optimization problems can be expressed as <i>constrained</i> optimization problems over manifolds. </p>
+                        <div style="display:flex">
+                            <div style="background-color:lightgray; padding:30px;">
+                                <h4 style="text-align:left"> Formulation </h4>
+                                <p>
+                                \[
+                                    \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
+                                \]
+                                </p>
+                                <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                            </div>
+                            <img width=300px src="rotating surface.gif" data-id="surface"/>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
                         <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <div style="background-color:lightgray; padding:30px; margin-bottom:20px">
+                            <h4 style="text-align:left"> Formulation </h4>
+                            <p>
+                            \[
+                                \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
+                            \]
+                            </p>
+                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <div style="background-color:lightgray; padding:30px; margin-bottom:20px">
+                            <h4 style="text-align:left"> Formulation </h4>
+                            <p>
+                            \[
+                                \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
+                            \]
+                            </p>
+                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                        </div>
                         <div class="fragment" style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                            <h4 style="text-align:left"> Reformulation in terms of the image</h4>
                             <p>
-                                $$\max \{x^{\intercal}A_0x : x^{\intercal}A_1x = c_1, \dots,  x^{\intercal}A_kx = c_k\}$$
+                            \[
+                                \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in f(M)\},
+                            \]
                             </p>
+                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
                     </section>
                     <section data-auto-animate>
                         <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
-                        <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                        <div style="background-color:lightgray; padding:30px; margin-bottom:20px">
+                            <h4 style="text-align:left"> Formulation </h4>
                             <p>
-                            $$\max \{\tr(A_0X) : \tr(A_1X) = c_1, \dots,  \tr(A_kX) = c_k, X =xx^{\intercal}\}$$
+                            \[
+                                \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
+                            \]
                             </p>
+                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                        </div>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left"> Convex Relaxation </h4>
+                            <p>
+                            \[
+                            \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in \color{red}{\text{conv}(}f(M)\color{red}{)}\},
+                            \]
+                            </p>
+                            <p data-id="relax_text">for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
                     </section>
                     <section data-auto-animate>
-                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization give bounds on the possible optimal value.</p>
+                        <p class=alignLeft> If $f(M)$ is already convex, then this relaxation is tight! When does this happen?</p>
                         <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;padding-left:100px"> Example (QCQP): </h4>
+                            <h4 style="text-align:left"> Convex Relaxation </h4>
                             <p>
-                            $$\max \{\tr(A_0X) : \tr(A_1X) = c_1, \dots,  \tr(A_kX) = c_k, \color{red}{X \succeq 0}\}$$
+                            \[
+                            \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in \color{red}{\text{conv}(}f(M)\color{red}{)}\},
+                            \]
                             </p>
+                            <p data-id="relax_text">for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
-                        <p> Question: When are these relaxations tight?</p>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Example of Hidden Convexity</h4>
@@ -147,7 +194,11 @@
                         <div style="background-color:lightgray; padding:30px;" class=fragment>
                             <h4 style="text-align:left;padding-left:50px"> Corollary</h4>
                             <p>
-                                Any QCQP with two constraints has a tight convex relaxation.
+                                Any QCQP of the form
+                                \[
+                                    \max \{x^{\intercal}A_0x : x^{\intercal}A_1x = c_1, x^{\intercal}A_2x = c_2\}
+                                \]
+                                has a tight convex relaxation.
                             </p>
                         </div>
                     </section>
@@ -169,11 +220,10 @@
                         <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^k$), and $f : M \rightarrow \R^k$ is a continuous function, when is $f(M)$ convex?</i></p>
                         <div style="background-color:lightgray; padding:30px;" class=fragment>
                             <h4 style="text-align:left;padding-left:50px">Theorem (informal)</h4>
-                            <p>
-                                Suppose that there is a continuous function $D : \R^k \rightarrow M$ so that $D(t)$ maximizes the function $\mathcal{L}(t, x)$ for every $t \in \R^k \setminus 0$. Then $f(M)$ is convex.
+                            <p class=alignLeft>
+                                Suppose that the maximizer $\text{argmax}_{x\in M}\mathcal{L}(t, x)$ is a continuous function of $t$. Then $f(M)$ is convex.
                             </p>
                         </div>
-                        <p class="alignLeft fragment">We call such a $D$ a <i>Lagrangian Dual Section.</i></p>
                     </section>
 
                     <section data-auto-animate>
@@ -192,7 +242,7 @@
                         <p class=alignLeft> \[\St^{n,m} = \{X \in \R^{n\times m} : X^{\intercal}X = I\}\]</p>
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left;padding-left:50px"> Theorem </h4>
-                        <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times m}$ containing no singular matrix (i.e. matrix of rank $< m$), then 
+                        <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times m}$ containing no nonzero singular matrix (i.e. matrix of rank $< m$), then 
                            \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \St^{n,m} \}=\] </p>
                         <p>\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, \color{red}{\sigma_{max}(X) \le 1}\}.\] </p>
                         </div>
@@ -204,12 +254,12 @@
                         <p class="alignLeft fragment"> How general is this phenomenon; can it be discovered and exploited automatically?</p>
                     </section>
                     <section data-auto-animate>
-                        <h4 class=alignLeft> Path-tracking Algorithms </h4>
+                        <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
                         <div style="display:flex">
                             <div>
-                                <p class=alignLeft> Continuity of optimal solutions suggests <i>path-tracking</i> approach to solve them. </p>
+                                <p class=alignLeft> Suppose optimizers of Lagrangians are continuous. How do I use this to solve constrained optimization problems? </p>
+                                <p class=alignLeft> Continuity of optimal solutions to Lagrangians suggests <i>path-tracking</i> approach to solve them. </p>
                                 <p class=fragment> <b>Start at a known solution to one of these problems, and then vary the Lagrange multipliers until we reach an optimal solution.</b> - CHORD algorithm </p>
-                                <p class="fragment alignLeft"> Analogous methods largely successful in convex optimization. </p>
                             </div>
                             <img src="path_trackinh.gif"/>
                         </div>
@@ -253,14 +303,8 @@
                         <ul class=alignLeft>
                             <li> Topological properties of the Lagrangian imply convexity </li>
                             <li> Globally optimal path tracking algorithms </li>
+                            <li> <b>Projection Simplicity</b> - Projections of complicated problems can be simpler to understand </li>
                         </ul>
-                        <div class=fragment style="padding:30px">
-                        <h4> Future Directions </h4>
-                        <ul class=alignLeft>
-                            <li> Finding hierarchies of relaxations <span style="padding-left:290px"></span> </li>
-                            <li> Approximate convexity analogues</li>
-                        </ul>
-                        </div>
                     </section>
                 </section>
                 <section>
@@ -275,12 +319,15 @@
                         <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i></p>
                         <p style="font-size:30px; text-align:left">2. <i>Composing optimized stepsize schedules for gradient descent</i></p>
                         <p style="font-size:30px; text-align:left">3. <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method</i></p>
-                        <p>All joint with A Wang and B Grimmer</p>
+                        <p><b>All joint with Alex Wang and Ben Grimmer</b></p>
+                        <p style="color:blue">Ben will be talking about our work tomorrow.  </p>
+
                     </section>
                     <section data-auto-animate>
                         <h4> Long step size gradient methods</h4>
-                        <ul>
-                            <li> Can you make gradient descent asymptotically faster on convex functions just by tuning the step sizes longer? <span class="fragment" style="color:red">Yes! The required step sizes are interesting.</span> </li>
+                        <ul style="list-style-type: none;">
+                            <li> Can you make gradient descent asymptotically faster on convex functions just by tuning the step sizes longer? </li>
+                            <li>  <span class="fragment" style="color:red">Yes! With nonmonotonic, unbounded size, and typically asymmetric step sizes. </span></li>
                         </ul>
                         <embed class="fragment" src="n50.pdf#toolbar=0&navpanes=0&scrollbar=0" width="500" height="375" type="application/pdf">
                     </section>
@@ -291,7 +338,7 @@
                             <li> First order optimization is like a <b>game</b> being played between an optimizer and an adversarial first order oracle.  </li>
                             <li> An algorithm is like a strategy for this game. </li>
                             <li> A minimax optimal algorithm is part of a <b>Nash equillibrium</b> for the game. </li>
-                            <li class="fragment"> Stronger equillibrium notions exist, like <b>subgame perfect equillibrium</b>, which also require the algorithm to be optimal in every iteration of the game. </li>
+                            <li class="fragment" style="color:blue"> Stronger equillibrium notions exist, like <b>subgame perfect equillibrium</b>, which also require the algorithm to be optimal in every iteration of the game. </li>
                         </ul>
                         <img class=fragment height=300px src="medAccur_rand.png"/>
                         </div>
@@ -425,7 +472,7 @@
                 </section>
                 <section>
                     <section data-auto-animate>
-                        <h3> Hyperbolic polynomials for linear algebra<sup>1, 2, 3</sup>  </h3>
+                        <h3> Hyperbolic polynomials for linear algebra<sup>1, 2</sup>  </h3>
 
                         <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Hyperbolic Relaxation of k-Locally Positive Semidefinite Matrices</i> - G Blekherman, S Dey, S Sun</p>
                         <p style="font-size:30px; text-align:left">2. <i> Debiasing Polynomial and Fourier Regression</i> - C Camaño and R Meyer</p>
