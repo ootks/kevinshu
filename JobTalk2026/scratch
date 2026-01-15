@@ -1,0 +1,33 @@
+                    <section>
+                        <h4> Certificates from Convex Optimization </h4>
+                        <p> Convex optimization can be used to <i>certify</i> that there is no point satisfying certain conditions, as long as those conditions.</p>
+                        <p class="fragment"> If no, then the algorithm always succeeds. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Why Convex Optimization? </h3>
+                        <ul>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Fast, Well-Established Algorithms </p></li>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Robust Theory </p></li>
+                            <li class ="fragment"><p style="font-weight:bold; font-size:40px"> Global Optimality Guarantees </p></li>
+                        </ul>
+                        <p class="fragment" style="color:red; font-size:40px"> But not all optimization problems are convex! </p>
+                    </section>
+                </section>
+                <section>
+                    <section data-auto-animate>
+                        <h3> What is Convex Optimization? </h3>
+                        <p class=alignLeft> Convex geometry is the natural generalization of linear algebra that admits inequalities. </p>
+                        <div  style="display:flex">
+                            <div>
+                                <p class="fragment alignLeft"> <b>Convex Set </b> - A set defined by a system of linear inequalities. </p>
+                                <p class="fragment alignLeft"> <b>Convex Function </b> - A function which is the pointwise minimum of linear functions. </p>
+                                <p class="fragment alignLeft"> <b>Convex optimization</b> - The study of minimizing convex functions on convex sets.  </p>
+                            </div>
+                            <img height=200px width=200px src="convex_function.png">
+                        </div>
+
+
+                    </section>
+                    <section data-auto-animate>
+                        <h3> Why Convex Optimization? </h3>
+                    </section>

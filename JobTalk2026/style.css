@@ -1,0 +1,16 @@
+p {
+  font-size: 30px;
+  text-align:left;
+}
+
+.desirata {
+   list-style-type: none;
+   margin-left: 0;
+   padding-left: 1em;
+   text-indent: -1em;
+}
+
+th, td {
+    border-bottom: none;
+}
+
