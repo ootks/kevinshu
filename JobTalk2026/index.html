@@ -569,22 +569,22 @@
                     </section>
                     <section>
                         <h4> First-Order Methods</h4>
-                        <p> A fixed step first-order method sets each $x_i$ according to
+                        <p style="margin-bottom:-40px"> A fixed step first-order method sets each $x_i$ according to
                         \[
                             x_i = x_{i-1} - \sum_{j=0}^{i-1} h_{ij}\nabla f(x_j).
                         \]
                         </p>
                         <p class=fragment>Common choices include</p>
                         <ul> 
-                            <li> 
-                                <p class=fragment> <b>Gradient descent methods </b>, setting
+                            <li class=fragment> 
+                                <p> <b>Gradient descent methods </b>, setting
                                 \[
                                     x_i = x_{i-1} - h_i\nabla f(x_{i-1}).
                                 \]
                                 </p>
                             </li>
-                            <li>
-                                <p class=fragment> <b>Momentum methods </b>, introducing an <b>auxilliary vector</b> z_i and 
+                            <li class=fragment>
+                                <p> <b>Momentum methods </b>, introducing an <b>auxilliary vector</b> z_i and 
                                 \[
                                     x_i = \theta_i (x_{i-1} - \frac{1}{L}\nabla f(x_{i-1})) + (1-\theta_i)z_{i-1}
                                 \]
@@ -597,14 +597,14 @@
                     </section>
                     <section>
                         <h4> First-Order Methods</h4>
-                        <p class=fragment>Different choices of $h$'s lead to different convergence rates.</p>
-                        <p class=fragment>How can we tell if a choice of $h$'s gives good convergence?</p>
+                        <p>Different choices of $h$'s lead to different convergence rates.</p>
+                        <p>How can we tell if a choice of $h$'s gives good convergence?</p>
                     </section>
                     <section>
                         <h4> Worst-Case Instance Search</h4>
                         <p> We will restrict attention to convex, $L$-smooth functions. </p>
                         <p> 
-                        Suppose that the $h_{ij}$ are chosen in advance; we want to find a `bad function' $f$ so that $f(x_n)$ is much larger than $f_{min}$ (relative to the initial error).
+                        Suppose that the $h_{ij}$ are <b>chosen in advance</b>; we want to find a `bad function' $f$ so that $f(x_n)$ is much larger than $f_{min}$ (relative to the initial error).
                         </p>
                         <p class="fragment">
                         Given an algorithm for choosing the $x_i$, can we find $f$ maximizing
@@ -617,25 +617,41 @@
                         </p>
                     </section>
                     <section data-auto-animate>
+                        <h4> Performance Estimation Papers </h4>
+                        <ul>
+                            <li> D. Kim and J. Fessler, "Optimized first-order methods for smooth convex minimization." Mathematical Programming (2016) </li>
+                            <li> A. Taylor, and Y. Drori. "An optimal gradient method for smooth strongly convex minimization." Mathematical Programming (2023)</li>
+                            <li> S. Das Gupta, B. Van Parys, and E. Ryu. "Branch-and-bound performance estimation programming: A unified methodology for constructing optimal optimization methods" Mathemathical Programming, (2023).</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Performance Estimation Papers </h4>
+                        <ul>
+                            <li> <b> D. Kim and J. Fessler, "Optimized first-order methods for smooth convex minimization." Mathematical programming (2016) </b> </li>
+                            <li> A. Taylor, and Y. Drori. "An optimal gradient method for smooth strongly convex minimization." Mathematical Programming (2023)</li>
+                            <li> S. Das Gupta, B. Van Parys, and E. Ryu. "Branch-and-bound performance estimation programming: A unified methodology for constructing optimal optimization methods" Mathemathical Programming, (2023).</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
                         <h4> Example 1:</h4>
                         <h4> Long step size gradient methods</h4>
                     </section>
                     <section data-auto-animate>
                         <h4> Long step size gradient methods</h4>
-                        <ul style="list-style-type: none;">
-                            <li> Gradient descent is a special kind of first order method which sets $x_i = x_{i-1} - h_i\nabla f(x_{i-1})$, where the $h_i$ are chosen step sizes. </li>
-                            <li class=fragment> Standard step size choice is $h_i = \frac{1}{L}$, converging at a rate of $O(1/n)$.</li>
-                            <ul>
-                                <li> </li>
-                                <li> </li>
-                            </ul>
-                            <li class=fragment> Can you make gradient descent asymptotically faster on convex functions just by tuning the step sizes longer? </li>
-                            <li class=fragment>  <span class="fragment" style="color:red">Yes! With nonmonotonic, unbounded size, and typically asymmetric step sizes. </span></li>
+                        <p>Gradient descent sets $x_i = x_{i-1} - h_i\nabla f(x_{i-1})$. </p>
+                        <p>Standard step size choice is $h_i = \frac{1}{L}$, converging at a rate of $O(1/n)$.</p>
+                        <p class = fragment> Much work treats constant step size case, all converging at $O(1/n)$ rate.</p>
+                        <ul class=fragment>
+                            <li> Y. Drori and M. Teboulle. "Performance of first-order methods for smooth convex minimization: a novel approach." Mathematical Programming (2014)</li>
+                            <li> T. Rotaru, F. Glineur, and P. Patrinos. "Exact worst-case convergence rates of gradient descent: a complete analysis for all constant stepsizes over nonconvex and convex functions." (2024).</li>
+                            <li> J. Kim, "A Proof of the Exact Convergence Rate of Gradient Descent" (2024)</li>
                         </ul>
                     </section>
                     <section data-auto-animate>
                         <h4>Our step sizes</h4>
-                        <div style="display:flex">
+                        <p> Can you make gradient descent asymptotically faster on convex functions just by tuning the step sizes longer? </p>
+                        <p class=fragment>  <span class="fragment" style="color:red">Yes! With nonmonotonic, unbounded size, and typically asymmetric step sizes. </span></p>
+                        <div style="display:flex" class=fragment>
                             <div style="flex:1">
                                 <div style="background: grey; color: white; padding: 20px 20px 20px 20px; margin-right:10px">
                                     <h5 style="color: white;">Theorem (Grimmer, S., Wang, 2024)</h5>
@@ -643,7 +659,7 @@
                                         There is a sequence of step sizes achieving a worst case rate of convergence of $O(1/n^{1.01})$. 
                                     </p>
                                 </div>
-                                <p> Simultaneously, Altschuler and Parrilo gave a sequence with a rate of convergence of $O(1/n^{1.27})$. We later adapted our step size schedule to give the same rate with a better constant. </p>
+                                <p> Simultaneously, Altschuler and Parrilo gave a sequence with a rate of convergence of $O(1/n^{1.27})$. </p>
                             </div>
                             <div style="flex:1">
                                 <img src="n50.png">
@@ -657,8 +673,19 @@
                     <section data-auto-animate>
                         <h4> Dynamically Optimal Gradient Methods </h4>
                         <p> Convex optimization is used to analyze algorithms offline. </p>
-                        <p class=fragment> This methodology is powerful enough to find minimax optimal algorithms (Kim and Fessler 2016). </p>
-                        <p class=fragment> Can we use this methodology to actually choose query points <i>dynamically</i>? </p>
+                        <p class=fragment> <b>Success story: </b> (Kim and Fessler 2016) found a <b>fixed step size momentum method</b> OGM which is minimax optimal, converging at a rate of $O(1/n^2)$. </p>
+                        <p class=fragment> Is this the end of the story? </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Difficiencies of Minimax Optimality </h4>
+                        <video src="ogm_vs_gd.mp4" controls/>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Difficiencies of Minimax Optimality </h4>
+                        <p> The function $\frac{1}{2L}x^2$ is worst case for OGM. </p>
+                        <p class=fragment> Practically, this means that the convergence is quite slow. </p>
+                        <p class=fragment> Information theoretically, any two gradient queries from this function <b>uniquely determine the minimizer</b>! </p>
+                        <p class=fragment> A minimax optimal algorithm can converge unnecessarily slowly in some circumstances. How can we formalize this? </p>
                     </section>
                     <section data-auto-animate>
                         <h4> Game theoretically motivated optimization </h4>
@@ -671,34 +698,18 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Game theoretically motivated optimization </h4>
-                        <ul>
-                            <li> An algorithm is like a strategy for this game; a function is like a strategy for the oracle. </li>
-                            <li> A minimax optimal algorithm is part of a <b>Nash equillibrium</b> for the game. </li>
-                            <li class="fragment" style="color:blue"> Stronger equillibrium notions exist, like <b>subgame perfect equillibrium</b>, which also require a strategy to be in nash equillibrium in every subgame. </li>
-                        </ul>
-                    </section>
-                    <section  data-auto-animate>
-                        <h3> The Minimization Game </h3>
-                        <p>Nonadversarial function = Suboptimal play</p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img src="einstein.jpg" height="80px"></img>
-                                <br>
-                                <img src="complicated.png" height="300px"/>
-                            </div>
-                            <div style="flex:1" class="fragment">
-                                <img src="patrick.jpg" height="80px"></img>
-                                <br>
-                                <img src="simple.gif" height="300px"/>
-                            </div>
-                        </div>
-                        <p class="fragment"> Want a notion of optimality that dynamically adjusts to either case. </p>
+                        <table>
+                            <tr> <td> Optimizer's strategy: </td> <td> Algorithm</td> </tr>
+                            <tr> <td> Oracle's strategy: </td> <td> Function </td> </tr>
+                            <tr> <td>Nash equillibrium: </td> <td>A minimax optimal algorithm / hard function</td></tr>
+                        </table>
+                        <p class="fragment" style="color:blue"> Stronger equillibrium notions exist, like <b>subgame perfect equillibrium</b>, which also require a strategy to be in nash equillibrium in every subgame. </p>
                     </section>
                     <section  data-auto-animate>
                         <h3> Subgame Perfect Equillibrium </h3>
                         <div class="fragment" style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left;"> Subgame perfect equillibrium  </h4>
-                            <p class=alignLeft>After making queries $x_0, \dots, x_n$, for <b>any</b> oracle responses $(f_i, g_i)_{i=0}^n$, the algorithm produces a number $\tau$ and guarantees that 
+                            <p class=alignLeft>After making queries $x_0, \dots, x_n$, for <b>any</b> oracle responses $(f(x_i), \nabla f(x_i))_{i=0}^n$, the algorithm produces a number $\tau$ (depending on the responses) and guarantees that 
                             \[
                                 \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2} \le \tau.
                             \]
@@ -717,7 +728,7 @@
                             <th></th>
                             <tr style="border-bottom:none;"> <td> max </td> <td> $ \frac{f(x_n') - f_{min}}{\|x_0 - x_{\star}\|^2}$ </td> </tr>
                             <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
-                            <tr> <td> For each $i$, </td> <td> $f(x_i) = f_i$, $\nabla f(x_i) = g_i$. </td> </tr>
+                            <tr> <td> For each $i$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
                         </table>
                         <p class=fragment> Able to reformulate this as a second order cone program. </p>
                         <p class=fragment> Let $\tau_n =  \frac{f(x_n') - f_{min}}{\|x_0 - x_{\star}\|^2}$ and a $z_n = x_{\star}$ in the above optimization problem. </p>
