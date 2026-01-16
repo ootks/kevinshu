@@ -42,13 +42,13 @@
                         <div style="display:flex">
                             <div style="flex:1; width:30%">
                                 <img src ="slam.png" style="box-shadow: 0px 0px 30px #ddd;">
-                                <p style="font-size:20px; padding-left:10px">
+                                <p style="font-size:10px; padding-left:10px">
                                     Rosen et al. 2021. Advances in Inference and Representation for Simultaneous Localization and Mapping. Annual Review Control, Robotics, and Autonomous Systems.
                                 </p>
                             </div>
                             <div style="flex:1; width:30%; padding-top:30px">
                                 <img src ="metamaterial.png" style="box-shadow: 0px 0px 30px #ddd;">
-                                <p style="font-size:20px; margin-top:50px; padding-left:10px">
+                                <p style="font-size:10px; margin-top:50px; padding-left:10px">
                                  Serles et al. 2025. Ultrahigh Specific Strength by Bayesian Optimization of Carbon Nanolattices. Adv. Mater.
                                 </p>
                             </div>
@@ -80,38 +80,6 @@
                                 <p class="alignLeft"> <b>Convex Function</b> - The value of the function at the mean of two points is less than the mean of the values of the function at those points. </p>
                             </div>
                             <img height=200px width=200px src="convex_function.png">
-                        </div>
-                    </section>
-                    <section>
-                        <h3> What is Convex Optimization? </h3>
-                        <div  style="display:flex">
-                            <div style="margin:20px;">
-                                <p style="text-align:center"> Linear Programs </p>
-                                <img src="linear_programming.svg"/>
-                                <table style="font-size:30px">
-                                    <tr><td> $\min$ </td><td> $b^{\intercal} x$</td></tr>
-                                    <tr><td> s.t. </td><td> $Ax \le c$</td></tr>
-                                    <tr><td> </td><td> $x \in \R^n$</td></tr>
-                                </table>
-                            </div>
-                            <div style="margin:20px;" class=fragment>
-                                <p style="text-align:center"> Conical Programs </p>
-                                <img src="conical.png" height=150px/>
-                                <table style="font-size:30px">
-                                    <tr><td> $\min$ </td><td> $b^{\intercal} x$</td></tr>
-                                    <tr><td> s.t. </td><td> $Ax = c$</td></tr>
-                                    <tr><td> </td><td> $x \in K$</td></tr>
-                                </table>
-                                <p> where $K$ is PSD cone, nonnegative orthant, second order cone...</p>
-                            </div>
-                            <div style="margin:20px;" class=fragment>
-                                <p style="text-align:center"> Regression </p>
-                                <img src="regressoin.png" style="margin-top:80px;margin-bottom:120px;"/>
-                                <table style="font-size:30px">
-                                    <tr><td> $\min$ </td><td> $\|Ax - b\|_p$</td></tr>
-                                    <tr><td> s.t. </td><td> $x \in \R^n$</td></tr>
-                                </table>
-                            </div>
                         </div>
                     </section>
                     <section>
@@ -205,7 +173,7 @@
                     <section data-auto-animate>
                         <h3> Convexifying Optimization Problems with Topology<sup>1</sup>  </h3>
 
-                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, <span style="color:#0000FF">K Shu</span> </p>
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, K <span style="color:#0000FF">Shu</span> </p>
                     </section>
                     <section data-auto-animate>
                         <p style="text-align:left"> Many fundamental optimization problems can be expressed as <i>constrained</i> problems over nonconvex sets (e.g. manifolds, algebraic varieties). </p>
@@ -460,10 +428,8 @@
                     </section>
                     <section>
                         <h4> Some Mathematical Connections </h4>
-                        <p> Subspaces containing no nonsingular matrix have relationships with representations of Clifford algebras, vector bundles on spheres. (Adams, Lax, Philips 1965)</p>
-                        <p class=fragment> In the examples given, $M$ is an <b>orbit of a Lie groups</b> and $f$ is linear. <b>Kostant convexity theorem</b> characterizes the maximizers of the associated Lagrangian in this case.</p>
-                        <p class=fragment> In particular, these are related to a generalized singular value decomposition (Cartan decomposition) in a Lie group representation. </p>
-                        <p class=fragment> We can show that if the generalized singular vectors of elements in the span of the constraints are ``sufficiently generic'', then there is a Lagrangian dual section.</p>
+                        <p> Subspaces containing no nonsingular matrix have relationships with representations of Clifford algebras, vector bundles on spheres.</p>
+                        <p> Many examples are <b>orbits of Lie groups</b> and linear constraints. This relates to the <b>Kostant convexity theorem</b>.</p>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
@@ -492,40 +458,15 @@
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
                         <p> Assume there is a Lagrangian dual section $D(t)$.</p>
                         <p> <b>Goal: </b> Given $D(\lambda)$ for some $\lambda$, find $D(\lambda')$ for $\lambda' \neq \lambda$. </p>
-                        <p> <b> Implementation Details </b> </p>
-                        <p> Need to make discrete steps in path tracking. </p>
-                        <p>
-                        \[
-                            \lambda_t := (1-t)\lambda + t\lambda'
-                        \]
-                        </p>
-                        <p> Given value of $D(\lambda_t)$, we want to find $D(\lambda_{t+\epsilon})$ with <b>local search</b>.</p>
+                        <div>
+                            <p class=fragment> In implementation, we need to discretize $[0,1]$ and use a <b>local search</b> procedure to compute $D(\lambda_{t + \epsilon})$ given $D(\lambda_t)$. </p>
+                            <p class=fragment> If $M$ is a Riemannian manifold, we can use Riemannian gradient descent on objective $\mathcal{L}(\lambda, x)$ for local search. </p>
+                            <p class=fragment> Need to make steps small enough (with respect to the conditioning of the Lagrangian maximization problem) to avoid local minima.</p>
+                        </div>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
-                        <p> Given value of $D(\lambda_t)$, we want to find $D(\lambda_{t+\epsilon})$ by applying <b>local search</b> to the problem
-                        $$\max \L(\lambda_{t+\epsilon}, x).$$
-                        </p>
-                        <p class=fragment> Local search can find <b> local minima</b> .</p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
-                        <p> Assume that $M$ is a Riemannian manifold, and $f$ is smooth. </p>
-                    </section>
-                    <section data-auto-animate>
-                        <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
-                        <p> Schematic for the CHORD algorithm. </p>
-                        <p> For some choice of $N, \delta$. </p>
-                        <ol>
-                            <li> Set $t = 0$, and $x_0 = D(\lambda_0)$. </li>
-                            <li> For $i = 1,\dots,N$ 
-                                <ol>
-                                    <li> Set $t = \frac{1}{N}$ </li>
-                                    <li> Set $x_t$ to the result of Riemannian gradient descent on the function $\ell(x) = \L(\lambda_t, x)$, starting at $x_{t - 1/N}$, with step size $\delta$ for $N$ iterations. </li>
-                                </ol>
-                            </li>
-                            <li> Return $x_1$. </li>
-                        </ol>
+                        <img src="CHORD.png" />
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
@@ -538,9 +479,9 @@
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Unbalanced Procrustes Problems</h4>
-                        <p class=alignLeft> Given an $n$-dimensional point cloud $A$, and an $m$ dimensional point cloud $B$ with $n > m$, find a rotation/projection that best maps $A$ to $B$. </p>
+                        <p class=alignLeft> Given a high dimensional point cloud $A$, and a low dimensional point cloud $B$, find a rotation/projection that best maps $A$ to $B$. </p>
                         <p>
-                        $$ \min_{X^{\intercal}X = I, X \in \R^{n \times m}} \|AX - B\|^2.$$
+                        $$ \min_{X^{\intercal}X = I} \|AX - B\|^2.$$
                         </p>
                         <div style="display:flex">
                             <div style="padding-right:50px">
@@ -729,20 +670,6 @@
                             </div>
                         </div>
                     </section>
-                    <section>
-                        <h4>Our step sizes - Intuition</h4>
-                        <p> Two extreme functions: </p>
-                        <div style="display:flex">
-                            <div style="flex:1">
-                                <img  height=200px src="quadratic.png"/>
-                                <p style="font-size:0.5em">$f(x) = \frac{1}{2}x^2$</p>
-                            </div>
-                            <div style="flex:1">
-                                <img height=200px src="huber.png"/>
-                                <p style="font-size:0.3em;margin-top:-10px">$f(x) = \begin{cases}|x| \text{ if }|x| < 1\\\\ \frac{1}{2}x^2\text{ otherwise}\end{cases}$</p>
-                            </div>
-                        </div>
-                    </section>
                     <section data-auto-animate>
                         <h4> Example 2:</h4>
                         <h4> Dynamically Optimal Gradient Methods </h4>
@@ -782,9 +709,7 @@
                         <h3> Subgame Perfect Equilibrium </h3>
                         <div class="fragment" style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left;"> Subgame perfect equilibrium  </h4>
-                            <p class=alignLeft>
-
-                            After making queries $x_0, \dots, x_n$, for <b>any</b> oracle responses $(f(x_i), \nabla f(x_i))_{i=0}^n$, the algorithm produces a number $\tau$ (depending on the responses) and guarantees that 
+                            <p class=alignLeft>After making queries $x_0, \dots, x_n$, for <b>any</b> oracle responses $(f(x_i), \nabla f(x_i))_{i=0}^n$, the algorithm produces a number $\tau$ (depending on the responses) and guarantees that 
                             \[
                                 \SUBOPT \le \tau.
                             \]
@@ -857,11 +782,10 @@
                     <section>
                         <h3> Thank you! </h3>
                         <ul>
-                            <li style="font-size:30px; text-align:left"> <i>Hidden convexity, optimization, and algorithms on rotation matrices</i> - A Ramachandran, <span style="color:#0000FF">K Shu</span>, AL Wang (2024)</li>
-                            <li style="font-size:30px; text-align:left"> <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i> - B Grimmer, <span style="color:#0000FF">K Shu</span>, AL Wang (2024)</li>
-                            <li style="font-size:30px; text-align:left"> <i>Composing optimized stepsize schedules for gradient descent</i> - B Grimmer, <span style="color:#0000FF">K Shu</span>, AL Wang(2025)</li>
-                        <li style="font-size:30px; text-align:left"> <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method</i> - B Grimmer, <span style="color:#0000FF">K Shu</span>, AL Wang (2025)</li>
                             <li style="font-size:30px; text-align:left"> <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, <span style="color:#0000FF">K Shu</span> (2025)</li>
+                            <li style="font-size:30px; text-align:left"> <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i> - B Grimmer, AL Wang, <span style="color:#0000FF">K Shu</span> (2024)</li>
+                            <li style="font-size:30px; text-align:left"> <i>Composing optimized stepsize schedules for gradient descent</i> - B Grimmer, AL Wang, <span style="color:#0000FF">K Shu</span>(2025)</li>
+                        <li style="font-size:30px; text-align:left"> <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method</i> - B Grimmer, AL Wang, <span style="color:#0000FF">K Shu</span> (2025)</li>
                         </ul>
                     </section>
                 </section>

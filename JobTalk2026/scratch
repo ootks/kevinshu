@@ -31,3 +31,60 @@
                     <section data-auto-animate>
                         <h3> Why Convex Optimization? </h3>
                     </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Projection Simplicity</h4>
+                        <p class=alignLeft><b> Optimization problems, even over complicated domains, often only depend on a few salient features of what you are optimizing. </b></p>
+                        <p class=alignLeft> Focusing on these features make it is possible to find simpler (convex) formulations of the problem. </p>
+                        <p class="alignLeft fragment"> How general is this phenomenon; can it be discovered and exploited automatically?</p>
+                    </section>
+
+
+                    <section data-auto-animate>
+                        <h3> Hyperbolic polynomials for linear algebra<sup>1, 2</sup>  </h3>
+
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Hyperbolic Relaxation of k-Locally Positive Semidefinite Matrices</i> - G Blekherman, S Dey, S Sun</p>
+                        <p style="font-size:30px; text-align:left">2. <i> Debiasing Polynomial and Fourier Regression</i> - C Camaño and R Meyer</p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Hyperbolic polynomials </h4>
+                        <ul>
+                            <li> Polynomials with real rootedness properties </li>
+                            <li> Arise in convex optimization, sampling theory, combinatorics </li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Debiasing Polynomial and Fourier Regression </h4>
+                        <ul>
+                            <li> <b>Active sampling</b> - how do you find a polynomial approximation of a function $f$ <i>without knowing $f$ explicitly</i>?</li>
+                            <li class=fragment> Given an oracle for computing $f(x)$, how do you find the best polynomial approximation of $f$ in the $L_{\mu}$ norm using as few evaluations as possible? </li>
+                            <li class=fragment> A surprising algorithm: sample a random matrix $X$ from the $\mu$-unitary ensemble, compute its eigenvalues $\lambda_0, \dots, \lambda_d$, and interpolate a polynomial $\hat{p}$ so that $\hat{p}(\lambda_i) = f(\lambda_i)$ for each $i$. $\E[\hat{p}] = p^*$. </li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Approximate PSD checking </h4>
+                        <ul>
+                            <li> <b>Approximate PSD checking</b> - If you know that all $k\times k$ submatrices of an $n\times n$ matrix are PSD, how far is that matrix from being PSD?</li>
+                            <li class=fragment> We show that the worst case always has all equal diagonal entries and all equal off-diagonal entries for an arbitrary matrix norm distance metric using a convex relaxation from hyperbolic polynomials.</li>
+                        </ul>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> An Example for Stiefel Manifold</h4>
+                        <p> When is there a subspace of $\R^{n \times m}$ of dimension $k$ containing no singular matrix? </p>
+                        <p> When $k \lt n-m,$ a generic such subspace has this property. </p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Theorem (Adams, Lax, Phillips 1965)</h4>
+                            <p class=alignLeft> A $k$ dimensional subspace of $\R^{n\times n}$ containing no nonzero singular matrix exists if and only if $k \le \rho(n)$. If $n = (2a+1)2^{c+4d}$ with $c \lt 4$, then $\rho(n)$ is the Radon-Hurwitz number
+                            \[
+                            \rho(n) = 2^c + 8d.
+                            \]
+                            </p>
+                        </div>
+                        <p>$\rho(n)$ is connected to representation theory of Clifford algebras, vector bundles on spheres. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Connections to Lie group theory and Topology  </h4>
+                        <p> In examples where $M$ is the <b>orbit of a Lie group action </b>, and the constraints are <b>linear</b>, this is closely related to Kostant's convexity theorem.
+                        </p>
+                        <p class=fragment> Kostant's convexity theorem characterizes the maximizers of the Lagrangian.  </p>
+                        <p class=fragment> Hidden convexity is implied if the constraints span a <b> noncrossing subspace</b> where certain generalized singular values are sufficiently generic .</p>
+                    </section>
