@@ -3,6 +3,10 @@ p {
   text-align:left;
 }
 
+.centered {
+  text-align:center;
+}
+
 .desirata {
    list-style-type: none;
    margin-left: 0;

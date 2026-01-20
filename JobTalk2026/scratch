@@ -88,3 +88,95 @@
                         <p class=fragment> Kostant's convexity theorem characterizes the maximizers of the Lagrangian.  </p>
                         <p class=fragment> Hidden convexity is implied if the constraints span a <b> noncrossing subspace</b> where certain generalized singular values are sufficiently generic .</p>
                     </section>
+
+                            After making queries $x_0, \dots, x_n$, for <b>any</b> oracle responses $(f(x_i), \nabla f(x_i))_{i=0}^n$, the algorithm produces a number $\tau$ (depending on the responses) and guarantees that 
+                            \[
+                                \SUBOPT \le \tau.
+                            \]
+                            Moreover, for any sequence of queries, there exists a $L$-smooth convex function $f^*$ so that any algorithm making the same initial queries,
+                            \[
+                                \SUBOPT \ge \tau.
+                            \]
+
+
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Example of Hidden Convexity</h4>
+                        <div style="background-color:lightgray;padding-left:30px;padding-right:30px; padding-top:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Theorem (Brickman) </h4>
+                            <p>
+                            $\{(x^{\intercal}A_0x, x^{\intercal}A_1x) : \|x\|=1\} \subseteq \R^2$ is convex.
+                            </p>
+                        </div>
+                        <video controls><source src="QuadraticSphere.mp4" type="video/mp4"></video>(Brickman)  
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> Example of Hidden Convexity</h4>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left;padding-left:50px"> Theorem (Brickman)  </h4>
+                            <p>
+                            $\{(x^{\intercal}A_0x, x^{\intercal}A_1x) : \|x\|=1\} \subseteq \R^2$ is convex.
+                            </p>
+                        </div>
+                        <br>
+                        <div style="background-color:lightgray; padding:30px;" class=fragment>
+                            <h4 style="text-align:left;padding-left:50px"> Corollary (Homogenized S-lemma)</h4>
+                            <p>
+                                Any QCQP of the form
+                                \[
+                                    \max \{x^{\intercal}A_0x : x^{\intercal}A_1x = c_1, x^{\intercal}A_2x = c_2\}
+                                \]
+                                has a tight convex relaxation.
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h4> Performance Estimation Problems </h4>
+                        <p> Formally, define error metric </p>
+                        <p>
+
+                        \[
+                            \SUBOPT = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}?
+                        \]
+                        </p>
+                        <p> And optimization problem </p>
+                        <table>
+                            <th></th>
+                            <tr style="border-bottom:none;"> <td> max </td> <td> $\SUBOPT$ </td> </tr>
+                            <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
+                        </table>
+                        <p class=fragment>Solve this by <b>reformulating</b> as a convex program via <b>interpolation conditions</b> (Taylor, Hendrickx and Glineur, 2017)</p>.
+                    </section>
+                    <section>
+                        <h4> First-Order Methods</h4>
+                        <p> <b>Meta-goal:</b> Find a first-order method with good <b>worst-case behavior</b>.</p>
+                        <p>Different choices of $h$'s lead to different convergence rates.</p>
+                        <p> <b>Subquestion:</b> How can we tell if a given first-order method converges quickly?</p>
+                    </section>
+                    <section>
+                        <h4> Worst-Case Instance Search</h4>
+                        <p> We will restrict attention to convex, $L$-smooth functions. </p>
+                        <p> <b> $L$-smooth </b> - gradient is $L$-Lipschitz under Euclidean distance. </b>
+                        <p> 
+                        Suppose that the $h_{ij}$ are <b>chosen in advance</b>; we want to find a `bad function' $f$ so that $f(x_n)$ is much larger than $f_{min}$ (relative to the initial error).
+                        </p>
+                        <p class="fragment">
+                        Given an algorithm for choosing the $x_i$, can we find $f$ maximizing
+                        \[
+                            \SUBOPT = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}?
+                        \]
+                        </p>
+                        <p class="fragment">
+                        Yes! Using convex optimization.  (Drori and Teboulle, 2012) The resulting objective is the worst case rate of convergence for the algorithm. (Taylor, Hendrickx and Glineur, 2017)
+                        </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Performance Estimation Papers </h4>
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Performance Estimation Papers </h4>
+                        <ul>
+                            <li> <b> D. Kim and J. Fessler, "Optimized first-order methods for smooth convex minimization." Mathematical programming (2016) </b> </li>
+                            <li> A. Taylor, and Y. Drori. "An optimal gradient method for smooth strongly convex minimization." Mathematical Programming (2023)</li>
+                            <li> S. Das Gupta, B. Van Parys, and E. Ryu. "Branch-and-bound performance estimation programming: A unified methodology for constructing optimal optimization methods" Mathemathical Programming, (2023).</li>
+                        </ul>
+                    </section>
