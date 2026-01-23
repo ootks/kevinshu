@@ -1,0 +1,11 @@
+Title: The Surprising Ubiquity of Convex Optimization
+Abstract:
+Computer optimization plays an increasingly central role in society, making it necessary to develop efficient algorithms which can offer rigorous guarantees on their outputs.
+Convexity is a mathematical property of an optimization problem which implies that the problem can be tractably solved to global optimality.
+While not all optimization problems satisfy the conditions of convexity, it is often possible to reformulate or relax the problem in such a way as to yield a convex problem.
+This talk will discuss a general framework for finding such reformulations based on a topological concept we call `Lagrangian dual sections'.
+Such Lagrangian dual sections naturally arise from studying optimization over topological spaces, and we will see how they lead to convex reformulations with applications in areas such as computer vision and industrial engineering.
+In particular, we will examine nonconvex optimization problems over manifolds that can be exactly reformulated as convex optimization problems.
+We will also discuss applications of convex reformulations to the design and analysis of first-order optimization algorithms.
+These reformulations led to the discovery of sequences of step sizes for gradient descent resulting in faster asymptotic convergence than constant step sizes for smooth convex functions.
+This methodology is also useful for the development of more refined first-order optimization methods with strong game-theoretically optimal performance guarantees.

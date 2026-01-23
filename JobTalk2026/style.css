@@ -2,6 +2,10 @@ p {
   font-size: 30px;
   text-align:left;
 }
+.leftHeader {
+  text-align:left;
+  margin:0px;
+}
 
 .centered {
   text-align:center;
@@ -18,3 +22,13 @@ th, td {
     border-bottom: none;
 }
 
+:root {
+    --pastel-blue:#4C9DFA;
+    --pastel-green:#7FCFA8;
+    --pastel-red:#FF645C;
+}
+
+.caption {
+    margin-top:50px;
+    font-size:20px;
+}
