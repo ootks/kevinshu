@@ -74,7 +74,7 @@
                             <li style="margin-top:20px;"> Reliable </li>
                             <li style="margin-top:20px;"> Expressive </li>
                             <!--color-->
-                            <li class=fragment style="margin-top:20px;"> Globally optimal </li>
+                            <li class=fragment style="margin-top:20px;color:var(--pastel-blue)"> Globally optimal </li>
                         </ul>
                     </section>
                     <section>
@@ -639,7 +639,7 @@
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left;"> Definition - Subgame Perfect </h4>
                             <p class=alignLeft>
-                            An algorithm is <b>subgame perfect</b> if <span class=fragment>for <b>any</b> first order history $\mathcal{H} = (x_i, f(x_i), \nabla f(x_i))_{i=0}^n$, it guarantees $\SUBOPT \le \tau$, where</span>
+                            An algorithm is <b>subgame perfect</b> if <span class=fragment>for <b>any</b> first order history $\mathcal{H} = (x_i, f(x_i), \nabla f(x_i))_{i=0}^n$, it guarantees $\SUBOPT \le \tau(\mathcal{H})$, where</span>
                                 <table class=fragment>
                                     <tr style="border-bottom:none;"> <td> <p>$\tau(\mathcal{H}) = \min_{\text{Alg} \in A(\mathcal{H})}$</p></td>
                                         <td> <p>$\max_{f \in F(\mathcal{H})}$</p> </td> <td> <p>$\SUBOPT(\text{Alg}, f)$</p> </td> </tr>
@@ -666,7 +666,7 @@
                             <th></th>
                             <tr style="border-bottom:none;"> <td> max_f </td> <td> $\SUBOPT'$ </td> </tr>
                             <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
-                            <tr> <td> For each $i < n$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
+                            <tr> <td> For each $i \lt n$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
                         </table>
                         <p> $\SUBOPT'$ is a slight modification of $\SUBOPT$. </p>
                         <p class=fragment> This can be reformulated as a second order cone program and solved in $O(n^{3.5} + dn)$ time, where $n$ is the number of iterations.</p>
@@ -678,7 +678,7 @@
                     <section>
                         <h4> Summary</h4>
                         <p> Convex optimization can be used to design first-order algorithms (for convex optimization) </p>
-                        <p> Game theoretic perspective leads to faster convergence. </p>
+                        <p> Subgame perfection as a notion of optimality. </p>
                     </section>
                 </section>
                 <section>
