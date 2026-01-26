@@ -30,7 +30,7 @@
                         <!--<img src="sphere_proj.png" height="300" width="400" />-->
                     </div>
                     <div style="display:flex">
-                        <p style="font-size:30px;flex:50%; padding-top:25px"> Kevin Shu </p> 
+                        <p style="font-size:30px; text-align:center; flex:50%; padding-top:25px"> Kevin Shu </p> 
                         <div  style="flex:50%">
                         <img src="caltech.png" width=200px />
                         </div>
@@ -73,6 +73,7 @@
                             <li style="margin-top:20px;"> Computationally efficient </li>
                             <li style="margin-top:20px;"> Reliable </li>
                             <li style="margin-top:20px;"> Expressive </li>
+                            <!--color-->
                             <li class=fragment style="margin-top:20px;"> Globally optimal </li>
                         </ul>
                     </section>
@@ -89,7 +90,8 @@
                                 \[
                                     f(tx + (1-t)y) \le tf(x) + (1-t)f(y).
                                 \]
- </p>
+                                 </p>
+                                 <p class="alignLeft"> <b>Convex Program</b> - Minimize a convex function on a convex set. </p>
                             </div>
                             <img height=200px width=200px src="convex_function.png">
                         </div>
@@ -97,7 +99,7 @@
                     <section>
                         <h3> What is Convex Optimization? </h3>
                         <div  style="display:flex">
-                            <div style="margin:20px;">
+                            <div style="margin:20px;flex:30%;">
                                 <p style="text-align:center"> Linear Programs </p>
                                 <img src="linear_programming.svg" height=150px/>
                                 <table style="font-size:30px">
@@ -106,7 +108,7 @@
                                     <tr><td> </td><td> $x \in \R^n_{\ge 0}$</td></tr>
                                 </table>
                             </div>
-                            <div style="margin:20px;" class=fragment>
+                            <div style="margin:20px;flex:30%;" class=fragment>
                                 <p style="text-align:center"> Conical Programs </p>
                                 <img src="conical.png" height=150px/>
                                 <table style="font-size:30px">
@@ -116,7 +118,7 @@
                                 </table>
                                 <p> e.g. $K$ is PSD cone.</p>
                             </div>
-                            <div style="margin:20px;" class=fragment>
+                            <div style="margin:20px;flex:30%;" class=fragment>
                                 <p style="text-align:center"> Regression </p>
                                 <img src="regressoin.png" height=150px/>
                                 <table style="font-size:30px">
@@ -137,6 +139,7 @@
                         <p class="fragment" style="color:var(--pastel-red); font-size:30px; text-align:center"> But not all optimization problems are convex! </p>
                     </section>
                     <section data-auto-animate>
+                        <h4>Convex Reformulations</h4>
                         <p> We want to solve some problem in engineering or science. </p>
                             <img height=300px src="landscape.png"/>
                     </section>
@@ -162,12 +165,12 @@
                     <section data-auto-animate>
                         <h4> Outline of the Talk </h4>
                         <ol>
-                            <li> <b>Introduction</b> </li>
+                            <li> Introduction </li>
                             <br>
-                            <li> A Topological Framework for Hidden Convexity </li>
+                            <li> <b>A Topological Framework for Hidden Convexity</b> </li>
                             <ul>
                                 <li> Lagrangian Dual Sections </li>
-                                <li> Path Tracking Algorithms </li>
+                                <li> Path-Tracking Algorithms </li>
                             </ul>
                             <br>
                             <li> Automatic Design of First-Order Methods</li>
@@ -189,9 +192,9 @@
                     <section>
                         <h4> Motivating Example: Attitude Estimation </h4>
                         <p> Probes in deep space need to estimate their orientation.<sup>1</sup> </p>
-                        <p class=caption>1. Wahba, Grace. "A least squares estimate of satellite attitude." SIAM review 7.3 (1965): 409-409.</p>
                         <img height=300px src="sattelite_image.webp"/>
                         <p class=fragment> Two data sources: <b>positions</b> of distant stars and accelerometer <b> estimate </b>. </p>
+                        <p class=caption style="margin-top:50px;">1. Wahba, Grace. "A least squares estimate of satellite attitude." (1965).</p>
                     </section>
                     <section>
                         <h4> Attitude Estimation </h4>
@@ -210,25 +213,26 @@
                         <h4> Attitude Estimation </h4>
                         <p> <b> Model: </b> </p>
                         <table>
-                            <tr> <td> $\min_X$ </td> <td> $\|AX - B\|^2$ </td> </tr>
-                            <tr> <td> s.t. </td> <td> $\|X - X_0\|^2 \le \epsilon$ </td> </tr>
+                            <tr> <td> $\min_X$ </td> <td> $\|AX - B\|_F^2$ </td> </tr>
+                            <tr> <td> s.t. </td> <td> $\|X - X_0\|_F^2 \le \epsilon$ </td> </tr>
                             <tr> <td> </td> <td> $X \in \SO(n)$ </td> </tr>
                         </table>
-                        <p>$A$ and $B$ represent the observed/stored star locations.</p>
-                        <p>$X_0$ is estimated rotation matrix.</p>
-                        <p class=fragment> Algebra shows that objective is equivalent to $\tr(B^{\intercal}A X)$ and first constraint is equivalent to $\tr(I - X_0^{\intercal}X) \le \epsilon$.</p>
+                        <p>$A, B \in \R^{d \times n}$ represent the observed/stored star locations.</p>
+                        <p>$X_0 \in \R^{n \times n}$ is estimated rotation matrix.</p>
+                        <p>$\|\cdot\|_F = \sqrt{\tr(X^{\intercal}X)}$ is the Frobenius norm. </p>
                     </section>
                     <section data-auto-animate>
-                        <h4 class=alignLeft> Hidden Convexity and $\SO(n)$</h4>
+                        <h4 class=alignLeft> Hidden Convexity</h4>
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left"> Theorem (R<span style="color:var(--pastel-blue)">S</span>W 2024)</h4>
-                            <p class=alignLeft> If $A_0, A_1 \in \R^{n\times n}$ for $n > 2$, then 
-                            \[ \big\{(\tr( A_0^{\intercal} X), \tr( A_1^{\intercal} X)) : X \in \SO(n)\big\} \subseteq \R^2\] 
+                            <p class=alignLeft> If $A, B \in \R^{d\times n}$ and $X_0 \in \R^{n \times n}$ for $n > 2$, then 
+                            \[ \big\{(\|AX - B\|^2, \|X - X_0\|^2) : X \in \SO(n)\big\} \subseteq \R^2\] 
                             is convex. </p>
                         </div>
                         <p> Means we can apply convex optimization to the constrained problem. </p>
                     </section>
                     <section data-auto-animate>
+                        <h4 class=alignLeft> Constrained Optimization</h4>
                         <p style="text-align:left"> Many fundamental optimization problems can be expressed as <i>constrained</i> problems over nonconvex sets (e.g. manifolds, algebraic varieties). </p>
                         <div class="fragment" style="display:flex">
                             <div style="background-color:lightgray; padding:30px;">
@@ -255,23 +259,7 @@
                     <section data-auto-animate>
                         <h4> Constrained Optimization</h4>
                         <p style="text-align:left"> Many fundamental problems expressed as <i>constrained</i> optimization problems over a domain $M$ (e.g. a manifold, an algebraic variety, $\R^d$). </p>
-                        <div style="display:flex">
-                            <div style="background-color:lightgray; padding:30px;">
-                                <h4 style="text-align:left"> Formulation </h4>
-                                <p>
-                                \[
-                                    \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
-                                \]
-                                </p>
-                                <p>for topological space $M$ and $f : M \rightarrow \R^{k+1}$.</p>
-                            </div>
-                            <img width=300px src="rotating surface.gif" data-id="surface"/>
-                        </div>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> Constrained Optimization</h4>
-                        <p class=alignLeft> Such problems are typically NP-hard. Convex optimization gives bounds on the optimal value.</p>
-                        <div style="background-color:lightgray; padding:30px; margin-bottom:20px">
+                        <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left"> Formulation </h4>
                             <p>
                             \[
@@ -280,6 +268,7 @@
                             </p>
                             <p>for topological space $M$ and $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
+                        <p class=fragment> Such problems are typically NP-hard. Convex optimization gives bounds on the optimal value.</p>
                     </section>
                     <section data-auto-animate>
                         <h4> Constrained Optimization</h4>
@@ -330,17 +319,16 @@
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Tightness of Convex Relaxations</h4>
-                        <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^d$), and $f : M \rightarrow \R^{k+1}$ is continuous, when is the convex relaxation tight?</i></p>
-                        <p class=alignLeft>We can give this an answer in terms of the Lagrangian 
-                        $$ \mathcal{L}(\lambda, x) = \langle \lambda, f(x)\rangle.$$</p>
+                        <p class=alignLeft style="border:2px solid black;"> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^d$), and $f : M \rightarrow \R^{k+1}$ is continuous, when is the convex relaxation tight?</i></p>
+                        <p class=alignLeft>To answer this question, we will need to analyze the Lagrangian. </p>
+                        <p>$$ \mathcal{L}(\lambda, x) = \langle \lambda, f(x)\rangle.$$</p>
                         <p class=alignLeft>Associate for each $\lambda \in \R^{k+1}$ the optimization problem of finding
                         $$ \underset{x\in M}{\argmax}\; \mathcal{L}(\lambda, x)$$</p>
-                        <p class="alignLeft fragment"><i>How do the maximizers depend on the choice of Lagrange multiplier $\lambda$?</i></p>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Tightness of Convex Relaxations </h4>
-                        <p class=alignLeft> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^d$), and $f : M \rightarrow \R^{k+1}$ is continuous, when is the convex relaxation tight?</i></p>
-                        <p class="alignLeft"><i>How do the maximizers of $\mathcal{L}(\lambda, x) = \langle \lambda, f(x)\rangle$ depend on the choice of Lagrange multiplier $\lambda$?</i></p>
+                        <p class=alignLeft style="border:2px solid black;"> <i> If $M$ is a topological space (e.g. a manifold, an algebraic variety, $\R^d$), and $f : M \rightarrow \R^{k+1}$ is continuous, when is the convex relaxation tight?</i></p>
+                        <p>$$ \mathcal{L}(\lambda, x) = \langle \lambda, f(x)\rangle.$$</p></p>
                         <div class=fragment>
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left">Definition </h4>
@@ -410,16 +398,15 @@
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
                         <div style="display:flex">
                             <div>
-                                <p> Does the existence of a Lagrangian dual section $D(\lambda)$ imply fast algorithms? </p>
-                                <p class=fragment> Knowing $D(\lambda)$ for all $\lambda$ facilitates the ellipsoid algorithm. </p>
-                                <p class=fragment> Goal: Find $D(\lambda)$ for arbitrary $\lambda$. </p>
+                                <p> Question: Assuming that there is a <span style="color:var(--pastel-blue)">Lagrangian dual section</span> $D$, how we find $D(\lambda)$ for a given $\lambda$? </p>
+                                <p class=fragment> Motivation: Knowing $D(\lambda)$ for all $\lambda$ facilitates the ellipsoid algorithm. </p>
                             </div>
                             <img src="path_trackinh.gif"/>
                         </div>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> From Continuity to Path-tracking Algorithms </h4>
-                        <p> Assume there is a Lagrangian dual section $D$, and that we know $D(\lambda_0)$ for fixed $\lambda_0 \in \R^{k+1}$.</p>
+                        <p> Assume there is a <span style="color:var(--pastel-blue)">Lagrangian dual section</span> $D$, and that we know $D(\lambda_0)$ for fixed $\lambda_0 \in \R^{k+1}$.</p>
                         <p> Try a <i>path-tracking</i> approach to find $D(\lambda)$ for $\lambda \neq \lambda_0$. </p>
                         <div class=fragment>
                             <p> <b>Idea: </b> Compute $D((1-t)\lambda + t\lambda_0)$ for $t \in [0,1]$ by slowly changing $t$.</p>
@@ -434,12 +421,13 @@
                         <ol>
                             <li> $M$ is a Riemannian manifold. </li>
                             <li> $f$ is smooth. </li>
+                            <li> There is a <span style="color:var(--pastel-blue)">Lagrangian dual section</span> $D$, which is <b>Lipschitz</b>. </li>
                         </ol>
                         <div class=fragment>
                         <div style="background-color:lightgray;padding:30px;">
                             <h4 style="text-align:left"> Theorem (CDR<span style="color:var(--pastel-blue)">S</span> 2025) - Informal </h4>
                             <p> 
-                            Assume (1) and (2), and that there is a Lagrangian dual section $D$. Given the value of $D(\lambda_0)$ for some $\lambda_0 \in \R^{k+1}$, there is a path tracking algorithm which outputs $D(\lambda)$ up to accuracy $\epsilon$ in
+                            Assume (1), (2), and (3) above. Given the value of $D(\lambda_0)$ for some $\lambda_0 \in \R^{k+1}$, there is a path-tracking algorithm which outputs $D(\lambda)$ up to accuracy $\epsilon$ in
                             $O\left(\frac{1}{\epsilon}\right)$ evaluations of $f$ and its derivatives.
                             </p>
                         </div>
@@ -448,7 +436,7 @@
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Unbalanced Procrustes Problems</h4>
-                        <p class=alignLeft> Given an $n$-dimensional point cloud $A$, and an $m$ dimensional point cloud $B$ with $n > m$, find a rotation/projection that best maps $A$ to $B$. </p>
+                        <p class=alignLeft> Given an $n$-dimensional point cloud $A$, and an $m$ dimensional point cloud $B$ with $n \gt m$, find a rotation/projection that best maps $A$ to $B$. </p>
                         <p>
                         $$ \min_{X^{\intercal}X = I, X \in \R^{n \times m}} \|AX - B\|^2.$$
                         </p>
@@ -486,7 +474,7 @@
                                 \[
                                     f(X) = (\langle A^{\intercal}B, X\rangle, \|AX - B\|^2).
                                 \]
-                                has a Lagrangian dual section.
+                                has a <span style="color:var(--pastel-blue)">Lagrangian dual section</span>.
                             </p>
                         </div>
                         <p> Roughly 95% of uniformly randomly chosen $A$ and $B$ satisfy these inequalities. </p>
@@ -499,7 +487,7 @@
                         <h4> Summary</h4>
                         <ul class=alignLeft>
                             <li> Topological properties of the Lagrangian imply convexity </li>
-                            <li> Globally optimal path tracking algorithms </li>
+                            <li> Globally optimal path-tracking algorithms </li>
                         </ul>
                     </section>
                 </section>
@@ -511,7 +499,7 @@
                             <li> A Topological Framework for Hidden Convexity </li>
                             <ul>
                                 <li> Lagrangian Dual Sections </li>
-                                <li> Path Tracking Algorithms </li>
+                                <li> Path-Tracking Algorithms </li>
                             </ul>
                             <br>
                             <li> <b>Automatic Design of First-Order Methods</b></li>
@@ -534,7 +522,7 @@
                     </section>
                     <section>
                         <h4> First-Order Methods</h4>
-                        <p> <b>Goal:</b> Minimize functions $f : \R^d \rightarrow \R$. </p>
+                        <p> <b>Goal:</b> Minimize function $f : \R^d \rightarrow \R$. </p>
                         <p class=fragment> <b> Input: </b> A black box that outputs the values $f(x)$ and $\nabla f(x)$ at points of our choosing. </p>
                         <p class=fragment> <b> First-order methods:</b> Algorithm for choosing query points $x_0, \dots, x_N$. </p>
                         <p class=fragment> We will be focused on analyzing performance on <b> convex functions with $L$-Lipschitz gradients ($L$-smooth convex functions).</b></p>
@@ -546,7 +534,8 @@
                     </section>
                     <section data-auto-animate>
                         <h4> Accelerating Gradient Descent </h4>
-                        <p>Gradient descent sets \[x_i = x_{i-1} - h_i\nabla f(x_{i-1}).\] </p>
+                        <p>Gradient descent sets  \[x_i = x_{i-1} - h_i\nabla f(x_{i-1})\]
+                        for a choice of step sizes $h_0, \dots, h_N$.</p>
                         <p class=fragment>Standard step size choice is $h_i = \frac{1}{L}$, converging at a rate of $O(1/n)$.</p>
                         <div class=fragment>
                         <p> Much work treats constant step size case, all converging at $O(1/n)$ rate.</p>
@@ -561,28 +550,30 @@
                         <h4>Our step sizes</h4>
                         <p> Can gradient descent be asymptotically faster on convex functions just by tuning the step sizes? </p>
                         <p class=fragment>  <span class="fragment" style="color:red">Yes! With nonmonotonic, unbounded size, and typically asymmetric step sizes. </span></p>
-                        <p class=fragment> First work: (AP 2024) and (G<span style="color:var(--pastel-blue)">S</span>W 2024).</p>
+                        <p class=fragment> First (contemporaneous) work: (Altschuler and Parrilo 2024) and (G<span style="color:var(--pastel-blue)">S</span>W 2024).</p>
                     </section>
                     <section data-auto-animate>
                         <h4>Our step sizes</h4>
 
                         <p> Our latest result: </p>
-                        <div style="display:flex" class=fragment>
-                            <div style="flex:1">
+                        <div class=fragment>
+                            <div style="display:flex">
+                                <div style="flex:1">
 
-                                <div style="background-color:lightgray;padding:30px;">
-                                    <h4 style="text-align:left;"> Theorem (G<span style="color:var(--pastel-blue)">S</span>W 2024) </h4>
-                                    <p>
-                                        There is a dynamic program for finding an optimized<sup>*</sup> sequence of a sequence of $n$ step sizes achieving a worst case rate of convergence of $O(1/n^{1.27})$. 
-                                    </p>
+                                    <div style="background-color:lightgray;padding:30px;">
+                                        <h4 style="text-align:left;"> Theorem (G<span style="color:var(--pastel-blue)">S</span>W 2024)<sup>1</sup> </h4>
+                                        <p>
+                                            There is a dynamic program for finding an optimized<sup>*</sup> sequence of $n$ step sizes achieving a worst case rate of convergence of $O(1/n^{1.27})$. 
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="flex:1">
+                                    <img src="n50.png">
                                 </div>
                             </div>
-                            <div style="flex:1">
-                                <img src="n50.png">
-                            </div>
+                            <p class=fragment> <sup>*</sup>conjectured to be <b>minimax optimal</b> amongst gradient descent methods. </p>
+                            <p style="font-size:20px;"> <sup>1</sup>Simultaneous with Jiang and Zhang. </p>
                         </div>
-                        <p class=fragment> <sup>*</sup>conjectured to be <b>minimax optimal</b> amongst gradient descent methods. </p>
-                        <p class=fragment> Simultaneous with Jiang and Zhang. </p>
                     </section>
                     <section>
                         <h4>Our step sizes - Intuition</h4>
@@ -610,7 +601,7 @@
                         <div style="padding:20px; background-color:black">
                         <p style="color:white"> <b> For which function $f$ does the algorithm achieve its worst performance? </b></p>
                         </div>
-                        <p class="fragment"> This can be solved over $L$-smooth convex functions with convex optimization! (DT 2012).</p>
+                        <p class="fragment"> This can be solved over $L$-smooth convex functions with convex optimization! (Drori and Teboulle 2012).</p>
                     </section>
                     <section>
                         <h4> Performance Estimation Problems </h4>
@@ -618,7 +609,7 @@
                         <p>
 
                         \[
-                            \SUBOPT(\text{Alg},f) = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}?
+                            \SUBOPT(\text{Alg},f) = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}.
                         \]
                         </p>
                         <p> And optimization problem </p>
@@ -627,7 +618,7 @@
                             <tr style="border-bottom:none;"> <td> $\max_f$ </td> <td> $\SUBOPT(\text{Alg},f)$ </td> </tr>
                             <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
                         </table>
-                        <p class=fragment>Solve this by <b>reformulating</b> as a convex program via <b>interpolation conditions</b> (THG 2017).</p>
+                        <p class=fragment>Solve this by <b>reformulating</b> as a convex program via <b>interpolation conditions</b> (Taylor, Hendrickx and Glineur 2017).</p>
                         <p class=fragment> We give explicit dual solutions to this convex program to prove the convergence rates of our step size sequences.</p>
                     </section>
                     <section>
@@ -640,13 +631,13 @@
                             <tr> <td></td> <td> <p>s.t.</p> </td> <td> <p>$f$ is $L$-smooth and convex.</p> </td> </tr>
                         </table>
                         <p class=fragment> We conjecture the step sizes discovered in (G<span style="color:var(--pastel-blue);">S</span>W 2025) are minimax optimal amongst all gradient descent methods. </p>
-                        <p class=fragment> Earlier work in (KF 2016) are minimax optimal amongst all first-order methods. </p>
+                        <p class=fragment> Earlier work in (Kim and Fessler 2016) are minimax optimal amongst all first-order methods. </p>
                         <p class=fragment> Is minimax optimality the best guarantee a first-order method can provide? </p>
                     </section>
                     <section  data-auto-animate>
                         <h4> Subgame Perfect </h4>
                         <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;"> Subgame Perfect </h4>
+                            <h4 style="text-align:left;"> Definition - Subgame Perfect </h4>
                             <p class=alignLeft>
                             An algorithm is <b>subgame perfect</b> if <span class=fragment>for <b>any</b> first order history $\mathcal{H} = (x_i, f(x_i), \nabla f(x_i))_{i=0}^n$, it guarantees $\SUBOPT \le \tau$, where</span>
                                 <table class=fragment>
@@ -673,7 +664,7 @@
                         <p> In each iteration, solve the worst-case function optimization problem. </p>
                         <table>
                             <th></th>
-                            <tr style="border-bottom:none;"> <td> max </td> <td> $\SUBOPT'$ </td> </tr>
+                            <tr style="border-bottom:none;"> <td> max_f </td> <td> $\SUBOPT'$ </td> </tr>
                             <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
                             <tr> <td> For each $i < n$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
                         </table>
@@ -698,8 +689,7 @@
                         <h4> Topology and Optimization </h4>
                         <p> Deepen connections between topology and optimization. </p>
                         <ul> 
-                            <li> <b>Approximate convexity</b> - Does <b>approximate</b> continuity for Lagrangian maximizers imply <b> approximate </b> convexity (small integrality gaps)?</li>
-                            <li style="margin-left:30px"> <p> Quantitative homotopy theory </p></li>
+                            <li> <b>Approximate convexity</b> - Does <b>approximate</b> continuity for Lagrangian maximizers imply <b> approximate </b> convexity (small integrality gaps)?  Quantitative homotopy theory?</li>
                         </ul>
                     </section>
                     <section>
@@ -746,17 +736,18 @@
                     </section>
                     <section>
                         <h4> Conclusions </h4>
-                        <p> <b>Focuses of my work: </b></p>
-                        <p> Applications of convex optimizations</p>
+                        <p> <b>Surprising appearances of convex optimization</b></p>
                         <ul>
                             <li> Manifold Optimization </li>
                             <li> Algorithm Design </li>
                         </ul>
-                        <p> Mathematical Connections to </p>
-                        <ul>
+                        <p><b> Mathematical connections </b></p>
+                        <ul style="margin-left:-75px;">
                             <li> Topology </li>
                             <li> Game Theory </li>
                         </ul>
+                        <br>
+                        <p style="text-align:center"><a>https://kevinshu.me</a></p>
                     </section>
                 </section>
             </div>

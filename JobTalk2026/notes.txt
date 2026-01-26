@@ -1,0 +1,15 @@
+Good morning, and thank you for inviting me to speak here today.
+As you can see from the title of my talk, I will be telling you about the surprising ubiquity of convex optimization.
+But before I tell you what convex optimization is, and why it is so useful, I wanted to reflect briefly on the prevalence of optimization in our everyday lives.
+--Slide--
+Indeed, it is not hard to examples of computer optimization playing a crucial role in fields as diverse as robotics, material science and machine learning.
+And yet, despite how commonplace it is, there is still much we don't understand about the results of these optimization procedures.
+--Slide--
+LLM hallucinations are perhaps the most topical example of an optimized model having strange behavior 
+When it comes to optimizing large scale models, you only need to look at the headlines on the news about , to see that the results of optimization can have many unexpected features.
+As an optimizer, I would like to develop a better mathematical understanding of how t
+--Slide--
+
+When this is possible, we often say that the nonconvex optimization problem exhibits hidden convexity. As though there is some convex problem hiding just beneath the surface of the problem that we are studying.
+
+Don't talk through the subbullet points, seems to get too complicated.
