@@ -74,27 +74,18 @@
                             <li style="margin-top:20px;"> Reliable </li>
                             <li style="margin-top:20px;"> Expressive </li>
                             <!--color-->
-                            <li class=fragment style="margin-top:20px;color:var(--pastel-blue)"> Globally optimal </li>
+                            <li class=fragment style="margin-top:20px;color:var(--pastel-blue)"> Globally optimal <br><img height=300px src="global_opt.png"/></li>
                         </ul>
                     </section>
                     <section>
                         <h3> What is Convex Optimization? </h3>
-                        <div  style="display:flex">
-                            <div>
-                                <p class="alignLeft"> <b>Convex Set</b> - For any $x, y \in C$, and $t \in [0,1]$,
-                                \[
-                                    tx + (1-t)y \in C.
-                                \]
-                                </p>
-                                <p class="alignLeft"> <b>Convex Function</b> - For any $x, y \in \R^d$, and $t \in [0,1]$,
-                                \[
-                                    f(tx + (1-t)y) \le tf(x) + (1-t)f(y).
-                                \]
-                                 </p>
-                                 <p class="alignLeft"> <b>Convex Program</b> - Minimize a convex function on a convex set. </p>
-                            </div>
-                            <img height=200px width=200px src="convex_function.png">
-                        </div>
+                        <table>
+                            <tr> <td><p><b>Convex Set</b> - For any $x, y \in C$, and $t \in [0,1]$, \[tx + (1-t)y \in C.\]</p></td>
+                                <td><img class="fragment semi-fade-in" src="convex_set.png" height=150px /></td></tr>
+                            <tr> <td><p><b>Convex Function</b> - For any $x, y \in \R^d$, and $t \in [0,1]$, \[ f(tx + (1-t)y) \le tf(x) + (1-t)f(y).  \] </p></td>
+                                <td><img class="fragment semi-fade-in" src="convex_function2.png" height=150px /></td></tr>
+                            <tr><td> <p class="alignLeft"> <b>Convex Program</b> - Minimize a convex function on a convex set. </p></td></tr>
+                        </table>
                     </section>
                     <section>
                         <h3> What is Convex Optimization? </h3>
@@ -173,7 +164,7 @@
                                 <li> Path-Tracking Algorithms </li>
                             </ul>
                             <br>
-                            <li> Automatic Design of First-Order Methods</li>
+                            <li> Design of First-Order Methods</li>
                             <ul>
                                 <li> Long Step Gradient Descent</li>
                                 <li> Subgame Perfect Gradient Method</li>
@@ -185,7 +176,7 @@
                 </section>
                 <section>
                     <section data-auto-animate>
-                        <h3> Convexifying Optimization Problems with Topology<sup>1</sup>  </h3>
+                        <h3> A Topological Framework for Hidden Convexity <sup>1</sup>  </h3>
 
                         <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Lagrangian Dual Sections: A Topological View of Hidden Convexity</i> - V Chandrasekaran, T Duff, J Rodriguez, <span style="color:#6A8DB5">K Shu</span> </p>
                     </section>
@@ -201,7 +192,7 @@
                         <p> <b> Goal: </b> Find a rotation satisfying two conditions: </p>
                         <ol>
                             <li> Transforms an internal star map to observed locations of the stars. </li>
-                            <li> Is not too far from some fixed rotation matrix. </li>
+                            <li> Is not too far from some the estimate from the accelerometer. </li>
                         </ol>
                         <p class=fragment> The set of rotations is called the <b> special orthogonal group </b> $\SO(3)$. 
                         \[
@@ -213,9 +204,9 @@
                         <h4> Attitude Estimation </h4>
                         <p> <b> Model: </b> </p>
                         <table>
-                            <tr> <td> $\min_X$ </td> <td> $\|AX - B\|_F^2$ </td> </tr>
-                            <tr> <td> s.t. </td> <td> $\|X - X_0\|_F^2 \le \epsilon$ </td> </tr>
-                            <tr> <td> </td> <td> $X \in \SO(n)$ </td> </tr>
+                            <tr> <td> $\min_X$ </td> <td> $\|AX - B\|_F^2$ </td> <td><p style="color:var(--pastel-blue)">Star map error</p></td> </tr>
+                            <tr> <td> s.t. </td> <td> $\|X - X_0\|_F^2 \le \epsilon$ </td> <td><p style="color:var(--pastel-blue)">Accelerometer estimate</p></td> </tr>
+                            <tr> <td> </td> <td> $X \in \SO(n)$ </td><td> <p style="color:var(--pastel-blue)">Rotation constraint</p> </td> </tr>
                         </table>
                         <p>$A, B \in \R^{d \times n}$ represent the observed/stored star locations.</p>
                         <p>$X_0 \in \R^{n \times n}$ is estimated rotation matrix.</p>
@@ -229,7 +220,10 @@
                             \[ \big\{(\|AX - B\|^2, \|X - X_0\|^2) : X \in \SO(n)\big\} \subseteq \R^2\] 
                             is convex. </p>
                         </div>
+                        <div style="display:flex">
                         <p> If we let $C$ be the convex set in the above theorem, then the attitude estimation problem can be represented as \[\min \{y_0 : y_1 \le \epsilon, (y_0, y_1) \in C\}.\] </p>
+                        <img height=150px  src="so3_proj.png"/>
+                        </div>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Constrained Optimization</h4>
@@ -251,7 +245,7 @@
                             </div>
                             <div>
                             <img width=300px src="rotating surface.gif"/>
-                            <p style="padding-left:20px; font-size:20px;"> Boyd's embedding of $\R\mathbb{P}^2$. </p>
+                            <p style="padding-left:20px; font-size:20px;"> Boy's embedding of $\R\mathbb{P}^2$. </p>
                             </div>
 
                         </div>
@@ -266,7 +260,7 @@
                                 \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
                             \]
                             </p>
-                            <p>for topological space $M$ and $f : M \rightarrow \R^{k+1}$.</p>
+                            <p>for a topological space $M$, a function $f : M \rightarrow \R^{k+1}$, and $c \in \R^k$.</p>
                         </div>
                         <p class=fragment> Such problems are typically NP-hard. Convex optimization gives bounds on the optimal value.</p>
                     </section>
@@ -279,16 +273,15 @@
                                 \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
                             \]
                             </p>
-                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                            <p>for a topological space $M$, a function $f : M \rightarrow \R^{k+1}$, and $c \in \R^k$.</p>
                         </div>
                         <div class="fragment" style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left"> Reformulation in terms of the image</h4>
                             <p>
                             \[
-                                \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in f(M)\},
+                                \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in f(M)\}.
                             \]
                             </p>
-                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
                     </section>
                     <section data-auto-animate>
@@ -300,16 +293,15 @@
                                 \max \{f_0(x) : f_1(x) = c_1, \dots, f_k(x) =c_k, x \in M\},
                             \]
                             </p>
-                            <p>for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
+                            <p>for a topological space $M$, a function $f : M \rightarrow \R^{k+1}$, and $c \in \R^k$.</p>
                         </div>
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left"> Convex Relaxation </h4>
                             <p>
                             \[
-                            \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in \color{red}{\text{conv}(}f(M)\color{red}{)}\},
+                            \max \{y_0 : y_1 = c_1, \dots, y_k =c_k, y \in \color{red}{\text{conv}(}f(M)\color{red}{)}\}.
                             \]
                             </p>
-                            <p data-id="relax_text">for some set $M$ and a function $f : M \rightarrow \R^{k+1}$.</p>
                         </div>
                         <p class=fragment> When are these two optimization problems equivalent? </p>
                     </section>
@@ -338,7 +330,7 @@
                         \]
                         </p>
                         </div>
-                        <p> That is, $D(\lambda)$ maximizes $\L(\lambda,x)$ for all $\lambda \in \R_{\ge 0} \times \R^k$. </p>
+                        <p> When does a Lagrangian dual section exist? </p>
                         </div>
                     </section>
                     <section data-auto-animate>
@@ -356,6 +348,7 @@
                                 \]
                             </p>
                         </div>
+                        <p class=fragment> We will also discuss algorithmic implications later in the talk. </p>
                     </section>
                     <section data-auto-animate>
                         <h4 class=alignLeft> Tightness of Convex Relaxations</h4>
@@ -383,12 +376,26 @@
                     </section>
                     <section>
                         <h4> Some Mathematical Connections </h4>
-                        <ul>
-                            <li> <p> Representations of Clifford algebras </p></li>
-                            <li> <p> Vector bundles on spheres </p></li>
-                            <li><p> Orbits of Lie group actions</p></li>
-                            <li> <p>Kostant convexity theorem</p></li>
-                            <li> <p>Von Neumann-Wigner noncrossing theorem</p></li>
+                            <div style="border:2px solid black">
+                                <h5> Lie groups/Representation Theory </h5>
+                                <ul style="margin-top:-10px;">
+                                    <li><p> Orbits of Lie group actions</p></li>
+                                    <li> <p>Kostant convexity theorem</p></li>
+                                    <li> <p> Representations of Clifford algebras </p></li>
+                                </ul>
+                            </div>
+                            <div style="border:2px solid black; margin-top:20px">
+                                <h5> Algebraic Topology </h5>
+                                <ul style="margin-top:-17px;">
+                                    <li> <p> Vector bundles on spheres </p></li>
+                                </ul>
+                            </div>
+                            <div style="border:2px solid black; margin-top:20px">
+                                <h5> Mathematical Physics </h5>
+                                <ul style="margin-top:-17px;">
+                                    <li> <p>Von Neumann-Wigner noncrossing theorem</p></li>
+                                </ul>
+                            </div>
                         </ul>
                     </section>
                     <section data-auto-animate>
@@ -460,7 +467,7 @@
                         <p class="alignLeft">
                         The Lagrangian optimization problems then look like 
                         \[
-                        \underset{X\in \St^{n,m}}{\argmax}\; \lambda_0 \langle A^{\intercal}B, X\rangle + \lambda_1 \|AX - B\|^2.
+                        \underset{X\in \St^{n,m}}{\argmin}\; \lambda_0 \langle A^{\intercal}B, X\rangle + \lambda_1 \|AX - B\|^2.
                         \]
                         when $\lambda_1 = 0$, this is easy to solve. When $\lambda_0 = 0$, this is the UPP.
                         </p>
@@ -472,7 +479,7 @@
                             <p>
                                 If $A \in \R^{d \times 3}$ and $B \in \R^{d \times 2}$ satisfy certain explicit inequalities, then the function 
                                 \[
-                                    f(X) = (\langle A^{\intercal}B, X\rangle, \|AX - B\|^2).
+                                    f(X) = (\langle A^{\intercal}B, X\rangle, \|AX - B\|^2)
                                 \]
                                 has a <span style="color:var(--pastel-blue)">Lagrangian dual section</span>.
                             </p>
@@ -502,7 +509,7 @@
                                 <li> Path-Tracking Algorithms </li>
                             </ul>
                             <br>
-                            <li> <b>Automatic Design of First-Order Methods</b></li>
+                            <li> <b>Automatic Design of Algorithms</b></li>
                             <ul>
                                 <li> Long Step Gradient Descent</li>
                                 <li> Subgame Perfect Gradient Method</li>
@@ -513,9 +520,9 @@
                     </section>
                 <section>
                     <section data-auto-animate>
-                        <h3> Automatic Design of Algorithms<sup>1, 2, 3</sup>  </h3>
+                        <h3> Automatic Design of Algorithms<sup style="font-size:35px">1, 2, 3</sup>  </h3>
 
-                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps (INFORMS JOC, 2024)</i></p>
+                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps (INFORMS JOO, 2024)</i></p>
                         <p style="font-size:30px; text-align:left">2. <i>Composing optimized stepsize schedules for gradient descent</i>(MOR, 2025)</p>
                         <p style="font-size:30px; text-align:left">3. <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method (In revision at Math Prog, 2025)</i></p>
                         <p><b>All joint with Alex Wang and Ben Grimmer</b></p>
@@ -524,12 +531,15 @@
                         <h4> First-Order Methods</h4>
                         <p> <b>Goal:</b> Minimize function $f : \R^d \rightarrow \R$. </p>
                         <p class=fragment> <b> Input: </b> A black box that outputs the values $f(x)$ and $\nabla f(x)$ at points of our choosing. </p>
-                        <p class=fragment> <b> First-order methods:</b> Algorithm for choosing query points $x_0, \dots, x_N$. </p>
+                        <div class=fragment>
+                            <p> <b> First-order methods:</b> Algorithm for choosing query points $x_0, \dots, x_N$. </p>
+                            <p> <b> Examples:</b> Gradient Descent, ADAM, BFGS, ... </b>
+                        </div>
                         <p class=fragment> We will be focused on analyzing performance on <b> convex functions with $L$-Lipschitz gradients ($L$-smooth convex functions).</b></p>
                         <img src="fom.png" height=200px/>
                     </section>
                     <section data-auto-animate>
-                        <h3> First Order Methods </h3>
+                        <h4> New First-Order Methods: </h4>
                         <h4> Gradient Descent  </h4>
                     </section>
                     <section data-auto-animate>
@@ -612,7 +622,7 @@
                             \SUBOPT(\text{Alg},f) = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}.
                         \]
                         </p>
-                        <p> And optimization problem </p>
+                        <p> And optimization problem for a fixed algorithm Alg </p>
                         <table>
                             <th></th>
                             <tr style="border-bottom:none;"> <td> $\max_f$ </td> <td> $\SUBOPT(\text{Alg},f)$ </td> </tr>
@@ -634,6 +644,10 @@
                         <p class=fragment> Earlier work in (Kim and Fessler 2016) are minimax optimal amongst all first-order methods. </p>
                         <p class=fragment> Is minimax optimality the best guarantee a first-order method can provide? </p>
                     </section>
+                    <section data-auto-animate>
+                        <h4> New First-Order Methods: </h4>
+                        <h4> Subgame Perfect Algorithms  </h4>
+                    </section>
                     <section  data-auto-animate>
                         <h4> Subgame Perfect </h4>
                         <div style="background-color:lightgray; padding:30px;">
@@ -647,15 +661,15 @@
                                 </table>
                         </div>
                         <div class=fragment>
-                        <p> Here, $A(\mathcal{H})$ are the <b> algorithms consistent with $\mathcal{H}$</b></p>
-                        <p> $F(\mathcal{H})$ are the <b> $L$-smooth convex functions consistent with $\mathcal{H}$</b></p>
+                        <p> Here, $A(\mathcal{H})$ are the <b> algorithms consistent with $\mathcal{H}.$</b></p>
+                        <p> $F(\mathcal{H})$ are the <b> $L$-smooth convex functions consistent with $\mathcal{H}$.</b></p>
                         </div>
                     </section>
                     <section>
                         <h4> Subgame Perfect Gradient Method </h4>
                         <div style="background-color:lightgray; padding:30px;">
                             <h4 style="text-align:left;"> Theorem (G<span style="color:var(--pastel-blue)">S</span>W 2025)</h4>
-                            <p class=alignLeft> There is a subgame perfect gradient method that runs in polynomial time per iteration. </p>
+                            <p class=alignLeft> There is a subgame perfect first-order method (SPGM) that runs in polynomial time per iteration. </p>
                         </div>
                     </section>
                     <section>
@@ -664,7 +678,7 @@
                         <p> In each iteration, solve the worst-case function optimization problem. </p>
                         <table>
                             <th></th>
-                            <tr style="border-bottom:none;"> <td> max_f </td> <td> $\SUBOPT'$ </td> </tr>
+                            <tr style="border-bottom:none;"> <td> $\max_f$ </td> <td> $\SUBOPT'$ </td> </tr>
                             <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
                             <tr> <td> For each $i \lt n$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
                         </table>
@@ -718,7 +732,7 @@
                         </ul>
                         <p> First-Order Methods </p>
                         <ul>
-                            <li style="font-size:20px; text-align:left; margin-left:-60px"> <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i> - B Grimmer, <span style="color:var(--pastel-blue)">K Shu</span>, AL Wang (INFORMS JOC, 2024)</li>
+                            <li style="font-size:20px; text-align:left; margin-left:-60px"> <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps</i> - B Grimmer, <span style="color:var(--pastel-blue)">K Shu</span>, AL Wang (INFORMS JOO, 2024)</li>
                             <li style="font-size:20px; text-align:left; margin-left:-60px"> <i>Composing optimized stepsize schedules for gradient descent</i> - B Grimmer, <span style="color:var(--pastel-blue)">K Shu</span>, AL Wang (MOR, 2025)</li>
                             <li style="font-size:20px; text-align:left; margin-left:-60px"> <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method</i> - B Grimmer, <span style="color:var(--pastel-blue)">K Shu</span>, AL Wang (In Revision - Math Prog, 2025)</li>
                         </ul>
@@ -776,6 +790,7 @@
 							L: '\\mathcal{L}',
 							SUBOPT: '\\text{SUBOPT}',
 							argmax: '\\text{argmax}',
+							argmin: '\\text{argmin}',
 							set: [ '\\left\\{#1 \\right\\}', 2 ]
 						}
 					}
