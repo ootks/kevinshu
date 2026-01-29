@@ -32,3 +32,9 @@ th, td {
     margin-top:50px;
     font-size:20px;
 }
+
+.citation {
+    font-size:17px;
+    text-align:left;
+    margin-left:-70px;
+}
