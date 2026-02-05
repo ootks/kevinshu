@@ -24,7 +24,7 @@ th, td {
 
 :root {
     --pastel-blue:#4C9DFA;
-    --pastel-green:#7FCFA8;
+    --pastel-green:#48C676;
     --pastel-red:#FF645C;
 }
 
@@ -37,4 +37,19 @@ th, td {
     font-size:17px;
     text-align:left;
     margin-left:-70px;
+}
+
+.simple_table p {
+    text-align:center;
+    padding:0px;
+}
+
+.simple_table td {
+    padding:0px;
+}
+.oracle {
+    color:var(--pastel-red);
+}
+.optimizer {
+    color:var(--pastel-blue);
 }
