@@ -42,15 +42,15 @@
                         <div style="display:flex">
                             <div style="flex:1; width:30%">
                                 <h5> Robotics </h5>
-                                <img src ="slam.png" style="box-shadow: 0px 0px 30px #ddd; margin-top:50px;margin-bottom:120px;">
+                                <img src ="slam.png" height=200px>
                                 <p class=centered style="font-size:20px; padding-left:10px">
                                     Rosen et al. 2021.
                                 </p>
                             </div>
                             <div style="flex:1; width:30%">
                                 <h5> Materials </h5>
-                                <img src ="metamaterial.png" style="box-shadow: 0px 0px 30px #ddd">
-                                <p class=centered style="font-size:20px; margin-top:50px; padding-left:10px">
+                                <img src ="metamaterial.png" height=200px>
+                                <p class=centered style="font-size:20px; padding-left:10px">
                                  Serles et al. 2025.
                                 </p>
                             </div>
@@ -74,8 +74,6 @@
                             <!--ferrari-->
                             <li style="margin-top:20px;"> Reliable </li>
                             <!--subaru-->
-                            <li style="margin-top:20px;"> Expressive </li>
-                            <!--car with face-->
                             <li class=fragment style="margin-top:20px;color:var(--pastel-blue)"> Globally optimal</li>
                         </ul>
                     </section>
@@ -204,16 +202,16 @@
                     <ol>
                         <li> Introduction </li>
                         <br>
-                        <li> <b>A Topological Framework for Hidden Convexity</b> </li>
+                        <li> <b>Main: A Topological Framework for Hidden Convexity</b> </li>
                         <ul>
                             <li> Lagrangian Dual Sections </li>
                             <li> Path-Tracking Algorithms </li>
                         </ul>
                         <br>
-                        <li> Design of First-Order Methods</li>
+                        <li> Briefly: Other Work </li>
                         <ul>
                             <li> Long Step Gradient Descent</li>
-                            <li> Subgame Perfect Gradient Method</li>
+                            <li> Active Sampling Polynomial Regression </li>
                         </ul>
                         <br>
                         <li> Conclusions and Future Work</li>
@@ -364,6 +362,36 @@
                         </ul>
                     </section>
                     <section data-auto-animate>
+                        <h4 class=alignLeft> An Example for Grassmannians</h4>
+                        <p class=alignLeft> Real Grassmannian - orthogonal projections</p>
+                        <p class=alignLeft> \[\Gr^{n,m} = \{X \in \R^{n\times n}_{sym} : X^2 = X, \tr(X) = m\}\]</p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left"> Theorem (CDR<span style="color:var(--pastel-blue)">S</span> 2025)</h4>
+                            <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times n}_{sym}$ containing no nonzero matrix with a repeated $m^{th}$ largest eigenvalue, then
+                           \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \Gr^{n,m} \}=\] </p>
+                            <p style="margin-left:-20px;">\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \color{red}{\conv}(\Gr^{n,m})\}.\] </p>
+                        </div>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> An Example for Grassmannians ($m=1$)</h4>
+                        <p class=alignLeft> \[
+                        \Gr^{n,1} = \{xx^{\intercal} : \|x\|=1, x \in \R^n\}, \text{ so}\]
+                        </p>
+                        <p> Linear optimization over $\Gr^{n,1}$ corresponds to quadratically constrained quadratic optimization over $\R^n$. </p>
+                        <div style="background-color:lightgray; padding:30px;">
+                            <h4 style="text-align:left"> Corollary (Homogenized S-Lemma)</h4>
+                            <p class=alignLeft>
+                            If $A_0, A_1 \in \R^{n\times n}_{sym}$, then
+                            \[ \max \{x^{\intercal} A_0 x : x^{\intercal} A_1 x = c_1, \|x\|=1, x \in \R^n \}=\] </p>
+                            <p style="margin-left:-20px;">\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \tr(X) = 1, X\succeq 0\}.\] </p>
+                        </div>
+                        <p> We also have analogues of this theorem that work with more constraints. </p>
+                    </section>
+                    <section data-auto-animate>
+                        <h4 class=alignLeft> An Example for Grassmannians ($m=1$)</h4>
+                        <video src="QuadraticSphere.mp4" controls=autoplay/>
+                    </section>
+                    <section data-auto-animate>
                         <h4 class=alignLeft> An Example for Stiefel Manifold</h4>
                         <p class=alignLeft> Stiefel manifold - orthogonal projections</p>
                         <p class=alignLeft> \[\St^{n,m} = \{X \in \R^{n\times m} : X^{\intercal}X = I\}\]</p>
@@ -373,7 +401,7 @@
                            \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \St^{n,m} \}=\] </p>
                         <p>\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, \color{red}{\sigma_{max}(X) \le 1}\}.\] </p>
                         </div>
-                        <p> Similar results in the context of QCQPs, inverse eigenvalue problems, and more. </p>
+                        <p> Similar results in the context of inverse eigenvalue problems and more. </p>
                     </section>
                     <section>
                         <h4> Some Mathematical Connections </h4>
@@ -469,9 +497,9 @@
                         <p class="alignLeft">
                         The Lagrangian optimization problems then look like 
                         \[
-                        \underset{X\in \St^{n,m}}{\argmax}\; -\lambda_0 \|AX - B\|^2 + \lambda_1 \langle A^{\intercal}B, X\rangle.
+                        \underset{X\in \St^{n,m}}{\argmax}\; -\lambda_1 \|AX - B\|^2 + \lambda_2 \langle A^{\intercal}B, X\rangle.
                         \]
-                        when $\lambda_0 = 0$, this is easy to solve. When $\lambda_1 = 0$, this is the UPP.
+                        when $\lambda_1 = 0$, this is easy to solve. When $\lambda_2 = 0$, this is the UPP.
                         </p>
                     </section>
                     <section data-auto-animate>
@@ -500,53 +528,39 @@
                         </ul>
                     </section>
                 </section>
-                    <section data-auto-animate>
-                        <h4> Outline of the Talk </h4>
-                        <ol>
-                            <li> Introduction </li>
-                            <br>
-                            <li> A Topological Framework for Hidden Convexity </li>
-                            <ul>
-                                <li> Lagrangian Dual Sections </li>
-                                <li> Path-Tracking Algorithms </li>
-                            </ul>
-                            <br>
-                            <li> <b>Automatic Design of Algorithms</b></li>
-                            <ul>
-                                <li> Long Step Gradient Descent</li>
-                                <li> Subgame Perfect Gradient Method</li>
-                            </ul>
-                            <br>
-                            <li> Conclusions and Future Work</li>
-                        </ol>
-                    </section>
+                <section data-auto-animate>
+                    <h4> Outline of the Talk </h4>
+                    <ol>
+                        <li> Introduction </li>
+                        <br>
+                        <li> Main: A Topological Framework for Hidden Convexity </li>
+                        <ul>
+                            <li> Lagrangian Dual Sections </li>
+                            <li> Path-Tracking Algorithms </li>
+                        </ul>
+                        <br>
+                        <li> <b>Briefly: Other Work</b> </li>
+                        <ul>
+                            <li> Long Step Gradient Descent</li>
+                            <li> Active Sampling Polynomial Regression </li>
+                        </ul>
+                        <br>
+                        <li> Conclusions and Future Work</li>
+                    </ol>
+                </section>
                 <section>
-                    <section data-auto-animate>
-                        <h3> Automatic Design of Algorithms<sup style="font-size:35px">1, 2, 3</sup>  </h3>
-
-                        <p style="font-size:30px; margin-top:200px; text-align:left">1. <i>Accelerated objective gap and gradient norm convergence for gradient descent via long steps (INFORMS JOO, 2024)</i></p>
-                        <p style="font-size:30px; text-align:left">2. <i>Composing optimized stepsize schedules for gradient descent</i>(MOR, 2025)</p>
-                        <p style="font-size:30px; text-align:left">3. <i>Beyond Minimax Optimality: A Subgame Perfect Gradient Method (In revision at Math Prog, 2025)</i></p>
-                        <p><b>All joint with Alex Wang and Ben Grimmer</b></p>
-                    </section>
                     <section>
-                        <h4> First-Order Methods</h4>
-                        <p> <b>Goal:</b> Minimize function $f : \R^d \rightarrow \R$. </p>
-                        <p class=fragment> <b> Input: </b> A black box that outputs the values $f(x)$ and $\nabla f(x)$ at points of our choosing. </p>
-                        <div class=fragment>
-                            <p> <b> First-order methods:</b> Algorithm for choosing query points $x_0, \dots, x_N$. </p>
-                            <p> <b> Examples:</b> Gradient Descent, ADAM, BFGS, ... </b>
-                        </div>
-                        <p class=fragment> We will be focused on analyzing performance on <b> convex functions with $L$-Lipschitz gradients ($L$-smooth convex functions).</b></p>
-                        <img src="fom.png" height=200px/>
-                    </section>
-                    <section data-auto-animate>
-                        <h4> New First-Order Methods: </h4>
-                        <h4> Gradient Descent  </h4>
+                        <h4> Other Work </h4>
                     </section>
                     <section data-auto-animate>
                         <h4> Accelerating Gradient Descent </h4>
-                        <p>Gradient descent sets  \[x_i = x_{i-1} - h_i\nabla f(x_{i-1})\]
+                    </section>
+                    <section data-auto-animate>
+                        <h4> Accelerating Gradient Descent </h4>
+                        <div style="background-color:black; color:white; padding:5px;">
+                            <p> <b>Goal:</b> Minimize $f : \R^d \rightarrow \R$ which is convex, and has $L$-Lipschitz gradients. </p>
+                        </div>
+                        <p class=fragment>Gradient descent sets  \[x_i = x_{i-1} - h_i\nabla f(x_{i-1})\]
                         for a choice of step sizes $h_0, \dots, h_N$.</p>
                         <p class=fragment>Standard step size choice is $h_i = \frac{1}{L}$, converging at a rate of $O(1/n)$.</p>
                         <div class=fragment>
@@ -577,7 +591,7 @@
                                     <div style="background-color:lightgray;padding:30px;">
                                         <h4 style="text-align:left;"> Theorem (G<span style="color:var(--pastel-blue)">S</span>W 2024)<sup>1</sup> </h4>
                                         <p>
-                                            There is a dynamic program for finding an optimized<sup>*</sup> sequence of $n$ step sizes achieving a worst case rate of convergence of $O(1/n^{1.27})$. 
+                                            There is a recursive construction for finding an optimized<sup>*</sup> sequence of $n$ step sizes achieving a worst case rate of convergence of $O(1/n^{1.27})$ on convex functions with $L$-Lipschitz gradients. 
                                         </p>
                                     </div>
                                 </div>
@@ -586,105 +600,53 @@
                                 </div>
                             </div>
                             <p class=fragment> <sup>*</sup>conjectured to be <b>minimax optimal</b> amongst gradient descent methods. </p>
-                            <p class=fragment> <b>How do we analyze these algorithms formally? </b></p>
+                            <p class=fragment> <b>Analysis uses convex optimization.</b></p>
                             <p style="font-size:20px;"> <sup>1</sup>Simultaneous with Jiang and Zhang. </p>
                         </div>
                     </section>
                     <section data-auto-animate>
-                        <h3> Analysis of Algorithms via Convex Optimization  </h3>
-                    </section>
-                    <section>
-                        <h4> Performance Estimation Problems </h4>
-                        <p> For worst case analysis, need to answer a <b>dual question</b>.</p>
-                        </p>
-                        <div style="padding:20px; background-color:black">
-                        <p style="color:white"> <b> For which function $f$ does the algorithm achieve its worst performance? </b></p>
-                        </div>
-                        <p class="fragment"> This can be solved over $L$-smooth convex functions with convex optimization! (Drori and Teboulle 2012).</p>
-                    </section>
-                    <section>
-                        <h4> Performance Estimation Problems </h4>
-                        <p> Formally, define error metric </p>
-                        <p>
-
-                        \[
-                            \SUBOPT(\text{Alg},f) = \frac{f(x_N) - f_{min}}{\|x_0 - x_{\star}\|^2}.
-                        \]
-                        </p>
-                        <p> And optimization problem for a fixed algorithm Alg </p>
-                        <table>
-                            <th></th>
-                            <tr style="border-bottom:none;"> <td> $\max_f$ </td> <td> $\SUBOPT(\text{Alg},f)$ </td> </tr>
-                            <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
-                        </table>
-                        <p class=fragment>Solve this by <b>reformulating</b> as a convex program via <b>interpolation conditions</b> (Taylor, Hendrickx and Glineur 2017).</p>
-                        <p class=fragment> We give explicit dual solutions to this convex program to prove the convergence rates of our step size sequences.</p>
-                    </section>
-                    <section>
-                        <h4> Minimax Optimality </h4>
-                        <p> A first-order algorithm is minimax optimal for some class of algorithms $\mathcal{A}$ if its worst case suboptimality is minimized in that class, i.e. equal to </p>
-                        <table>
-                            <th></th>
-                            <tr style="border-bottom:none;"> <td> <p>$\min_{\text{Alg} \in \mathcal{A}}$</p></td>
-                                    <td> <p>$\max_f$</p> </td> <td> <p>$\SUBOPT(\text{Alg}, f)$</p> </td> </tr>
-                            <tr> <td></td> <td> <p>s.t.</p> </td> <td> <p>$f$ is $L$-smooth and convex.</p> </td> </tr>
-                        </table>
-                        <p class=fragment> We conjecture the step sizes discovered in (G<span style="color:var(--pastel-blue);">S</span>W 2024) are minimax optimal amongst all gradient descent methods. </p>
-                        <p class=fragment> Earlier work in (Kim and Fessler 2016) are minimax optimal amongst all first-order methods. </p>
-                        <p class=fragment> Is minimax optimality the best guarantee a first-order method can provide? </p>
+                        <h4> Active Sampling </h4>
                     </section>
                     <section data-auto-animate>
-                        <h4> New First-Order Methods: </h4>
-                        <h4> Subgame Perfect Algorithms  </h4>
-                    </section>
-                    <section  data-auto-animate>
-                        <h4> Subgame Perfect </h4>
-                        <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;"> Definition - Subgame Perfect </h4>
-                            <p class=alignLeft>
-                            An $N$-step first order method is <b>subgame perfect</b> if for any $0 \le n \le N$, <span class=fragment>for <b>any</b> first order history $\mathcal{H} = (x_i, f(x_i), \nabla f(x_i))_{i=0}^n$,</span>
-                            <div class=fragment>
-                            <p>
-                            it guarantees $\SUBOPT \le \tau(\mathcal{H})$, where</p>
-                                <table>
-                                    <tr style="border-bottom:none;"> <td> <p>$\tau(\mathcal{H}) = \min_{\text{Alg} \in A(\mathcal{H})}$</p></td>
-                                        <td> <p>$\max_{f \in F(\mathcal{H})}$</p> </td> <td> <p>$\SUBOPT(\text{Alg}, f)$</p> </td> </tr>
-                                </table>
+                        <h4>Active Sampling for Polynomial Regression</h4>
+
+                        <div style="display:flex">
+                            <div>
+                                <p> Given an unknown function $f$, find a degree-$d$ polynomial which closely approximates it, where we have access to $f$ via point evaluations. </p>
+                                <p> \[
+                                p^* = \argmin_{p \in \R[x]_d} \int_{-\infty}^{\infty}(f(x) - p(x))^2d\mu(x).
+                                \]
+                                </p>
+                            </div>
+                            <div class="r-stack">
+                                <img src="unknown_f.png" width=800px />
+                                <img class=fragment src="unknown_f_samples.png" width=800px />
+                                <img class=fragment src="unknown_f_sample_reg.png" width=800px />
                             </div>
                         </div>
-                        <div class=fragment>
-                        <p> Here, $A(\mathcal{H})$ are the <b> algorithms consistent with $\mathcal{H}.$</b></p>
-                        <p> $F(\mathcal{H})$ are the <b> $L$-smooth convex functions consistent with $\mathcal{H}$.</b></p>
+                        <p class=fragment> <b> Idea: </b> Choose a random set of points $x_1, \dots, x_n \in \R$, and find a polynomial $\hat{p}$ so that $\hat{p}(x_i) \approx f(x_i)$ for each $i$.
+                        </p>
+
+                    </section>
+                    <section data-auto-animate>
+                        <h4>Active Sampling for Polynomial Regression</h4>
+
+                        <p> Given an unknown function $f$, find a degree-$d$ polynomial which closely approximates it, where we have access to $f$ via point evaluations. </p>
+                        <p> \[
+                        p^* = \argmin_{p \in \R[x]_d} \int_{-\infty}^{\infty}(f(x) - p(x))^2d\mu(x).
+                        \]
+                        </p>
+                        <div style="background-color:lightgray;padding:30px;">
+                            <h4 style="text-align:left;"> Theorem (CM<span style="color:var(--pastel-blue)">S</span> 2025) </h4>
+                            <p>
+                            If $\lambda_1, \dots, \lambda_{d+1}$ are the eigenvalues of random matrix associated to $\mu$, and $\hat{p}$ is a degree $d$ polynomial so that $\hat{p}(\lambda_i) = f(\lambda_i)$ for each $i$, then
+                            \[
+                                \E[\hat{p}] = p^*. 
+                            \]
+                            </p>
                         </div>
-                    </section>
-                    <section>
-                        <h4> Subgame Perfect Gradient Method </h4>
-                        <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left;"> Theorem (G<span style="color:var(--pastel-blue)">S</span>W 2025)</h4>
-                            <p class=alignLeft> There is a subgame perfect first-order method (SPGM) that runs in polynomial time per iteration. </p>
-                        </div>
-                    </section>
-                    <section>
-                        <h4> Subgame Perfect Gradient Method </h4>
-                        <b> Key idea</b>
-                        <p> In each iteration, solve the worst-case function optimization problem. </p>
-                        <table>
-                            <th></th>
-                            <tr style="border-bottom:none;"> <td> $\max_f$ </td> <td> $\SUBOPT'$ </td> </tr>
-                            <tr> <td> s.t. </td> <td> $f$ is $L$-smooth and convex. </td> </tr>
-                            <tr> <td> For each $i \lt n$, </td> <td> $f(x_i)$, $\nabla f(x_i)$ are fixed. </td> </tr>
-                        </table>
-                        <p> $\SUBOPT'$ is a slight modification of $\SUBOPT$. </p>
-                        <p class=fragment> This can be reformulated as a second order cone program and solved in $O(n^{3.5} + dn)$ time, where $n$ is the number of iterations.</p>
-                    </section>
-                    <section>
-                        <h4> Subgame Perfect Gradient Method </h4>
-                        <img src="instance.png"/>
-                    </section>
-                    <section>
-                        <h4> Summary</h4>
-                        <p> Convex optimization can be used to design first-order algorithms (for convex optimization) </p>
-                        <p> Subgame perfection as a notion of optimality. </p>
+                        <p class=fragment> If $\mu$ is Gaussian, then the random matrix is GUE, and the eigenvalues can be sampled in $O(d\log(d))$ time. </p>
+
                     </section>
                 </section>
                 <section>
@@ -713,15 +675,6 @@
                             <p style="font-size:50px;margin-top:75px; text-align:center; flex:30%;">&#8594;</p>
                             <img height=150px  style="flex:30%;" src="so3_proj.png"/>
                         </div>
-                    </section>
-                    <section>
-                        <h4> Algorithm Design via Convex Relaxations </h4>
-                        <p> Designing algorithms requires proving that there are <b> no instances where the algorithm fails</b>. </p>
-                        <p> Convex relaxations bounded the possible bad instances for first order algorithms. </p>
-                        <ul> 
-                            <li> Can we apply this methodology to <b>combinatorial algorithms</b> e.g. sorting networks? </li>
-                        </ul>
-                        <img src="algo_diagram.png" height="200px;"/>
                     </section>
                     <section>
                         <h4> References </h4>
