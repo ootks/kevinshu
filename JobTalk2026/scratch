@@ -322,18 +322,6 @@
 
 
                     <section data-auto-animate>
-                        <h4 class=alignLeft> An Example for Grassmannians</h4>
-                        <p class=alignLeft> Real Grassmannian - orthogonal projections</p>
-                        <p class=alignLeft> \[\Gr^{n,m} = \{X \in \R^{n\times n}_{sym} : X^2 = X, \tr(X) = m\}\]</p>
-                        <div style="background-color:lightgray; padding:30px;">
-                            <h4 style="text-align:left"> Theorem (CDR<span style="color:var(--pastel-blue)">S</span> 2025)</h4>
-                            <p class=alignLeft> If $A_0, \dots, A_k$ span a linear subspace of $\R^{n\times n}_{sym}$ containing no nonzero matrix with a repeated eigenvalue amongst its $m$ largest ones, then 
-                           \[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \Gr^{n,m} \}=\] </p>
-                            <p style="margin-left:-20px;">\[ \max \{\langle A_0, X\rangle : \langle A_1, X\rangle = c_1, \dots, \langle A_k, X\rangle = c_k, X \in \color{red}{\conv}(\Gr^{n,m})\}.\] </p>
-                        </div>
-                        <p>In the case $m = 1$, optimization over $\Gr^{n,m}$ corresponds to QCQPs.</p>
-                    </section>
-                    <section data-auto-animate>
                         <h4> Attitude Estimation (Linearized Equivalent)</h4>
                         <p> <b> Model: </b> </p>
                         <table>
