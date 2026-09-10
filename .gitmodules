@@ -7,3 +7,6 @@
 [submodule "ThesisPresentation"]
 	path = ThesisPresentation
 	url = git@github.com:ootks/ThesisPresentation.git
+[submodule "co250-lectures"]
+	path = co250-lectures
+	url = git@github.com:ootks/co250-lectures.git
