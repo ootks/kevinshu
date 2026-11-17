@@ -13,7 +13,7 @@ function toggleCollapse() {
 
 // The issue is that if the thing is collapsed, and then you resize until it is in full screen mode size, then there'll just be no header.
 function redisplay() {
-    if (!window.matchMedia("(max-width: 800px").matches) {
+    if (!window.matchMedia("(max-width: 800px)").matches) {
             document.getElementById("homeSidebar").style.display = "block";
     } else {
         if (collapsed) {
